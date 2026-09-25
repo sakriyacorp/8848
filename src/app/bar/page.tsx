@@ -53,9 +53,10 @@ export default function BarPage() {
             <span>Tue–Thu {formatWindows(site.barHours.tue ?? [])}</span>
             <span>21+ with ID</span>
           </Reveal>
-          {isOn("constellation") && (
-            <p className="caps mt-8 hidden text-[10px] text-brass/70 md:block" aria-hidden="true">
-              Press and hold the sky
+          {(isOn("constellation") || isOn("nightSky")) && (
+            <p className="caps mt-8 text-[10px] text-brass/70" aria-hidden="true">
+              {isOn("constellation") && <span className="hidden md:inline">Press and hold the sky · </span>}
+              {isOn("nightSky") && <span>Catch a shooting star</span>}
             </p>
           )}
         </div>

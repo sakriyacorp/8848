@@ -3117,3 +3117,23 @@ html,
 body {
   overflow-x: clip;
 }
+
+.globe-label {
+  position: absolute;
+  left: 0;
+  top: 0;
+  opacity: 0;
+  white-space: nowrap;
+  padding: 4px 10px;
+  margin: -34px 0 0 12px;
+  border-radius: 999px;
+  border: 1px solid rgba(182, 158, 112, 0.35);
+  background: rgba(23, 17, 13, 0.72);
+  color: var(--brass-hi);
+  font-family: var(--font-cinzel), serif;
+  font-size: 10px;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  transition: opacity 0.35s;
+  will-change: transform;
+}

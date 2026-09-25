@@ -4,6 +4,8 @@ import { useBag } from "@/lib/bag";
 import { useUI } from "@/lib/ui";
 import { isOn } from "@/config/features";
 import type { SpiceChoice } from "@/lib/menu";
+import { sfx } from "@/lib/sound";
+import { pluck } from "@/lib/audio";
 
 type Opts = { qty?: number; spice?: SpiceChoice; instructions?: string };
 
@@ -12,6 +14,7 @@ type Opts = { qty?: number; spice?: SpiceChoice; instructions?: string };
    (usually its photo). */
 export function addToPack(itemId: string, name: string, opts: Opts = {}, from?: HTMLElement | null, src?: string | null) {
   useBag.getState().add(itemId, opts);
+  sfx(pluck);
   const ui = useUI.getState();
   const reduce = typeof window !== "undefined" && matchMedia("(prefers-reduced-motion: reduce)").matches;
   if (from && isOn("bagFlight") && !reduce) {

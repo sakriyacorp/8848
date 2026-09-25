@@ -14,6 +14,8 @@ import { DishImage } from "@/components/menu/DishImage";
 import { Logo } from "@/components/brand/Logo";
 import type { ClimbDish } from "@/components/climb/ClimbStatic";
 import { height, ROUTE_ALT, ROUTE_XZ } from "@/components/climb/ascent/terrain";
+import { sfx } from "@/lib/sound";
+import { bowl, setWind } from "@/lib/audio";
 import {
   cloudFrag,
   cloudVert,
@@ -343,6 +345,7 @@ export default function Ascent3D({ dishes, onFail }: { dishes: Record<string, Cl
     // the card's box (relative to the stage) is measured when the camp changes, not per frame
     let cardBox: { x: number; y: number } | null = null;
     let cardMeasure = 0;
+    let windTick = 0;
     const view = { w: 1, h: 1 };
 
     const size = () => {
@@ -467,7 +470,11 @@ export default function Ascent3D({ dishes, onFail }: { dishes: Record<string, Cl
       if (fOn !== finaleOn) {
         finaleOn = fOn;
         setFinale(fOn);
+        // the summit: a bowl rings out and the wind drops
+        if (fOn) sfx(() => bowl({ freq: 261.6, gain: 0.16, dur: 9 }));
       }
+      // wind rises with altitude (sound on only), dies away in the stillness on top
+      if (++windTick % 12 === 0) sfx(() => setWind(fin > 0.3 ? 0.08 : Math.pow(clamp((alt - 1400) / 7449), 1.3)));
       say(altRef.current, fin > 0.05 ? "8,848.86" : Math.round(alt).toLocaleString("en-US"));
       // the browser tab climbs too (AltitudeTitle)
       const tab = window as unknown as { __8848alt: number; __8848altAt: number };

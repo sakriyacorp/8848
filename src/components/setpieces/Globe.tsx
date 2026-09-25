@@ -6,6 +6,8 @@ import { cn } from "@/lib/cn";
 import { LAND_MASK, MASK_W, MASK_H } from "@/lib/landmask";
 import { EVEREST, HARRISONBURG, KATHMANDU } from "@/config/site";
 import { trackSection } from "@/lib/section-track";
+import { sfx } from "@/lib/sound";
+import { bowl, whoosh } from "@/lib/audio";
 
 /* ★ Flagship 3 — sakriya's globe, re-cast in brass on walnut and scripted by scroll:
      0.00–0.28  spin to the Himalayas; Everest pulses
@@ -40,6 +42,8 @@ export default function Globe() {
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const [stage, setStage] = useState(0);
   const [ready, setReady] = useState(false);
+  const labelRefs = useRef<(HTMLSpanElement | null)[]>([]);
+  const milesRef = useRef<HTMLSpanElement>(null);
 
   useEffect(() => {
     const canvas = canvasRef.current;
@@ -207,6 +211,12 @@ export default function Globe() {
     const everestHalo = pin(EVT, 0.03);
     pin(KTM, 0.036);
     const hbgHalo = pin(HBG, 0.042);
+    // HTML labels ride the pins (projected each frame, hidden when the point turns away)
+    const LABELS = [EVT, KTM, HBG];
+    const wp = new THREE.Vector3();
+    const nrm = new THREE.Vector3();
+    const toCam = new THREE.Vector3();
+    let milesShown = "";
 
     // "you are here" ripples at Harrisonburg, for the landing
     const ripples: THREE.Mesh[] = [];
@@ -284,10 +294,13 @@ export default function Globe() {
     // fit the astrolabe (not the globe) to the frame: ~78% of height on wide screens, ~94% of
     // width on portrait phones, lifted so the caption sits underneath
     let baseZ = 7.4;
+    const view = { w: 1, h: 1 };
     const size = () => {
       const w = canvas.clientWidth;
       const h = canvas.clientHeight;
       renderer.setSize(w, h, false);
+      view.w = w;
+      view.h = h;
       camera.aspect = w / h;
       camera.fov = 38;
       camera.updateProjectionMatrix();
@@ -373,8 +386,36 @@ export default function Globe() {
 
       renderer.render(scene, camera);
 
+      // pin labels: which ones show depends on the chapter of the story
+      const vw = view.w;
+      const vh = view.h;
+      LABELS.forEach((v, i) => {
+        const el = labelRefs.current[i];
+        if (!el) return;
+        wp.copy(v).multiplyScalar(1.02).applyMatrix4(globe.matrixWorld);
+        nrm.copy(v).normalize().transformDirection(globe.matrixWorld);
+        toCam.copy(camera.position).sub(wp).normalize();
+        const facing = nrm.dot(toCam);
+        wp.project(camera);
+        const want = i === 0 ? a > 0.5 && b < 0.4 : i === 1 ? b > 0.05 && c < 0.5 : c > 0.3;
+        const o = want && facing > 0.15 ? Math.min(1, (facing - 0.15) * 4) : 0;
+        el.style.opacity = o.toFixed(2);
+        const sx = (wp.x * 0.5 + 0.5) * vw;
+        // labels sit to the right of their pin, or to the left once the pin is on the right side
+        const flip = sx > vw * 0.58;
+        el.style.transform = `translate3d(${sx.toFixed(1)}px, ${((-wp.y * 0.5 + 0.5) * vh).toFixed(1)}px, 0)${flip ? " translateX(calc(-100% - 24px))" : ""}`;
+      });
+      // the mileage runs up as the packet flies
+      const miles = Math.round(arcP * 7752).toLocaleString("en-US");
+      if (milesRef.current && miles !== milesShown) {
+        milesShown = miles;
+        milesRef.current.textContent = miles;
+      }
+
       const st = p < 0.28 ? 0 : p < 0.66 ? 1 : 2;
       if (st !== lastStage) {
+        if (st === 1 && lastStage === 0) sfx(() => whoosh(1.8, 0.1));
+        if (st === 2 && lastStage === 1) sfx(() => bowl({ freq: 392, gain: 0.08, dur: 4.5 }));
         lastStage = st;
         setStage(st);
       }
@@ -418,7 +459,7 @@ export default function Globe() {
 
   const lines = [
     { k: "Sagarmatha · 27.99° N, 86.93° E", t: "It starts at 8,848.86 metres." },
-    { k: "Kathmandu → Harrisonburg", t: "7,752 miles from the roof of the world…" },
+    { k: "Kathmandu → Harrisonburg", t: "miles from the roof of the world…" },
     { k: "38.45° N, 78.87° W", t: "…to 258 Reservoir Street." },
   ];
 
@@ -432,11 +473,27 @@ export default function Globe() {
           role="img"
           aria-label="Globe: an arc flies from Kathmandu, near Everest, to Harrisonburg, Virginia"
         />
+        <div aria-hidden="true" className="pointer-events-none absolute inset-0 z-[1]">
+          {["Sagarmatha · 8,849 m", "Kathmandu", "Harrisonburg, VA"].map((t, i) => (
+            <span key={t} ref={(n) => void (labelRefs.current[i] = n)} className="globe-label">
+              {t}
+            </span>
+          ))}
+        </div>
         <div className="pointer-events-none absolute inset-x-0 bottom-[9svh] z-[2] px-6 text-center md:bottom-[11svh]">
           {lines.map((l, i) => (
             <div key={i} className={cn("globe-line absolute inset-x-0", stage === i && "is-on")} aria-hidden={stage !== i}>
               <p className="caps text-[10px] text-brass">{l.k}</p>
-              <p className="display mt-2 text-[clamp(1.8rem,5.4vw,3.4rem)] leading-tight text-brass-hi [text-shadow:0_2px_24px_rgba(0,0,0,.7)]">{l.t}</p>
+              <p className="display mt-2 text-[clamp(1.8rem,5.4vw,3.4rem)] leading-tight text-brass-hi [text-shadow:0_2px_24px_rgba(0,0,0,.7)]">
+                {i === 1 && (
+                  <>
+                    <span ref={milesRef} className="num inline-block min-w-[3.6ch] text-right">
+                      7,752
+                    </span>{" "}
+                  </>
+                )}
+                {l.t}
+              </p>
             </div>
           ))}
         </div>

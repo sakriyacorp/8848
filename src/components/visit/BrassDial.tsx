@@ -1,10 +1,16 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
+import { sfx } from "@/lib/sound";
+import { tick } from "@/lib/audio";
 
 /* A brass dial for picking a time: drag it round like a safe dial (or use the arrow keys); each
    detent is one slot. The engraved window shows the chosen time; ticks light up as it turns. */
-export function BrassDial({ options, value, onChange, label }: { options: string[]; value: number; onChange(i: number): void; label: string }) {
+export function BrassDial({ options, value, onChange: change, label }: { options: string[]; value: number; onChange(i: number): void; label: string }) {
+  const onChange = (i: number) => {
+    if (i !== value) sfx(() => tick(1 + (i % 3) * 0.04));
+    change(i);
+  };
   const ref = useRef<HTMLDivElement>(null);
   const drag = useRef<{ a0: number; v0: number } | null>(null);
   const [angle, setAngle] = useState(0);

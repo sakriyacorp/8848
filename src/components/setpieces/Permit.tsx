@@ -9,6 +9,8 @@ import { getOrder, type Order } from "@/lib/orders";
 import { site, mapsUrl } from "@/config/site";
 import { isOn } from "@/config/features";
 import { Logo } from "@/components/brand/Logo";
+import { sfx } from "@/lib/sound";
+import { stamp as stampSound } from "@/lib/audio";
 
 /* Order confirmation as a summit permit: a flag is planted on the peak, then the permit slides
    up with the guest's name, the order number and the provisions, and a round brass-ink stamp
@@ -19,6 +21,14 @@ export function Permit({ id }: { id: string | null }) {
   useEffect(() => {
     setOrder(id ? getOrder(id) : null);
   }, [id]);
+
+  // the stamp lands 2.85 s after the permit appears (see .permit-stamp in globals.css)
+  const found = !!order;
+  useEffect(() => {
+    if (!found || !isOn("permit") || matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+    const t = setTimeout(() => sfx(stampSound), 2850);
+    return () => clearTimeout(t);
+  }, [found]);
 
   if (order === undefined) return <div className="min-h-[80svh]" aria-busy="true" />;
 

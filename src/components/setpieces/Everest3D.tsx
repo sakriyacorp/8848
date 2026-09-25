@@ -11,6 +11,8 @@ import { terrainFrag, terrainVert } from "@/components/climb/ascent/shaders";
 import { addToPack } from "@/lib/add-to-pack";
 import { getDishImage } from "@/lib/dish-path";
 import { DishImage } from "@/components/menu/DishImage";
+import { sfx } from "@/lib/sound";
+import { tick } from "@/lib/audio";
 
 export type PairDish = { id: string; name: string; price: number; img: string; category: string; spice: number; available: boolean; spiceable: boolean };
 
@@ -358,6 +360,7 @@ export default function Everest3D({ dishes }: { dishes: Record<string, PairDish>
   }, [mode]);
 
   const choose = (i: number | null) => {
+    if (i !== null) sfx(() => tick(0.8));
     setOpen(i);
     api.current?.fly(i);
   };

@@ -142,3 +142,107 @@ export function stopWind() {
 
 /* A pentatonic set of bowl pitches so random taps always sound consonant. */
 export const BOWL_NOTES = [174.6, 196, 220, 261.6, 293.7, 349.2];
+
+/* ---------- small effects ---------- */
+
+let noiseBuf: AudioBuffer | null = null;
+function noise(c: AudioContext) {
+  if (noiseBuf) return noiseBuf;
+  const len = c.sampleRate * 2;
+  noiseBuf = c.createBuffer(1, len, c.sampleRate);
+  const d = noiseBuf.getChannelData(0);
+  for (let i = 0; i < len; i++) d[i] = Math.random() * 2 - 1;
+  return noiseBuf;
+}
+
+/** Wind level while climbing (0–1). Only acts if the wind bed is running. */
+export function setWind(level: number) {
+  if (!ctx || !windNodes) return;
+  windNodes.gain.gain.setTargetAtTime(0.02 + Math.max(0, Math.min(1, level)) * 0.11, ctx.currentTime, 0.6);
+}
+
+/** Air moving past: a band-passed noise sweep (the globe's flight). */
+export function whoosh(dur = 1.6, gain = 0.12) {
+  const c = audio();
+  if (!c || !master) return;
+  const t = c.currentTime;
+  const src = c.createBufferSource();
+  src.buffer = noise(c);
+  const bp = c.createBiquadFilter();
+  bp.type = "bandpass";
+  bp.Q.value = 1.2;
+  bp.frequency.setValueAtTime(260, t);
+  bp.frequency.exponentialRampToValueAtTime(1800, t + dur * 0.55);
+  bp.frequency.exponentialRampToValueAtTime(500, t + dur);
+  const g = c.createGain();
+  g.gain.setValueAtTime(0, t);
+  g.gain.linearRampToValueAtTime(gain, t + dur * 0.45);
+  g.gain.exponentialRampToValueAtTime(0.0001, t + dur);
+  src.connect(bp).connect(g).connect(master);
+  src.start(t);
+  src.stop(t + dur + 0.05);
+}
+
+/** A rubber stamp landing on paper: low thump + papery click. */
+export function stamp() {
+  const c = audio();
+  if (!c || !master) return;
+  const t = c.currentTime;
+  const o = c.createOscillator();
+  o.type = "sine";
+  o.frequency.setValueAtTime(140, t);
+  o.frequency.exponentialRampToValueAtTime(55, t + 0.12);
+  const g = c.createGain();
+  g.gain.setValueAtTime(0.35, t);
+  g.gain.exponentialRampToValueAtTime(0.0001, t + 0.22);
+  o.connect(g).connect(master);
+  o.start(t);
+  o.stop(t + 0.25);
+  const n = c.createBufferSource();
+  n.buffer = noise(c);
+  const hp = c.createBiquadFilter();
+  hp.type = "highpass";
+  hp.frequency.value = 1800;
+  const ng = c.createGain();
+  ng.gain.setValueAtTime(0.12, t);
+  ng.gain.exponentialRampToValueAtTime(0.0001, t + 0.06);
+  n.connect(hp).connect(ng).connect(master);
+  n.start(t);
+  n.stop(t + 0.08);
+}
+
+/** A detent: a small brass click (dials, camps). */
+export function tick(pitch = 1) {
+  const c = audio();
+  if (!c || !master) return;
+  const t = c.currentTime;
+  const o = c.createOscillator();
+  o.type = "triangle";
+  o.frequency.value = 1900 * pitch;
+  const g = c.createGain();
+  g.gain.setValueAtTime(0.07, t);
+  g.gain.exponentialRampToValueAtTime(0.0001, t + 0.045);
+  o.connect(g).connect(master);
+  o.start(t);
+  o.stop(t + 0.06);
+}
+
+/** Something soft going into the pack: a muted two-note pluck. */
+export function pluck() {
+  const c = audio();
+  if (!c || !master) return;
+  const t = c.currentTime;
+  [392, 587.3].forEach((f, i) => {
+    const o = c.createOscillator();
+    o.type = "sine";
+    o.frequency.value = f;
+    const g = c.createGain();
+    const s = t + i * 0.07;
+    g.gain.setValueAtTime(0, s);
+    g.gain.linearRampToValueAtTime(0.08, s + 0.008);
+    g.gain.exponentialRampToValueAtTime(0.0001, s + 0.35);
+    o.connect(g).connect(master!);
+    o.start(s);
+    o.stop(s + 0.4);
+  });
+}

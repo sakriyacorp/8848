@@ -40,3 +40,8 @@ export function restoreSound() {
   addEventListener("pointerdown", wake, { once: true });
   addEventListener("keydown", wake, { once: true });
 }
+
+/* Play an effect only if the guest has turned sound on. */
+export function sfx(play: () => void) {
+  if (useSound.getState().on) play();
+}

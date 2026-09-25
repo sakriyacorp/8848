@@ -9,6 +9,8 @@ import { addDays, dayName, formatHM, parseHM, toLocal } from "@/lib/hours";
 import { digitsOnly, formatPhone } from "@/lib/format";
 import { BrassDial } from "@/components/visit/BrassDial";
 import { Logo } from "@/components/brand/Logo";
+import { sfx } from "@/lib/sound";
+import { stamp as stampSound } from "@/lib/audio";
 
 /* A mock reservation: pick a day, turn the brass dial to a time, say how many. Confirming cuts
    your name into a brass "Reserved" plaque and stamps it like a passport. Nothing is sent
@@ -77,6 +79,8 @@ export function Reservation() {
       localStorage.setItem("8848-reservation", JSON.stringify({ name, phone, party, occasion, day: day?.date.toISOString(), time }));
     } catch {}
     setState("done");
+    // the passport stamp lands 2.4 s after the plaque appears
+    setTimeout(() => sfx(stampSound), 2400);
   };
 
   if (!now || !day) return <div className="min-h-[520px]" aria-busy="true" />;

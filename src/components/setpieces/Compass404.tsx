@@ -1,9 +1,12 @@
 "use client";
 
 import { useEffect, useRef } from "react";
+import { sfx } from "@/lib/sound";
+import { tick as click } from "@/lib/audio";
 
 /* A brass compass whose needle can't decide: it spins, hunts, overshoots, and every few seconds
-   settles on "down" for a moment before the storm spins it again. */
+   settles on "down" for a moment before the storm spins it again. Point at (or tab to) the way
+   out — anything marked [data-compass-target] — and the needle swings round and locks onto it. */
 export function Compass404() {
   const needle = useRef<SVGGElement>(null);
   const bezel = useRef<SVGGElement>(null);
@@ -21,8 +24,40 @@ export function Compass404() {
     let target = 0;
     let nextFlip = performance.now() + 1500;
     let raf = 0;
+    let lock: number | null = null;
+    const svg = n.ownerSVGElement;
+    const bearingTo = (el: Element) => {
+      const t = el.getBoundingClientRect();
+      const c = svg!.getBoundingClientRect();
+      return (Math.atan2(t.left + t.width / 2 - (c.left + c.width / 2), -(t.top + t.height / 2 - (c.top + c.height / 2))) * 180) / Math.PI;
+    };
+    const on = (e: Event) => {
+      const t = (e.target as Element | null)?.closest?.("[data-compass-target]");
+      if (!t || !svg) return;
+      if (lock === null) sfx(() => click(0.7));
+      lock = bearingTo(t);
+    };
+    const off = (e: Event) => {
+      const t = (e.target as Element | null)?.closest?.("[data-compass-target]");
+      if (t) lock = null;
+    };
+    document.addEventListener("pointerover", on);
+    document.addEventListener("focusin", on);
+    document.addEventListener("pointerout", off);
+    document.addEventListener("focusout", off);
     const t0 = performance.now();
     const tick = (now: number) => {
+      if (lock !== null) {
+        // shortest way round to the exit, then hold steady
+        target = a + ((((lock - a) % 360) + 540) % 360) - 180;
+        v += (target - a) * 0.06;
+        v *= 0.78;
+        a += v;
+        n.style.transform = `rotate(${a.toFixed(2)}deg)`;
+        b.style.transform = "rotate(0deg)";
+        raf = requestAnimationFrame(tick);
+        return;
+      }
       if (now > nextFlip) {
         const settle = Math.random() < 0.4;
         target = settle ? a - (a % 360) + 180 : a + (Math.random() - 0.3) * 900;
@@ -36,7 +71,13 @@ export function Compass404() {
       raf = requestAnimationFrame(tick);
     };
     raf = requestAnimationFrame(tick);
-    return () => cancelAnimationFrame(raf);
+    return () => {
+      cancelAnimationFrame(raf);
+      document.removeEventListener("pointerover", on);
+      document.removeEventListener("focusin", on);
+      document.removeEventListener("pointerout", off);
+      document.removeEventListener("focusout", off);
+    };
   }, []);
 
   return (

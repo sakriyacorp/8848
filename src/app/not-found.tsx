@@ -24,7 +24,7 @@ export default function NotFound() {
         <p className="mt-5 max-w-[42ch] text-[17px] text-bronze">
           This page wandered off the trail. Visibility is zero, the compass is spinning, and the smart move is to head back down.
         </p>
-        <Link href="/" className="btn mt-8 bg-choc px-7 py-4 text-[15.5px] text-brass-hi shadow-[0_18px_40px_-14px_rgba(59,37,23,.7)] hover:-translate-y-0.5">
+        <Link href="/" data-compass-target className="btn mt-8 bg-choc px-7 py-4 text-[15.5px] text-brass-hi shadow-[0_18px_40px_-14px_rgba(59,37,23,.7)] hover:-translate-y-0.5">
           <ArrowLeft size={16} aria-hidden="true" /> Return to Base Camp
         </Link>
         <nav aria-label="Other ways down" className="mt-6 flex flex-wrap justify-center gap-x-6 gap-y-2 text-[14px] text-bronze">

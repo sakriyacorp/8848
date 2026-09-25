@@ -3,11 +3,26 @@
 import { useEffect, useRef } from "react";
 import { rng } from "@/lib/ridge";
 import { cn } from "@/lib/cn";
+import { trackSection } from "@/lib/section-track";
+import { useUI } from "@/lib/ui";
+import { sfx } from "@/lib/sound";
+import { bowl } from "@/lib/audio";
+
+/* Things a caught shooting star grants. */
+const WISHES = [
+  "Wish granted: your momos arrive steaming.",
+  "Wish granted: the next round tastes like timur and moonlight.",
+  "Wish granted: a table by the lamps, whenever you want one.",
+  "Wish granted: clear skies over the Khumbu tonight.",
+  "Wish granted: the dal is bottomless. (It always was.)",
+  "Wish granted: someone else is paying.",
+];
 
 /* The bar's sky: a canvas star field with a Milky Way band, stars that twinkle on their own
    clocks, a very slow drift of the whole sky, and a shooting star every few seconds. Pauses
    off-screen; reduced motion gets one still frame. Exposes its stars on window.__8848stars for
-   the constellation easter egg. */
+   the constellation easter egg. Tap a shooting star as it passes and you catch it: it bursts
+   into sparks and grants a wish. */
 export type Star = { x: number; y: number; r: number; a: number; ph: number; sp: number };
 
 export function NightSky({ className, density = 1, onStars }: { className?: string; density?: number; onStars?: (s: Star[], size: { w: number; h: number }) => void }) {
@@ -26,6 +41,8 @@ export function NightSky({ className, density = 1, onStars }: { className?: stri
     let stars: Star[] = [];
     let glow: HTMLCanvasElement | null = null;
     const shooters: { x: number; y: number; vx: number; vy: number; life: number }[] = [];
+    const sparks: { x: number; y: number; vx: number; vy: number; life: number }[] = [];
+    let wishes = 0;
     let nextShoot = performance.now() + 2500;
 
     const build = () => {
@@ -133,6 +150,21 @@ export function NightSky({ className, density = 1, onStars }: { className?: stri
         const fromLeft = Math.random() < 0.5;
         shooters.push({ x: fromLeft ? w * (0.1 + Math.random() * 0.4) : w * (0.5 + Math.random() * 0.4), y: h * Math.random() * 0.35, vx: (fromLeft ? 1 : -1) * (520 + Math.random() * 260), vy: 170 + Math.random() * 120, life: 1 });
       }
+      for (let i = sparks.length - 1; i >= 0; i--) {
+        const p = sparks[i];
+        p.x += p.vx / 60;
+        p.y += p.vy / 60;
+        p.vy += 2.2;
+        p.life -= 1 / 50;
+        if (p.life <= 0) {
+          sparks.splice(i, 1);
+          continue;
+        }
+        ctx.fillStyle = `rgba(255,240,205,${p.life})`;
+        ctx.beginPath();
+        ctx.arc(p.x, p.y, 1.3 * p.life + 0.3, 0, Math.PI * 2);
+        ctx.fill();
+      }
       for (let i = shooters.length - 1; i >= 0; i--) {
         const s = shooters[i];
         s.x += s.vx / 60;
@@ -176,6 +208,37 @@ export function NightSky({ className, density = 1, onStars }: { className?: stri
       }
     });
     io.observe(canvas);
+
+    // catching: a tap near the head (or along the tail) of a passing shooting star
+    const track = trackSection(canvas);
+    const catchStar = (e: PointerEvent) => {
+      if (!visible || !shooters.length) return;
+      const r = track.rect();
+      const x = e.clientX - r.left;
+      const y = e.clientY - r.top;
+      if (y < 0 || y > r.height) return;
+      const hit = shooters.findIndex((s) => {
+        for (let k = 0; k <= 4; k++) {
+          const t = (k / 4) * 0.16;
+          if (Math.hypot(x - (s.x - s.vx * t), y - (s.y - s.vy * t)) < (phone ? 70 : 56)) return true;
+        }
+        return false;
+      });
+      if (hit < 0) return;
+      const s = shooters.splice(hit, 1)[0];
+      for (let k = 0; k < 26; k++) {
+        const a = Math.random() * Math.PI * 2;
+        const v = 40 + Math.random() * 140;
+        sparks.push({ x: s.x, y: s.y, vx: Math.cos(a) * v + s.vx * 0.15, vy: Math.sin(a) * v + s.vy * 0.15, life: 0.7 + Math.random() * 0.3 });
+      }
+      nextShoot = Math.min(nextShoot, performance.now() + 2500);
+      sfx(() => bowl({ freq: 523.3 * (1 + (wishes % 3) * 0.125), gain: 0.09, dur: 3.5 }));
+      useUI.getState().showToast(WISHES[wishes++ % WISHES.length], { plain: true });
+      try {
+        navigator.vibrate?.([10, 30, 10]);
+      } catch {}
+    };
+    addEventListener("pointerdown", catchStar, { passive: true });
     const ro = new ResizeObserver(() => {
       build();
       draw(performance.now());
@@ -184,6 +247,8 @@ export function NightSky({ className, density = 1, onStars }: { className?: stri
     return () => {
       io.disconnect();
       ro.disconnect();
+      track.dispose();
+      removeEventListener("pointerdown", catchStar);
       cancelAnimationFrame(raf);
     };
   }, [density, onStars]);
