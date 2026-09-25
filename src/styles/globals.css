@@ -2048,3 +2048,105 @@ body:has(.whiteout) header nav {
     width: 118px;
   }
 }
+
+/* ============================================================================================
+   ★ Ascent (3D)
+   ========================================================================================== */
+.ascent-frost {
+  background: url("/fx/frost.svg") center / 100% 100% no-repeat;
+  filter: drop-shadow(0 0 2px rgba(255, 255, 255, 0.6));
+  transition: opacity 0.4s linear;
+}
+
+.ascent-card {
+  animation: ascent-card-in 0.7s var(--ease) both;
+}
+
+@keyframes ascent-card-in {
+  from {
+    opacity: 0;
+    transform: translateY(18px) scale(0.98);
+    filter: blur(6px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+    filter: none;
+  }
+}
+
+.ascent-finale {
+  opacity: 0;
+  visibility: hidden;
+  transition:
+    opacity 1s var(--ease),
+    visibility 0s 1s;
+  background: radial-gradient(60% 55% at 50% 50%, rgba(7, 6, 10, 0.55), transparent 75%);
+}
+
+.ascent-finale.is-on {
+  opacity: 1;
+  visibility: visible;
+  transition: opacity 1.2s var(--ease);
+}
+
+.summit-flags {
+  opacity: 0;
+  transition:
+    transform 1.6s var(--ease),
+    opacity 1s var(--ease);
+}
+
+.summit-flags-a {
+  top: -3%;
+  left: -12%;
+  transform: translate(-30%, -40%) rotate(-8deg);
+}
+
+.summit-flags-b {
+  bottom: 4%;
+  right: -12%;
+  transform: translate(30%, 40%) rotate(172deg);
+}
+
+.ascent-finale.is-on .summit-flags {
+  opacity: 1;
+}
+
+.ascent-finale.is-on .summit-flags-a {
+  transform: translate(0, 0) rotate(-6deg);
+}
+
+.ascent-finale.is-on .summit-flags-b {
+  transform: translate(0, 0) rotate(174deg);
+}
+
+.summit-flags .sf-cloth {
+  transform-box: fill-box;
+  transform-origin: 50% 0;
+  animation: flag-flutter 1.4s ease-in-out infinite;
+}
+
+@keyframes flag-flutter {
+  0%,
+  100% {
+    transform: skewX(0deg) scaleY(1);
+  }
+  30% {
+    transform: skewX(9deg) scaleY(0.94);
+  }
+  65% {
+    transform: skewX(-6deg) scaleY(1.02);
+  }
+}
+
+/* Brass mandala loader */
+.mandala-loader svg {
+  animation: spin 9s linear infinite;
+}
+
+.mandala-loader .ml-inner {
+  transform-origin: 50% 50%;
+  transform-box: fill-box;
+  animation: spin 5s linear infinite reverse;
+}
