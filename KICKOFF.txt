@@ -1,0 +1,3 @@
+Paste this into Claude Code (Opus 5.5, effort: xhigh):
+
+Read PROMPT.md in full, then reference-code/README.md, and execute the brief end to end. Brand assets are in ./assets, my previous sites' code is in ./reference-code (read-only, exclude it from the build). Work autonomously all night, don't stop to ask me anything, commit after every milestone (push too if a remote is set), and above all: be creative.

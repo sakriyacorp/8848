@@ -1,0 +1,29 @@
+{
+  "_notes": "Every entry here must be a verbatim public review. The first three are from the restaurant's current website. Live Google reviews are merged in automatically when GOOGLE_PLACES_API_KEY and GOOGLE_PLACE_ID are set (Google's API returns at most 5). To add more, copy-paste from the Google Business profile: name, stars, text, and the review date if known. Never write, edit, merge or embellish review text.",
+  "aggregate": {
+    "rating": 4.5,
+    "count": 462,
+    "source": "Google",
+    "_note": "Owner-provided Google numbers, September 2026. Replaced by the live API value when connected."
+  },
+  "reviews": [
+    {
+      "id": "steve-t",
+      "name": "Steve T.",
+      "stars": 5,
+      "text": "Had dinner with 2 of my sons here and we will definitely be back. We all ordered different entrees and each one was great. We also liked the ambiance of the place."
+    },
+    {
+      "id": "kirsten-b",
+      "name": "Kirsten B.",
+      "stars": 5,
+      "text": "Delicious!! So many options and everything we tried was so good (we have leftovers for days because I wanted to try it all!!) We were enjoying the whole experience! Delicious Lamb Pasanda is one of the most delicious things I have ever eaten!"
+    },
+    {
+      "id": "sarah-o",
+      "name": "Sarah O.",
+      "stars": 5,
+      "text": "Good quality and fast service. We arrived thirty minutes before they closed but we were immediately greeted and sat at a table. The food was delicious. Highly recommend the Samosas."
+    }
+  ]
+}

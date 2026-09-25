@@ -1,0 +1,1045 @@
+@import "tailwindcss";
+
+/* ============================================================================================
+   8848 — design tokens
+   Colours are sampled from the brass table plaque and the gold-foil card (see PLAN.md).
+   ========================================================================================== */
+:root {
+  --night: #17110d;
+  --void: #0e0a07;
+  --walnut-deep: #2a1b12;
+  --walnut: #5b3825;
+  --cocoa: #4b3630;
+  --choc: #3b2517;
+  --bronze: #614a32;
+  --brass-shadow: #9b7e53;
+  --brass: #b69e70;
+  --foil: #dcbf7b;
+  --brass-hi: #f2e9cf;
+  --lamp: #eed3a5;
+  --cream: #e6e0d6;
+  --paper: #efe8db;
+  --text: #ede4d3;
+  --muted: #b7a68a;
+  --line: rgba(222, 196, 146, 0.16);
+  --line-strong: rgba(222, 196, 146, 0.32);
+  --ink-line: rgba(59, 37, 23, 0.16);
+
+  /* prayer-flag cloth — only ever inside flag illustrations */
+  --flag-blue: #5a7188;
+  --flag-white: #d8d0c0;
+  --flag-red: #9a5446;
+  --flag-green: #627457;
+  --flag-yellow: #c6a55a;
+
+  --glass-fill: linear-gradient(135deg, rgba(242, 233, 207, 0.085), rgba(242, 233, 207, 0.025));
+
+  --foil-gradient: linear-gradient(
+    105deg,
+    #8e6f3e 0%,
+    #c9a764 16%,
+    #f6e7b8 30%,
+    #dcbf7b 42%,
+    #a8854b 56%,
+    #e8d39a 70%,
+    #fff3cf 78%,
+    #b08a4a 92%,
+    #8e6f3e 100%
+  );
+
+  --ease: cubic-bezier(0.22, 1, 0.36, 1);
+  --ease-soft: cubic-bezier(0.2, 0.8, 0.2, 1);
+  --ease-bounce: cubic-bezier(0.34, 1.36, 0.64, 1);
+  --ease-in-out: cubic-bezier(0.65, 0, 0.35, 1);
+
+  --gutter: 1.25rem;
+  --maxw: 1240px;
+  --nav-h: 72px;
+}
+
+@media (min-width: 768px) {
+  :root {
+    --gutter: 2rem;
+  }
+}
+
+@theme inline {
+  --color-*: initial;
+  --color-night: var(--night);
+  --color-void: var(--void);
+  --color-walnut-deep: var(--walnut-deep);
+  --color-walnut: var(--walnut);
+  --color-cocoa: var(--cocoa);
+  --color-choc: var(--choc);
+  --color-bronze: var(--bronze);
+  --color-brass-shadow: var(--brass-shadow);
+  --color-brass: var(--brass);
+  --color-foil: var(--foil);
+  --color-brass-hi: var(--brass-hi);
+  --color-lamp: var(--lamp);
+  --color-cream: var(--cream);
+  --color-paper: var(--paper);
+  --color-text: var(--text);
+  --color-muted: var(--muted);
+  --color-line: var(--line);
+  --color-line-strong: var(--line-strong);
+  --color-ink-line: var(--ink-line);
+  --color-transparent: transparent;
+  --color-current: currentColor;
+  --color-black: #000;
+  --color-white: #fff;
+
+  --font-display: var(--font-cormorant), "Cormorant Garamond", Georgia, serif;
+  --font-caps: var(--font-cinzel), "Trajan Pro", Georgia, serif;
+  --font-sans: var(--font-jost), ui-sans-serif, system-ui, sans-serif;
+
+  --ease-soft: var(--ease-soft);
+  --ease-out: var(--ease);
+  --ease-bounce: var(--ease-bounce);
+
+  --animate-badge: badge-bounce 420ms var(--ease-bounce);
+  --animate-spin-slow: spin 14s linear infinite;
+}
+
+/* ============================================================================================
+   Base
+   ========================================================================================== */
+@layer base {
+  html {
+    color-scheme: dark;
+    scroll-padding-top: calc(var(--nav-h) + 16px);
+    -webkit-tap-highlight-color: transparent;
+    background: var(--void);
+  }
+
+  body {
+    background-color: var(--night);
+    color: var(--text);
+    font-family: var(--font-sans);
+    font-size: 17px;
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+    overflow-x: clip;
+  }
+
+  @media (max-width: 767px) {
+    body {
+      font-size: 16px;
+    }
+  }
+
+  ::selection {
+    background: rgba(220, 191, 123, 0.35);
+    color: var(--brass-hi);
+  }
+
+  /* Film grain over everything: the room is never perfectly clean. */
+  body::after {
+    content: "";
+    position: fixed;
+    inset: 0;
+    z-index: 9990;
+    pointer-events: none;
+    opacity: 0.05;
+    mix-blend-mode: overlay;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='180' height='180' filter='url(%23n)'/%3E%3C/svg%3E");
+  }
+
+  :focus-visible {
+    outline: 2px solid var(--foil);
+    outline-offset: 3px;
+    border-radius: 6px;
+  }
+
+  :focus:not(:focus-visible) {
+    outline: none;
+  }
+
+  img,
+  svg,
+  canvas,
+  video {
+    display: block;
+  }
+
+  button {
+    cursor: pointer;
+  }
+
+  @media (hover: hover) and (pointer: fine) {
+    html[data-cursor="custom"] body,
+    html[data-cursor="custom"] a,
+    html[data-cursor="custom"] button,
+    html[data-cursor="custom"] [role="button"],
+    html[data-cursor="custom"] label,
+    html[data-cursor="custom"] summary,
+    html[data-cursor="custom"] canvas {
+      cursor: none !important;
+    }
+  }
+}
+
+/* ============================================================================================
+   Materials
+   ========================================================================================== */
+
+/* Brushed brass — the plaque. Broad anisotropic bands + fine directional grain + a specular
+   highlight whose position is driven by --sx/--sy (cursor, tilt or scroll). */
+@utility brass {
+  position: relative;
+  isolation: isolate;
+  color: var(--choc);
+  background:
+    radial-gradient(90% 70% at var(--sx, 28%) var(--sy, 18%), rgba(255, 249, 228, 0.62), rgba(255, 249, 228, 0) 58%),
+    linear-gradient(
+      100deg,
+      #8f7447 0%,
+      #b89f6d 12%,
+      #e3d2a4 26%,
+      #c4ab78 38%,
+      #a98e5c 50%,
+      #cfba89 63%,
+      #efe2bb 74%,
+      #b59a68 88%,
+      #967a4c 100%
+    );
+  box-shadow:
+    inset 0 1px 0 rgba(255, 248, 225, 0.75),
+    inset 0 -1px 0 rgba(80, 56, 28, 0.55),
+    inset 1px 0 0 rgba(255, 248, 225, 0.35),
+    inset -1px 0 0 rgba(80, 56, 28, 0.35);
+
+  &::before {
+    /* horizontal brushing: stretched turbulence reads as fine directional scratches */
+    content: "";
+    position: absolute;
+    inset: 0;
+    z-index: -1;
+    border-radius: inherit;
+    pointer-events: none;
+    opacity: 0.55;
+    mix-blend-mode: overlay;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='400' height='400'%3E%3Cfilter id='b'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.004 0.9' numOctaves='3' seed='8'/%3E%3CfeColorMatrix values='0 0 0 0 .5 0 0 0 0 .5 0 0 0 0 .5 0 0 0 1.4 -.2'/%3E%3C/filter%3E%3Crect width='400' height='400' filter='url(%23b)'/%3E%3C/svg%3E");
+    background-size: 400px 400px;
+  }
+}
+
+/* A light band that sweeps across metal. Add .sheen to a .brass/.foil element; set
+   --sheen-delay to stagger, or toggle .sheen-go from JS to replay. */
+@utility sheen {
+  overflow: hidden;
+
+  &::after {
+    content: "";
+    position: absolute;
+    inset: -20% auto -20% 0;
+    width: 45%;
+    pointer-events: none;
+    z-index: 2;
+    background: linear-gradient(
+      100deg,
+      rgba(255, 250, 230, 0) 0%,
+      rgba(255, 250, 230, 0.12) 35%,
+      rgba(255, 252, 240, 0.55) 50%,
+      rgba(255, 250, 230, 0.12) 65%,
+      rgba(255, 250, 230, 0) 100%
+    );
+    mix-blend-mode: soft-light;
+    transform: translateX(-130%) skewX(-18deg);
+    animation: sheen-sweep 2.8s var(--ease) var(--sheen-delay, 0.6s) both;
+  }
+}
+
+/* Gold foil text: moving metallic gradient clipped to the glyphs. */
+@utility foil-text {
+  background-image: var(--foil-gradient);
+  background-size: 260% 100%;
+  background-position: 0% 50%;
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  -webkit-text-fill-color: transparent;
+  animation: foil-drift 9s var(--ease-in-out) infinite alternate;
+}
+
+/* Brass text for dark surfaces (headlines that should read as metal, not paint). */
+@utility brass-text {
+  background-image: linear-gradient(
+    176deg,
+    #fff4d6 0%,
+    #efdcad 22%,
+    #c9ae78 48%,
+    #a58853 62%,
+    #dcc38e 80%,
+    #f6e8c2 100%
+  );
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  -webkit-text-fill-color: transparent;
+}
+
+/* Engraved into brass: dark ink, a darker lip above, a lit lip below. */
+@utility engraved {
+  color: var(--choc);
+  text-shadow:
+    0 1px 0 rgba(255, 246, 220, 0.6),
+    0 -1px 0 rgba(40, 24, 12, 0.35);
+}
+
+/* Walnut: dark wood with long grain. */
+@utility walnut {
+  background-color: #3a2416;
+  background-image:
+    radial-gradient(120% 90% at 50% 0%, rgba(238, 211, 165, 0.1), transparent 60%),
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='600' height='300'%3E%3Cfilter id='w'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.0035 0.08' numOctaves='4' seed='3'/%3E%3CfeColorMatrix values='0 0 0 0 .36 0 0 0 0 .22 0 0 0 0 .14 0 0 0 2.2 -.75'/%3E%3C/filter%3E%3Crect width='600' height='300' filter='url(%23w)'/%3E%3C/svg%3E"),
+    linear-gradient(180deg, #4a2e1d, #2e1c12);
+  background-size:
+    100% 100%,
+    600px 300px,
+    100% 100%;
+}
+
+/* Lokta / cream paper: warm fibre and faint mottling. Reading surface. */
+@utility paper {
+  background-color: var(--paper);
+  color: var(--choc);
+  background-image:
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Cfilter id='p'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='3' seed='2'/%3E%3CfeColorMatrix values='0 0 0 0 .42 0 0 0 0 .31 0 0 0 0 .2 0 0 0 .5 -.12'/%3E%3C/filter%3E%3Crect width='300' height='300' filter='url(%23p)'/%3E%3C/svg%3E"),
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='700' height='700'%3E%3Cfilter id='m'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.006' numOctaves='3' seed='9'/%3E%3CfeColorMatrix values='0 0 0 0 .55 0 0 0 0 .42 0 0 0 0 .28 0 0 0 .35 -.08'/%3E%3C/filter%3E%3Crect width='700' height='700' filter='url(%23m)'/%3E%3C/svg%3E");
+  background-size:
+    300px 300px,
+    700px 700px;
+
+  ::selection {
+    background: rgba(97, 74, 50, 0.25);
+    color: var(--choc);
+  }
+}
+
+/* Cocoa linen: a fine weave for dark cards. */
+@utility linen {
+  background-color: var(--cocoa);
+  background-image:
+    repeating-linear-gradient(0deg, rgba(255, 240, 220, 0.025) 0 1px, transparent 1px 3px),
+    repeating-linear-gradient(90deg, rgba(0, 0, 0, 0.06) 0 1px, transparent 1px 3px);
+}
+
+/* Warm liquid glass with a thin brass edge (sakriya .glass, re-lit). */
+@utility glass {
+  position: relative;
+  background: var(--glass-fill), var(--glass-base, rgba(23, 17, 13, 0.35));
+  border: 1px solid var(--line);
+  box-shadow:
+    inset 0 1px 0 rgba(242, 233, 207, 0.14),
+    inset 0 -1px 0 rgba(242, 233, 207, 0.03),
+    0 24px 60px -22px rgba(0, 0, 0, 0.75);
+  -webkit-backdrop-filter: blur(18px) saturate(1.35);
+  backdrop-filter: blur(18px) saturate(1.35);
+
+  &::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    border-radius: inherit;
+    pointer-events: none;
+    padding: 1px;
+    background: linear-gradient(
+      160deg,
+      rgba(242, 233, 207, 0.32),
+      rgba(220, 191, 123, 0.05) 30%,
+      rgba(220, 191, 123, 0) 68%,
+      rgba(220, 191, 123, 0.28)
+    );
+    -webkit-mask:
+      linear-gradient(#000, #000) content-box,
+      linear-gradient(#000, #000);
+    mask:
+      linear-gradient(#000, #000) content-box,
+      linear-gradient(#000, #000);
+    -webkit-mask-composite: xor;
+    mask-composite: exclude;
+  }
+}
+
+@media (prefers-reduced-transparency: reduce) {
+  .glass {
+    background: var(--walnut-deep);
+    -webkit-backdrop-filter: none;
+    backdrop-filter: none;
+  }
+}
+
+/* ============================================================================================
+   Type
+   ========================================================================================== */
+@utility display {
+  font-family: var(--font-display);
+  font-weight: 500;
+  letter-spacing: -0.012em;
+  line-height: 1;
+  font-variant-numeric: lining-nums;
+}
+
+@utility caps {
+  font-family: var(--font-caps);
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.22em;
+}
+
+@utility eyebrow {
+  font-family: var(--font-caps);
+  font-weight: 600;
+  font-size: 11.5px;
+  text-transform: uppercase;
+  letter-spacing: 0.3em;
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+
+  &::before {
+    content: "";
+    width: 26px;
+    height: 1px;
+    background: linear-gradient(90deg, currentColor, transparent);
+    opacity: 0.8;
+  }
+}
+
+@utility num {
+  font-variant-numeric: tabular-nums lining-nums;
+}
+
+@utility no-scrollbar {
+  scrollbar-width: none;
+  &::-webkit-scrollbar {
+    display: none;
+  }
+}
+
+@utility container-x {
+  width: 100%;
+  max-width: var(--maxw);
+  margin-inline: auto;
+  padding-inline: var(--gutter);
+}
+
+/* ============================================================================================
+   Buttons
+   ========================================================================================== */
+@utility btn {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  border-radius: 999px;
+  font-family: var(--font-sans);
+  font-weight: 500;
+  letter-spacing: 0.02em;
+  white-space: nowrap;
+  user-select: none;
+  transition:
+    transform 220ms var(--ease-bounce),
+    box-shadow 320ms var(--ease-soft),
+    background-color 320ms var(--ease-soft),
+    color 220ms var(--ease-soft),
+    filter 320ms var(--ease-soft);
+
+  &:active {
+    transform: translateY(0) scale(0.965);
+  }
+
+  &:disabled {
+    opacity: 0.55;
+    pointer-events: none;
+  }
+}
+
+/* The primary call to action is a small brass plaque with an engraved label. */
+@utility btn-brass {
+  overflow: hidden;
+  isolation: isolate;
+  color: var(--choc);
+  font-weight: 600;
+  background:
+    radial-gradient(120% 140% at 30% 0%, rgba(255, 249, 228, 0.7), rgba(255, 249, 228, 0) 55%),
+    linear-gradient(100deg, #a58a58 0%, #d9c595 30%, #f1e4bd 46%, #c5ac78 64%, #a88c5a 100%);
+  box-shadow:
+    inset 0 1px 0 rgba(255, 250, 232, 0.85),
+    inset 0 -1px 0 rgba(90, 64, 30, 0.6),
+    0 1px 2px rgba(0, 0, 0, 0.5),
+    0 12px 32px -10px rgba(220, 191, 123, 0.45);
+  text-shadow: 0 1px 0 rgba(255, 246, 220, 0.55);
+
+  &::after {
+    content: "";
+    position: absolute;
+    top: -40%;
+    bottom: -40%;
+    left: 0;
+    width: 40%;
+    pointer-events: none;
+    background: linear-gradient(100deg, rgba(255, 252, 240, 0) 0%, rgba(255, 252, 240, 0.7) 50%, rgba(255, 252, 240, 0) 100%);
+    mix-blend-mode: soft-light;
+    transform: translateX(-170%) skewX(-18deg);
+  }
+
+  &:hover {
+    transform: translateY(-2px);
+    box-shadow:
+      inset 0 1px 0 rgba(255, 250, 232, 0.9),
+      inset 0 -1px 0 rgba(90, 64, 30, 0.6),
+      0 2px 4px rgba(0, 0, 0, 0.5),
+      0 18px 44px -10px rgba(220, 191, 123, 0.6),
+      0 0 0 4px rgba(220, 191, 123, 0.12);
+  }
+
+  &:hover::after {
+    transform: translateX(380%) skewX(-18deg);
+    transition: transform 1s var(--ease);
+  }
+
+  &:focus-visible {
+    outline-color: var(--brass-hi);
+  }
+}
+
+@utility btn-ghost {
+  color: var(--text);
+  border: 1px solid var(--line-strong);
+  background: var(--glass-fill);
+  -webkit-backdrop-filter: blur(10px);
+  backdrop-filter: blur(10px);
+
+  &:hover {
+    transform: translateY(-2px);
+    border-color: rgba(220, 191, 123, 0.55);
+    color: var(--brass-hi);
+    box-shadow: 0 10px 30px -12px rgba(220, 191, 123, 0.35);
+  }
+}
+
+/* Ghost button for cream paper sections. */
+@utility btn-ink {
+  color: var(--choc);
+  border: 1px solid rgba(59, 37, 23, 0.35);
+  background: rgba(255, 252, 244, 0.35);
+
+  &:hover {
+    transform: translateY(-2px);
+    border-color: var(--choc);
+    background: rgba(255, 252, 244, 0.7);
+  }
+}
+
+/* ============================================================================================
+   Keyframes
+   ========================================================================================== */
+@keyframes sheen-sweep {
+  0% {
+    transform: translateX(-130%) skewX(-18deg);
+  }
+  100% {
+    transform: translateX(330%) skewX(-18deg);
+  }
+}
+
+@keyframes foil-drift {
+  from {
+    background-position: 0% 50%;
+  }
+  to {
+    background-position: 100% 50%;
+  }
+}
+
+@keyframes badge-bounce {
+  0% {
+    transform: scale(1);
+  }
+  40% {
+    transform: scale(1.35) translateY(-2px);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
+@keyframes rise {
+  from {
+    opacity: 0;
+    transform: translateY(22px);
+    filter: blur(8px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+    filter: none;
+  }
+}
+
+@keyframes fade {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes flicker {
+  0%,
+  100% {
+    transform: scaleY(1) scaleX(1);
+    opacity: 1;
+  }
+  22% {
+    transform: scaleY(1.08) scaleX(0.94);
+    opacity: 0.94;
+  }
+  41% {
+    transform: scaleY(0.95) scaleX(1.04);
+    opacity: 1;
+  }
+  63% {
+    transform: scaleY(1.05) scaleX(0.97) skewX(2deg);
+    opacity: 0.9;
+  }
+  82% {
+    transform: scaleY(0.98) scaleX(1.02) skewX(-1.5deg);
+    opacity: 1;
+  }
+}
+
+@keyframes glow-breathe {
+  0%,
+  100% {
+    opacity: 0.75;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 1;
+    transform: scale(1.06);
+  }
+}
+
+@keyframes drift-x {
+  from {
+    transform: translateX(-4%);
+  }
+  to {
+    transform: translateX(4%);
+  }
+}
+
+@keyframes steam {
+  0% {
+    opacity: 0;
+    transform: translateY(0) scaleX(1);
+  }
+  25% {
+    opacity: 0.7;
+  }
+  100% {
+    opacity: 0;
+    transform: translateY(-46px) scaleX(1.6);
+  }
+}
+
+@keyframes twinkle {
+  0%,
+  100% {
+    opacity: var(--o, 0.8);
+  }
+  50% {
+    opacity: calc(var(--o, 0.8) * 0.25);
+  }
+}
+
+/* ============================================================================================
+   Components
+   ========================================================================================== */
+@layer components {
+  /* Scroll reveal (sakriya Effects / Natraj Reveal). The hidden start state is only applied
+     once JS has run, so nothing disappears without it. */
+  .reveal {
+    opacity: 0;
+    transform: translateY(26px);
+    filter: blur(6px);
+    transition:
+      opacity 0.9s var(--ease),
+      transform 0.9s var(--ease),
+      filter 0.9s var(--ease);
+    transition-delay: var(--rd, 0s);
+  }
+
+  .reveal.in {
+    opacity: 1;
+    transform: none;
+    filter: none;
+  }
+
+  /* Split-word headline reveal: each word rises from behind a mask. */
+  .split-word {
+    display: inline-block;
+    overflow: hidden;
+    vertical-align: top;
+    padding-bottom: 0.08em;
+    margin-bottom: -0.08em;
+  }
+
+  .split-word > span {
+    display: inline-block;
+    transform: translateY(105%) rotate(4deg);
+    transform-origin: 0 100%;
+    transition: transform 1.05s var(--ease);
+    transition-delay: calc(var(--i, 0) * 70ms + var(--rd, 0s));
+  }
+
+  .split.in .split-word > span,
+  .no-js .split-word > span {
+    transform: none;
+  }
+
+  /* Card tilt + glare (sakriya [data-tilt]). */
+  [data-tilt] {
+    transition: transform 0.5s var(--ease);
+    transform-style: preserve-3d;
+  }
+
+  [data-tilt]::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    border-radius: inherit;
+    pointer-events: none;
+    background: radial-gradient(420px circle at var(--gx, 50%) var(--gy, 50%), rgba(255, 244, 214, 0.14), transparent 45%);
+    opacity: 0;
+    transition: opacity 0.4s var(--ease);
+  }
+
+  @media (hover: hover) {
+    [data-tilt]:hover::after {
+      opacity: 1;
+    }
+  }
+
+  /* Hairline section divider with a brass point in the middle. */
+  .rule {
+    position: relative;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, var(--line-strong) 30%, var(--line-strong) 70%, transparent);
+  }
+
+  .rule::after {
+    content: "";
+    position: absolute;
+    left: 50%;
+    top: -3px;
+    width: 7px;
+    height: 7px;
+    margin-left: -3.5px;
+    transform: rotate(45deg);
+    background: var(--brass);
+    box-shadow: 0 0 12px rgba(220, 191, 123, 0.6);
+  }
+
+  /* Cursor — sakriya liquid-glass arrow re-lit in brass. */
+  #cursor {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 19px;
+    height: 22px;
+    z-index: 10000;
+    pointer-events: none;
+    opacity: 0;
+    clip-path: polygon(0% 0%, 0% 78%, 21% 62%, 34% 94%, 46% 88%, 33% 57%, 58% 57%);
+    background: linear-gradient(150deg, rgba(255, 246, 222, 0.92), rgba(220, 191, 123, 0.5) 45%, rgba(155, 126, 83, 0.8));
+    -webkit-backdrop-filter: blur(2px) saturate(1.6) brightness(1.2);
+    backdrop-filter: blur(2px) saturate(1.6) brightness(1.2);
+    filter: drop-shadow(0 2px 5px rgba(0, 0, 0, 0.55)) drop-shadow(0 0 1.5px rgba(255, 240, 210, 0.9));
+    transform-origin: 2px 2px;
+    transition:
+      transform 220ms var(--ease-bounce),
+      opacity 300ms var(--ease-soft),
+      width 220ms var(--ease-bounce),
+      height 220ms var(--ease-bounce),
+      clip-path 220ms var(--ease-soft);
+    will-change: transform;
+  }
+
+  #cursor.grow {
+    transform: scale(1.4);
+  }
+
+  #cursor.text {
+    clip-path: polygon(28% 0%, 72% 0%, 72% 100%, 28% 100%);
+    width: 6px;
+    height: 22px;
+  }
+
+  /* Glass lens that springs behind the hovered nav link (sakriya .lens). */
+  .nav-lens {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+    border-radius: 999px;
+    z-index: 0;
+    background: linear-gradient(135deg, rgba(242, 233, 207, 0.14), rgba(242, 233, 207, 0.04));
+    border: 1px solid rgba(220, 191, 123, 0.22);
+    box-shadow:
+      inset 0 1px 0 rgba(255, 244, 214, 0.22),
+      0 4px 14px rgba(0, 0, 0, 0.4);
+    opacity: 0;
+    transition: opacity 200ms var(--ease-soft);
+    will-change: transform, width;
+  }
+
+  /* Faint lamp glow, used behind sections. */
+  .lamp-glow {
+    position: absolute;
+    pointer-events: none;
+    border-radius: 50%;
+    background: radial-gradient(closest-side, rgba(238, 211, 165, 0.22), rgba(238, 211, 165, 0.06) 55%, transparent);
+    filter: blur(8px);
+    animation: glow-breathe 7s ease-in-out infinite;
+  }
+
+  /* Section edges that fade dark into dark / paper into dark. */
+  .fade-top {
+    mask-image: linear-gradient(to bottom, transparent, #000 90px);
+  }
+
+  .edge-mask-x {
+    -webkit-mask-image: linear-gradient(90deg, transparent, #000 8%, #000 92%, transparent);
+    mask-image: linear-gradient(90deg, transparent, #000 8%, #000 92%, transparent);
+  }
+
+  @media (max-width: 767px) {
+    .edge-mask-x {
+      -webkit-mask-image: linear-gradient(90deg, transparent, #000 6%, #000 94%, transparent);
+      mask-image: linear-gradient(90deg, transparent, #000 6%, #000 94%, transparent);
+    }
+  }
+}
+
+/* Registered so glass tints can ease. */
+@property --glass-base {
+  syntax: "<color>";
+  inherits: true;
+  initial-value: transparent;
+}
+
+/* ============================================================================================
+   Reduced motion: keep fades, drop movement.
+   ========================================================================================== */
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+
+  .reveal {
+    transform: none;
+    filter: none;
+    transition: opacity 0.6s linear !important;
+  }
+
+  .split-word > span {
+    transform: none;
+  }
+
+  #cursor {
+    display: none;
+  }
+}
+
+/* ============================================================================================
+   Logo — materials + draw-on (see components/brand/Logo.tsx)
+   ========================================================================================== */
+.logo8848 {
+  overflow: visible;
+}
+
+.logo8848 .logo-peaks,
+.logo8848 .logo-num,
+.logo8848 .logo-orb,
+.logo8848 .logo-tag {
+  transform-box: fill-box;
+  transform-origin: 50% 100%;
+}
+
+.logo-engraved {
+  filter: drop-shadow(0 1px 0 rgba(255, 246, 220, 0.55)) drop-shadow(0 -0.6px 0 rgba(30, 18, 8, 0.45));
+}
+
+.logo-foil {
+  filter: drop-shadow(0 1px 0.6px rgba(80, 55, 20, 0.35)) drop-shadow(0 -0.5px 0 rgba(255, 250, 235, 0.85));
+}
+
+.logo-brass {
+  filter: drop-shadow(0 1.5px 0 rgba(0, 0, 0, 0.55)) drop-shadow(0 0 22px rgba(220, 191, 123, 0.14));
+}
+
+.logo-cream {
+  filter: drop-shadow(0 1px 0 rgba(0, 0, 0, 0.5));
+}
+
+.logo-sheen {
+  animation: logo-sheen 2.6s var(--ease) calc(var(--ld, 0s) + 0.5s) both;
+}
+
+.logo-anim .logo-sheen {
+  animation-delay: calc(var(--ld, 0s) + 2.6s);
+}
+
+.logo-anim .logo-arc {
+  stroke-dasharray: 1;
+  stroke-dashoffset: 1;
+  animation: logo-draw 1.6s var(--ease-in-out) var(--ld, 0s) forwards;
+}
+
+.logo-anim .logo-peaks {
+  transform: translateY(104%);
+  animation: logo-rise 1.35s var(--ease) calc(var(--ld, 0s) + 0.55s) forwards;
+}
+
+.logo-anim .logo-orb {
+  opacity: 0;
+  transform: translateY(560px);
+  animation: logo-sunrise 2.2s var(--ease) calc(var(--ld, 0s) + 0.95s) forwards;
+}
+
+.logo-anim .logo-num {
+  opacity: 0;
+  transform: translateY(22%) scale(0.96);
+  filter: blur(10px);
+  animation: logo-settle 1s var(--ease) calc(var(--ld, 0s) + 1.5s + var(--i, 0) * 0.1s) forwards;
+}
+
+.logo-anim .logo-tag {
+  opacity: 0;
+  transform: scaleX(0.86);
+  transform-origin: 50% 50%;
+  animation: logo-tag 1.2s var(--ease) calc(var(--ld, 0s) + 2.05s) forwards;
+}
+
+@keyframes logo-draw {
+  to {
+    stroke-dashoffset: 0;
+  }
+}
+
+@keyframes logo-rise {
+  to {
+    transform: translateY(0);
+  }
+}
+
+@keyframes logo-sunrise {
+  0% {
+    opacity: 0;
+    transform: translateY(560px);
+  }
+  30% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes logo-settle {
+  to {
+    opacity: 1;
+    transform: none;
+    filter: none;
+  }
+}
+
+@keyframes logo-tag {
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+@keyframes logo-sheen {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(3400px);
+  }
+}
+
+/* ============================================================================================
+   Butter lamp
+   ========================================================================================== */
+.butter-lamp .lamp-flame {
+  transform-box: fill-box;
+  transform-origin: 50% 90%;
+  animation: flicker 2.3s ease-in-out infinite;
+}
+
+.butter-lamp .lamp-glow-disc {
+  transform-box: fill-box;
+  transform-origin: center;
+  animation: glow-breathe 2.9s ease-in-out infinite;
+}
+
+.butter-lamp .lamp-smoke path {
+  stroke-dasharray: 0.35 1;
+  stroke-dashoffset: 1.35;
+  opacity: 0;
+  animation: lamp-smoke 3.2s ease-out infinite;
+}
+
+@keyframes lamp-smoke {
+  0% {
+    stroke-dashoffset: 1.35;
+    opacity: 0;
+  }
+  20% {
+    opacity: 0.7;
+  }
+  100% {
+    stroke-dashoffset: 0;
+    opacity: 0;
+  }
+}
+
+/* ============================================================================================
+   Footer horizon
+   ========================================================================================== */
+.footer-horizon .fh-layer {
+  transform: translateY(calc((1 - var(--fp, 1)) * var(--s, 0.5) * 60px));
+  will-change: transform;
+}
+
+.footer-horizon .fh-stars circle {
+  animation: twinkle 4.5s ease-in-out infinite;
+}
+
+.footer-horizon .fh-arc {
+  stroke-dasharray: 1;
+  stroke-dashoffset: calc(1 - var(--fp, 1));
+}
+
+.footer-horizon .fh-orb {
+  transition: transform 1.2s var(--ease);
+}

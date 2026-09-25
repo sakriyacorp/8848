@@ -1,0 +1,770 @@
+@import "tailwindcss";
+
+:root {
+  --night: #0d0c0c;
+  --charcoal: #171616;
+  --void: #070707;
+  --red: #c8202e;
+  --red-deep: #8f1520;
+  --gold: #e2b44a;
+  --cream: #f2e8d5;
+  --cream-2: #b5aa98;
+  --beige: #e8dfcc;
+  --beige-2: #d9cfb8;
+  --ink: #141313;
+  --ink-2: #5d564d;
+  --green: #6f8c5e;
+  --line: rgba(242, 232, 213, 0.12);
+  --glass-fill: linear-gradient(135deg, rgba(242, 232, 213, 0.075), rgba(242, 232, 213, 0.022));
+  --ease-soft: cubic-bezier(0.2, 0.8, 0.2, 1);
+  --ease-bounce: cubic-bezier(0.34, 1.36, 0.64, 1);
+}
+
+@theme inline {
+  --color-*: initial;
+  --color-night: var(--night);
+  --color-charcoal: var(--charcoal);
+  --color-void: var(--void);
+  --color-red: var(--red);
+  --color-red-deep: var(--red-deep);
+  --color-gold: var(--gold);
+  --color-cream: var(--cream);
+  --color-cream-2: var(--cream-2);
+  --color-beige: var(--beige);
+  --color-beige-2: var(--beige-2);
+  --color-ink: var(--ink);
+  --color-ink-2: var(--ink-2);
+  --color-green: var(--green);
+  --color-line: var(--line);
+  --color-glass: rgba(242, 232, 213, 0.06);
+
+  --font-sans: var(--font-instrument-sans), ui-sans-serif, system-ui, sans-serif;
+  --font-display: var(--font-fraunces), Georgia, serif;
+
+  --ease-soft: var(--ease-soft);
+  --ease-bounce: var(--ease-bounce);
+  --radius-card: 12px;
+
+  --animate-badge: badge-bounce 300ms ease-out;
+}
+
+@keyframes hero-zoom {
+  from {
+    transform: scale(1.06);
+  }
+  to {
+    transform: scale(1);
+  }
+}
+
+@keyframes hero-rise {
+  from {
+    transform: translateY(24px);
+    filter: blur(8px);
+  }
+  to {
+    transform: translateY(0);
+    filter: blur(0);
+  }
+}
+
+@keyframes hero-fade {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes badge-bounce {
+  0%,
+  100% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.25);
+  }
+}
+
+@layer base {
+  html {
+    color-scheme: dark;
+    scroll-behavior: smooth;
+    scroll-padding-top: 88px;
+  }
+
+  body {
+    background-color: var(--night);
+    color: var(--cream);
+    font-size: 17px;
+    line-height: 1.5;
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+  }
+
+  @media (max-width: 767px) {
+    body {
+      font-size: 16px;
+    }
+  }
+
+  ::selection {
+    background: rgba(200, 32, 46, 0.45);
+    color: var(--cream);
+  }
+
+  /* 3% film grain — the only texture on the site (sakriya .grain, dialed down) */
+  body::before {
+    content: "";
+    position: fixed;
+    inset: 0;
+    z-index: 9999;
+    pointer-events: none;
+    opacity: 0.03;
+    mix-blend-mode: overlay;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2'/%3E%3C/filter%3E%3Crect width='160' height='160' filter='url(%23n)' opacity='1'/%3E%3C/svg%3E");
+  }
+
+  :focus-visible {
+    outline: 2px solid var(--red);
+    outline-offset: 3px;
+  }
+
+  :focus:not(:focus-visible) {
+    outline: none;
+  }
+
+  /* Native cursor hidden where the glass arrow takes over; text inputs keep their I-beam */
+  @media (hover: hover) and (pointer: fine) {
+    html[data-cursor="custom"] body,
+    html[data-cursor="custom"] a,
+    html[data-cursor="custom"] button,
+    html[data-cursor="custom"] [role="button"],
+    html[data-cursor="custom"] label,
+    html[data-cursor="custom"] summary {
+      cursor: none !important;
+    }
+  }
+}
+
+/* Liquid glass — sakriya .glass, retinted: cream fill over an optional smoky base
+   (--glass-base, set per component for drawers/sheets), rim light warming to red. */
+@utility glass {
+  position: relative;
+  background: var(--glass-fill), var(--glass-base, transparent);
+  border: 1px solid var(--line);
+  box-shadow:
+    inset 0 1px 0 rgba(242, 232, 213, 0.14),
+    inset 0 -1px 0 rgba(242, 232, 213, 0.03),
+    0 24px 60px -22px rgba(0, 0, 0, 0.7);
+  -webkit-backdrop-filter: blur(18px) saturate(1.4);
+  backdrop-filter: blur(18px) saturate(1.4);
+
+  &::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    border-radius: inherit;
+    pointer-events: none;
+    padding: 1px;
+    background: linear-gradient(
+      160deg,
+      rgba(242, 232, 213, 0.2),
+      rgba(242, 232, 213, 0) 28%,
+      rgba(242, 232, 213, 0) 70%,
+      rgba(200, 32, 46, 0.16)
+    );
+    -webkit-mask:
+      linear-gradient(#000, #000) content-box,
+      linear-gradient(#000, #000);
+    mask:
+      linear-gradient(#000, #000) content-box,
+      linear-gradient(#000, #000);
+    -webkit-mask-composite: xor;
+    mask-composite: exclude;
+  }
+}
+
+@media (prefers-reduced-transparency: reduce) {
+  .glass {
+    background: var(--charcoal);
+    -webkit-backdrop-filter: none;
+    backdrop-filter: none;
+  }
+}
+
+@utility btn-primary {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  border-radius: 999px;
+  font-weight: 600;
+  color: var(--cream);
+  white-space: nowrap;
+  background: linear-gradient(135deg, #d9313f, var(--red) 55%, #a81a26);
+  box-shadow:
+    0 4px 24px rgba(200, 32, 46, 0.35),
+    inset 0 1px 0 rgba(242, 232, 213, 0.35);
+  transition:
+    transform 150ms var(--ease-bounce),
+    box-shadow 250ms var(--ease-soft);
+
+  &:hover {
+    transform: translateY(-1px);
+    box-shadow:
+      0 8px 30px rgba(200, 32, 46, 0.45),
+      inset 0 1px 0 rgba(242, 232, 213, 0.35);
+  }
+
+  &:active {
+    transform: scale(0.97);
+  }
+}
+
+@utility btn-ghost {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  border-radius: 999px;
+  font-weight: 500;
+  color: var(--cream);
+  white-space: nowrap;
+  border: 1px solid var(--line);
+  background: var(--glass-fill);
+  -webkit-backdrop-filter: blur(10px);
+  backdrop-filter: blur(10px);
+  transition:
+    transform 150ms var(--ease-bounce),
+    background 250ms var(--ease-soft);
+
+  &:hover {
+    transform: translateY(-1px);
+    background: linear-gradient(135deg, rgba(242, 232, 213, 0.12), rgba(242, 232, 213, 0.04));
+  }
+}
+
+@utility display {
+  font-family: var(--font-display);
+  font-variation-settings: "opsz" 144;
+  font-weight: 500;
+  letter-spacing: -0.02em;
+  line-height: 1.02;
+}
+
+@utility no-scrollbar {
+  scrollbar-width: none;
+  &::-webkit-scrollbar {
+    display: none;
+  }
+}
+
+@layer components {
+  /* Card photo zoom on hover (SPEC §6) */
+  .dish-photo img {
+    transition: transform 300ms ease-out;
+  }
+
+  @media (hover: hover) {
+    .group:hover .dish-photo img {
+      transform: scale(1.03);
+    }
+  }
+
+  /* Hero page-load sequence (SPEC §6): image settles, lines rise and unblur, CTAs fade last */
+  .hero-zoom {
+    animation: hero-zoom 1.2s var(--ease-soft) both;
+  }
+
+  .hero-rise {
+    animation: hero-rise 0.6s var(--ease-soft) both;
+    animation-delay: var(--d, 0s);
+  }
+
+  .hero-fade {
+    animation: hero-fade 0.6s var(--ease-soft) both;
+    animation-delay: var(--d, 0s);
+  }
+
+  /* Glass lens that slides behind the hovered/active nav link (sakriya .lens) */
+  .nav-lens {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+    border-radius: 999px;
+    z-index: 0;
+    background: linear-gradient(135deg, rgba(242, 232, 213, 0.13), rgba(242, 232, 213, 0.04));
+    border: 1px solid rgba(242, 232, 213, 0.15);
+    box-shadow:
+      inset 0 1px 0 rgba(242, 232, 213, 0.22),
+      0 4px 14px rgba(0, 0, 0, 0.4);
+    -webkit-backdrop-filter: blur(6px);
+    backdrop-filter: blur(6px);
+    opacity: 0;
+    transition: opacity 200ms var(--ease-soft);
+    will-change: transform, width;
+  }
+
+  /* Cursor — sakriya liquid-glass arrow, retinted cream to red */
+  #cursor {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 19px;
+    height: 22px;
+    z-index: 10000;
+    pointer-events: none;
+    opacity: 0;
+    clip-path: polygon(0% 0%, 0% 78%, 21% 62%, 34% 94%, 46% 88%, 33% 57%, 58% 57%);
+    background: linear-gradient(150deg, rgba(242, 232, 213, 0.85), rgba(242, 232, 213, 0.3) 42%, rgba(200, 32, 46, 0.55));
+    -webkit-backdrop-filter: blur(2px) saturate(1.7) brightness(1.2);
+    backdrop-filter: blur(2px) saturate(1.7) brightness(1.2);
+    filter: drop-shadow(0 2px 5px rgba(0, 0, 0, 0.5)) drop-shadow(0 0 1.5px rgba(242, 232, 213, 0.9));
+    transform-origin: 2px 2px;
+    transition:
+      transform 220ms var(--ease-bounce),
+      opacity 300ms var(--ease-soft),
+      width 220ms var(--ease-bounce),
+      height 220ms var(--ease-bounce),
+      background 250ms var(--ease-soft),
+      clip-path 220ms var(--ease-soft);
+    will-change: left, top;
+  }
+
+  #cursor.grow {
+    transform: scale(1.35);
+    background: linear-gradient(150deg, rgba(242, 232, 213, 0.9), rgba(200, 32, 46, 0.6) 45%, rgba(143, 21, 32, 0.75));
+  }
+
+  #cursor.text {
+    clip-path: polygon(28% 0%, 72% 0%, 72% 100%, 28% 100%);
+    width: 6px;
+    height: 20px;
+    background: linear-gradient(180deg, rgba(242, 232, 213, 0.95), rgba(200, 32, 46, 0.8));
+    transform: translate(-3px, -10px);
+  }
+
+  /* Review wall — sakriya testimonial wall: drifting columns under a soft mask */
+  .review-wall {
+    position: relative;
+    display: grid;
+    gap: 0 18px;
+    height: 640px;
+    overflow: hidden;
+    -webkit-mask-image: linear-gradient(transparent, #000 11%, #000 89%, transparent);
+    mask-image: linear-gradient(transparent, #000 11%, #000 89%, transparent);
+  }
+
+  @media (max-width: 1023px) {
+    .review-wall {
+      height: 560px;
+      gap: 0 12px;
+    }
+  }
+
+  .review-col {
+    display: flex;
+    flex-direction: column;
+    will-change: transform;
+  }
+
+  .review-col > .review-card {
+    margin-bottom: 18px;
+  }
+
+  /* Liquid-glass scrollbar that scrubs the wall (sakriya .tbar) */
+  .tbar {
+    position: absolute;
+    top: 7%;
+    bottom: 7%;
+    right: -20px;
+    width: 8px;
+    border-radius: 999px;
+    background: linear-gradient(180deg, rgba(242, 232, 213, 0.05), rgba(242, 232, 213, 0.09), rgba(242, 232, 213, 0.05));
+    border: 1px solid rgba(242, 232, 213, 0.1);
+    -webkit-backdrop-filter: blur(10px);
+    backdrop-filter: blur(10px);
+    box-shadow: inset 0 1px 0 rgba(242, 232, 213, 0.1);
+    z-index: 3;
+    cursor: grab;
+    touch-action: none;
+    transition:
+      width 220ms var(--ease-bounce),
+      right 220ms var(--ease-bounce);
+  }
+
+  .tbar:hover,
+  .tbar.dragging {
+    width: 12px;
+    right: -22px;
+  }
+
+  .tbar.dragging {
+    cursor: grabbing;
+  }
+
+  .tbar-thumb {
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 0;
+    height: 74px;
+    border-radius: 999px;
+    background: linear-gradient(160deg, rgba(242, 232, 213, 0.6), rgba(242, 232, 213, 0.22) 45%, rgba(200, 32, 46, 0.45));
+    border: 1px solid rgba(242, 232, 213, 0.4);
+    -webkit-backdrop-filter: blur(6px) saturate(1.5);
+    backdrop-filter: blur(6px) saturate(1.5);
+    box-shadow:
+      inset 0 1px 1px rgba(242, 232, 213, 0.5),
+      inset 0 -1px 2px rgba(0, 0, 0, 0.25),
+      0 2px 12px rgba(200, 32, 46, 0.3);
+    pointer-events: none;
+  }
+
+  .tbar:hover .tbar-thumb,
+  .tbar.dragging .tbar-thumb {
+    box-shadow:
+      inset 0 1px 1px rgba(242, 232, 213, 0.6),
+      inset 0 -1px 2px rgba(0, 0, 0, 0.25),
+      0 2px 18px rgba(200, 32, 46, 0.5);
+  }
+
+  @media (max-width: 1279px) {
+    .tbar {
+      right: -12px;
+    }
+    .tbar:hover,
+    .tbar.dragging {
+      right: -14px;
+    }
+  }
+}
+
+/* Unlayered so the hover glow wins over the .glass utility's box-shadow */
+.review-card {
+  transition:
+    border-color 300ms var(--ease-soft),
+    box-shadow 300ms var(--ease-soft),
+    transform 300ms var(--ease-soft);
+}
+
+@media (hover: hover) {
+  .review-card:hover,
+  .review-card:focus-within {
+    border-color: rgba(200, 32, 46, 0.35);
+    box-shadow:
+      inset 0 1px 0 rgba(242, 232, 213, 0.14),
+      inset 0 -1px 0 rgba(242, 232, 213, 0.03),
+      0 24px 60px -22px rgba(0, 0, 0, 0.7),
+      0 0 0 1px rgba(200, 32, 46, 0.14),
+      0 18px 50px -18px rgba(200, 32, 46, 0.4);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+
+  #cursor {
+    display: none;
+  }
+
+  .review-wall {
+    height: auto;
+    -webkit-mask-image: none;
+    mask-image: none;
+  }
+
+  .review-col > [aria-hidden="true"] {
+    display: none;
+  }
+
+  .tbar {
+    display: none;
+  }
+}
+
+/* Registered so the nav pill can ease between its resting and scrolled tint. */
+@property --glass-base {
+  syntax: "<color>";
+  inherits: true;
+  initial-value: transparent;
+}
+
+/* The Order call to action: deep red lacquer under a glass skin. A masked rim catches light at
+   the top-left and warms to gold at the tail, a sheen sweeps across on hover, and focus uses a
+   cream ring because red on red would vanish. */
+@utility btn-order {
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  border-radius: 999px;
+  font-weight: 600;
+  letter-spacing: 0.01em;
+  color: var(--cream);
+  white-space: nowrap;
+  border: 1px solid rgba(242, 232, 213, 0.16);
+  background:
+    linear-gradient(180deg, rgba(242, 232, 213, 0.18), rgba(242, 232, 213, 0) 46%),
+    radial-gradient(120% 130% at 50% 125%, #e2333f 0%, rgba(226, 51, 63, 0) 62%),
+    linear-gradient(135deg, #b81c29, var(--red-deep));
+  box-shadow:
+    inset 0 1px 0 rgba(242, 232, 213, 0.34),
+    inset 0 -1px 0 rgba(0, 0, 0, 0.4),
+    0 1px 2px rgba(0, 0, 0, 0.5),
+    0 10px 30px -8px rgba(200, 32, 46, 0.55);
+  -webkit-backdrop-filter: blur(10px) saturate(1.3);
+  backdrop-filter: blur(10px) saturate(1.3);
+  transition:
+    transform 220ms var(--ease-bounce),
+    box-shadow 320ms var(--ease-soft),
+    filter 320ms var(--ease-soft);
+
+  &::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    border-radius: inherit;
+    padding: 1px;
+    pointer-events: none;
+    background: linear-gradient(
+      160deg,
+      rgba(242, 232, 213, 0.6),
+      rgba(242, 232, 213, 0.08) 30%,
+      rgba(242, 232, 213, 0) 60%,
+      rgba(226, 180, 74, 0.45)
+    );
+    -webkit-mask:
+      linear-gradient(#000, #000) content-box,
+      linear-gradient(#000, #000);
+    mask:
+      linear-gradient(#000, #000) content-box,
+      linear-gradient(#000, #000);
+    -webkit-mask-composite: xor;
+    mask-composite: exclude;
+  }
+
+  &::after {
+    content: "";
+    position: absolute;
+    top: -40%;
+    bottom: -40%;
+    left: 0;
+    width: 36%;
+    pointer-events: none;
+    background: linear-gradient(100deg, rgba(242, 232, 213, 0) 0%, rgba(242, 232, 213, 0.3) 50%, rgba(242, 232, 213, 0) 100%);
+    transform: translateX(-160%) skewX(-16deg);
+  }
+
+  &:hover {
+    transform: translateY(-1px);
+    filter: saturate(1.08) brightness(1.05);
+    box-shadow:
+      inset 0 1px 0 rgba(242, 232, 213, 0.4),
+      inset 0 -1px 0 rgba(0, 0, 0, 0.4),
+      0 1px 2px rgba(0, 0, 0, 0.5),
+      0 16px 40px -8px rgba(200, 32, 46, 0.75),
+      0 0 0 4px rgba(200, 32, 46, 0.14);
+  }
+
+  &:hover::after {
+    transform: translateX(400%) skewX(-16deg);
+    transition: transform 900ms var(--ease-soft);
+  }
+
+  &:active {
+    transform: translateY(0) scale(0.97);
+  }
+
+  &:focus-visible {
+    outline: 2px solid var(--cream);
+    outline-offset: 3px;
+  }
+}
+
+@layer components {
+  /* Menu → reviews handoff (see Reveal.tsx and ReviewsSection). */
+  .reveal {
+    opacity: 0;
+    transform: translateY(18px);
+    filter: blur(8px);
+    transition:
+      opacity 0.65s var(--ease-soft),
+      transform 0.65s var(--ease-soft),
+      filter 0.65s var(--ease-soft);
+  }
+
+  .reveal.in {
+    opacity: 1;
+    transform: none;
+    filter: none;
+  }
+
+  .bridge {
+    position: relative;
+    height: 120px;
+  }
+
+  @media (min-width: 768px) {
+    .bridge {
+      height: 168px;
+    }
+  }
+
+  .bridge::before {
+    content: "";
+    position: absolute;
+    left: 50%;
+    top: 0;
+    bottom: 22px;
+    width: 1px;
+    background: linear-gradient(to bottom, transparent, var(--line) 35%, rgba(200, 32, 46, 0.7));
+  }
+
+  .bridge::after {
+    content: "";
+    position: absolute;
+    left: 50%;
+    bottom: 16px;
+    width: 6px;
+    height: 6px;
+    margin-left: -2.5px;
+    border-radius: 50%;
+    background: var(--red);
+    box-shadow: 0 0 16px 4px rgba(200, 32, 46, 0.35);
+  }
+}
+
+/* Hero slideshow: three more official photos crossfade over the LCP image on a 24s cycle;
+   every layer drifts slowly (Ken Burns). Reduced motion keeps the first photo still. */
+@keyframes hero-slide {
+  0% {
+    opacity: 0;
+  }
+  6% {
+    opacity: 1;
+  }
+  25% {
+    opacity: 1;
+  }
+  31% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 0;
+  }
+}
+
+@keyframes hero-drift {
+  from {
+    transform: scale(1.04) translate3d(0, 0, 0);
+  }
+  to {
+    transform: scale(1.12) translate3d(-1.5%, 1%, 0);
+  }
+}
+
+/* From Our Kitchen: each tile holds two photos; the second fades in and out on a 14s cycle,
+   offset per tile so the grid keeps shifting without ever changing all at once. */
+@keyframes kt-fade {
+  0% {
+    opacity: 0;
+  }
+  7% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 1;
+  }
+  57% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 0;
+  }
+}
+
+@layer components {
+  .hero-slide {
+    opacity: 0;
+    animation: hero-slide 24s ease-in-out infinite;
+  }
+
+  .hero-drift {
+    will-change: transform;
+    animation: hero-drift 26s linear 1.2s infinite alternate;
+  }
+
+  .kt-alt {
+    opacity: 0;
+    animation: kt-fade 14s ease-in-out infinite;
+    animation-delay: var(--d, 0s);
+  }
+
+  .kt:hover .kt-alt {
+    animation-play-state: paused;
+  }
+
+  .faq-panel {
+    display: grid;
+    grid-template-rows: 0fr;
+    transition: grid-template-rows 0.4s var(--ease-soft);
+  }
+
+  .faq-panel[data-open="true"] {
+    grid-template-rows: 1fr;
+  }
+
+  .faq-panel > div {
+    overflow: hidden;
+    min-height: 0;
+  }
+
+  .faq-chev {
+    transition: transform 0.3s var(--ease-soft);
+  }
+
+  [aria-expanded="true"] .faq-chev {
+    transform: rotate(45deg);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .hero-slide,
+  .kt-alt {
+    display: none;
+  }
+
+  .hero-drift {
+    animation: none;
+  }
+}
+
+@layer components {
+  /* Edge-bleed rails share the section gutter: 20px, 32px from md, and the centered 1280px column beyond it. */
+  .rail-wrap {
+    --edge: max(1.25rem, calc((100vw - 1280px) / 2));
+  }
+
+  @media (min-width: 768px) {
+    .rail-wrap {
+      --edge: max(2rem, calc((100vw - 1280px) / 2));
+    }
+  }
+}

@@ -1,0 +1,1913 @@
+{
+  "_notes": {
+    "source": "Names, prices, descriptions, categories and order synced from the official online menu at eatnatraj.com on 2026-09-04 (151 items). Dietary prefixes in the official descriptions were moved into tags; 'served with rice/raita' lines live in the category blurbs.",
+    "img": "Not a file path. A 'visual family' key: o-<id> is the official photo from eatnatraj.com for that dish; other keys are shared Pexels families for dishes without an official photo. scripts/fetch-images.mjs pulls Pexels families into /public/dishes/<family>.jpg."
+  },
+  "restaurant": {
+    "name": "Natraj Indian Cuisine",
+    "tagline": "North and South Indian cooking in downtown Culpeper",
+    "address": {
+      "line1": "219 E Davis St, Suite 110",
+      "line2": "The Taft Building",
+      "city": "Culpeper",
+      "state": "VA",
+      "zip": "22701",
+      "lat": 38.4726808,
+      "lng": -77.9942511
+    },
+    "phone": "(540) 317-5293",
+    "phoneHref": "tel:+15403175293",
+    "hours": {
+      "mon": null,
+      "tue": [
+        [
+          "11:00",
+          "14:30"
+        ],
+        [
+          "16:30",
+          "21:30"
+        ]
+      ],
+      "wed": [
+        [
+          "11:00",
+          "14:30"
+        ],
+        [
+          "16:30",
+          "21:30"
+        ]
+      ],
+      "thu": [
+        [
+          "11:00",
+          "14:30"
+        ],
+        [
+          "16:30",
+          "21:30"
+        ]
+      ],
+      "fri": [
+        [
+          "11:00",
+          "14:30"
+        ],
+        [
+          "16:30",
+          "21:30"
+        ]
+      ],
+      "sat": [
+        [
+          "11:00",
+          "14:30"
+        ],
+        [
+          "16:30",
+          "21:30"
+        ]
+      ],
+      "sun": [
+        [
+          "11:00",
+          "14:30"
+        ],
+        [
+          "16:30",
+          "21:30"
+        ]
+      ]
+    },
+    "carryoutCutoffMinutes": 15,
+    "reservationUrl": "https://reservations.shift4payments.com/#/73aa9a6f-12da-4940-858f-328943750c49",
+    "reviewUrl": "https://www.google.com/search?q=NATRAJ+INDIAN+CUISINE+Culpeper+VA#lrd=0x89b426c02e9fd2bf:0xbadddd3a7e7483d3,3",
+    "mapsUrl": "https://maps.google.com/?daddr=38.4726808,-77.9942511",
+    "estimatedTaxRate": 0.063,
+    "_taxNote": "VA 5.3% + 1% local = 6.3% placeholder. Culpeper may also levy a town meals tax — confirm with owner.",
+    "spiceLevels": [
+      "Mild",
+      "Medium",
+      "Hot",
+      "Indian Hot"
+    ],
+    "entreeNote": "All entrées are served with saffron basmati rice.",
+    "biryaniNote": "All biryanis are served with raita.",
+    "email": "birukarkiji90@gmail.com",
+    "emailHref": "mailto:birukarkiji90@gmail.com",
+    "legalName": "BP Culpeper LLC",
+    "officialSite": "https://eatnatraj.com",
+    "links": {
+      "orderOnline": "https://eatnatraj.com/menu",
+      "pdfMenu": "https://eatnatraj.com/page/pdf-menus",
+      "privateEvents": "https://eatnatraj.com/page/private-events",
+      "sundayBuffet": "https://eatnatraj.com/page/sunday-buffet",
+      "story": "https://eatnatraj.com/story",
+      "giftCards": "https://eatnatraj.com/gift-cards",
+      "contact": "https://eatnatraj.com/page/contact-us",
+      "careers": "https://eatnatraj.com/careers",
+      "rewards": "https://eatnatraj.com/login"
+    },
+    "sundayBuffet": {
+      "price": 15.95,
+      "days": "Every Sunday"
+    }
+  },
+  "categories": [
+    {
+      "id": "appetizers",
+      "name": "Appetizers"
+    },
+    {
+      "id": "lunch-combos",
+      "name": "Lunch Combo Box Specials",
+      "blurb": "An entrée boxed with naan, dal, basmati rice and chutney."
+    },
+    {
+      "id": "chicken",
+      "name": "Chicken Specialties",
+      "blurb": "Served with saffron basmati rice."
+    },
+    {
+      "id": "vegetarian",
+      "name": "Vegetarian Specialties",
+      "blurb": "Served with saffron rice."
+    },
+    {
+      "id": "lamb",
+      "name": "Lamb Specials",
+      "blurb": "Served with saffron basmati rice."
+    },
+    {
+      "id": "breads-sides",
+      "name": "Breads & Sides",
+      "blurb": "Breads are baked to order in the tandoor."
+    },
+    {
+      "id": "biryani-rice",
+      "name": "Biryanis & Rice Specialties",
+      "blurb": "Served with raita."
+    },
+    {
+      "id": "tandoori",
+      "name": "Kebab (Tandoori) Specials",
+      "blurb": "Marinated and cooked in the tandoor, a clay oven."
+    },
+    {
+      "id": "chef-specials",
+      "name": "Chef's Special"
+    },
+    {
+      "id": "seafood",
+      "name": "Seafood Specialties",
+      "blurb": "Served with saffron basmati rice."
+    },
+    {
+      "id": "soups",
+      "name": "Soups"
+    },
+    {
+      "id": "desserts",
+      "name": "Desserts"
+    },
+    {
+      "id": "beverages",
+      "name": "Beverages"
+    }
+  ],
+  "items": [
+    {
+      "id": "kutchumber-salad",
+      "name": "Kutchumber Salad",
+      "category": "appetizers",
+      "price": 6.5,
+      "desc": "Indian style salad of freshly chopped vegetables slightly seasoned.",
+      "tags": [
+        "vegan",
+        "vegetarian"
+      ],
+      "img": "o-kutchumber-salad",
+      "priceVerified": true
+    },
+    {
+      "id": "momo-veggie",
+      "name": "Momo Veggie (Steamed)",
+      "category": "appetizers",
+      "price": 13.1,
+      "desc": "Steamed dumplings filled with a mix of finely chopped vegetables and spices, served with Nepali chutney.",
+      "tags": [
+        "vegetarian"
+      ],
+      "img": "o-momo-veggie",
+      "priceVerified": true
+    },
+    {
+      "id": "vegetable-samosa",
+      "name": "Vegetable Samosa",
+      "category": "appetizers",
+      "price": 5.5,
+      "desc": "2 crispy cone pouches stuffed with mildly spiced vegetables.",
+      "tags": [
+        "vegetarian",
+        "popular"
+      ],
+      "img": "o-vegetable-samosa",
+      "priceVerified": true
+    },
+    {
+      "id": "vegetable-platter",
+      "name": "Vegetable Platter",
+      "category": "appetizers",
+      "price": 11.5,
+      "desc": "Assorted vegetarian appetizers.",
+      "tags": [
+        "vegetarian"
+      ],
+      "img": "o-vegetable-platter",
+      "priceVerified": true
+    },
+    {
+      "id": "onion-bhajia",
+      "name": "Onion Bhajia",
+      "category": "appetizers",
+      "price": 5.95,
+      "desc": "Fresh onion fritters.",
+      "tags": [
+        "vegan",
+        "vegetarian"
+      ],
+      "img": "o-onion-bhajia",
+      "priceVerified": true
+    },
+    {
+      "id": "vegetable-pakoras",
+      "name": "Vegetable Pakoras",
+      "category": "appetizers",
+      "price": 6.5,
+      "desc": "Mildly spiced vegetable fritters.",
+      "tags": [
+        "vegan",
+        "vegetarian"
+      ],
+      "img": "o-vegetable-pakoras",
+      "priceVerified": true
+    },
+    {
+      "id": "paneer-pakora",
+      "name": "Paneer Pakora",
+      "category": "appetizers",
+      "price": 8.5,
+      "desc": "Homemade cheese deep fried in chickpea batter.",
+      "tags": [
+        "vegetarian"
+      ],
+      "img": "o-paneer-pakora",
+      "priceVerified": true
+    },
+    {
+      "id": "meat-samosa",
+      "name": "Meat Samosa",
+      "category": "appetizers",
+      "price": 6.95,
+      "desc": "2 crispy patties stuffed with mildly spiced ground lamb meat.",
+      "tags": [
+        "popular"
+      ],
+      "img": "o-meat-samosa",
+      "priceVerified": true
+    },
+    {
+      "id": "chicken-chili-momo",
+      "name": "Chicken Chili Momo",
+      "category": "appetizers",
+      "price": 14,
+      "desc": "Chili Chicken Momo is stir-fried chicken cooked with bell peppers, onions, garlic, and red chili sauce, making it spicier and crispier with a smoky flavor.",
+      "tags": [
+        "spicy"
+      ],
+      "img": "o-chicken-chili-momo",
+      "priceVerified": true
+    },
+    {
+      "id": "chicken-momo",
+      "name": "Chicken Momo (Steamed)",
+      "category": "appetizers",
+      "price": 14.5,
+      "desc": "Steamed dumplings filled with minced chicken served with Nepalese chutney.",
+      "tags": [],
+      "img": "o-chicken-momo",
+      "priceVerified": true
+    },
+    {
+      "id": "tandoori-tid-bits",
+      "name": "Tandoori Tid Bits",
+      "category": "appetizers",
+      "price": 14,
+      "desc": "Tandoori mixed appetizer. Seekh kebab, chicken tikka and boti kebab.",
+      "tags": [],
+      "img": "o-tandoori-tid-bits",
+      "priceVerified": true
+    },
+    {
+      "id": "shrimp-poori",
+      "name": "Shrimp Poori",
+      "category": "appetizers",
+      "price": 13.95,
+      "desc": "Fresh shrimp flavored with garlic, mustard seed and curry leaves.",
+      "tags": [],
+      "img": "o-shrimp-poori",
+      "priceVerified": true
+    },
+    {
+      "id": "aloo-chaat",
+      "name": "Aloo Chaat",
+      "category": "appetizers",
+      "price": 6.5,
+      "desc": "Cubes of boiled potatoes in spicy sauce with cubes of cucumber and tomato.",
+      "tags": [
+        "vegan",
+        "vegetarian"
+      ],
+      "img": "chaat",
+      "priceVerified": true
+    },
+    {
+      "id": "chicken-chaat",
+      "name": "Chicken Chaat",
+      "category": "appetizers",
+      "price": 8,
+      "desc": "Cubes of marinated boneless chicken cooked in a clay oven tossed in a spicy sauce with cubes of cucumber and tomato.",
+      "tags": [],
+      "img": "chaat-chicken",
+      "priceVerified": true
+    },
+    {
+      "id": "aloo-tikki",
+      "name": "Aloo Tikki",
+      "category": "appetizers",
+      "price": 5.5,
+      "desc": "Mashed potato patties dipped in chickpea batter.",
+      "tags": [
+        "vegan",
+        "vegetarian"
+      ],
+      "img": "tikki",
+      "priceVerified": true
+    },
+    {
+      "id": "chilli-veggie-momo",
+      "name": "Chilli Veggie Momo",
+      "category": "appetizers",
+      "price": 13.5,
+      "desc": "Chilli Momo is stir-fried with bell peppers, onions, garlic, and red chilli sauce, making it spicier and crispier with a smoky flavour.",
+      "tags": [
+        "vegetarian",
+        "spicy"
+      ],
+      "img": "o-momo-veggie",
+      "priceVerified": true
+    },
+    {
+      "id": "chicken-pakora",
+      "name": "Chicken Pakora",
+      "category": "appetizers",
+      "price": 8.5,
+      "desc": "Cubes of boneless chicken marinated and dipped in chickpea batter and deep fried.",
+      "tags": [],
+      "img": "chicken-pakora",
+      "priceVerified": true
+    },
+    {
+      "id": "house-special-appetizer",
+      "name": "House Special Mixed Appetizer Platter",
+      "category": "appetizers",
+      "price": 12.95,
+      "desc": "Assorted vegetarian and non-vegetarian appetizers.",
+      "tags": [],
+      "img": "platter-mixed",
+      "priceVerified": true
+    },
+    {
+      "id": "chicken-lunch-combo-box",
+      "name": "Chicken Lunch Combo Box",
+      "category": "lunch-combos",
+      "price": 14.95,
+      "desc": "Chicken tikka masala, naan bread, dal, basmati rice and chutney.",
+      "tags": [],
+      "img": "o-chicken-lunch-combo-box",
+      "priceVerified": true
+    },
+    {
+      "id": "lamb-lunch-combo-box",
+      "name": "Lamb Lunch Combo Box",
+      "category": "lunch-combos",
+      "price": 15.25,
+      "desc": "Lamb curry, dal, naan bread, basmati rice and chutney.",
+      "tags": [],
+      "img": "o-lamb-lunch-combo-box",
+      "priceVerified": true
+    },
+    {
+      "id": "vegetable-lunch-combo-box",
+      "name": "Vegetable Lunch Combo Box",
+      "category": "lunch-combos",
+      "price": 13.95,
+      "desc": "Saag paneer, dal, naan bread, basmati rice and chutney.",
+      "tags": [
+        "vegetarian"
+      ],
+      "img": "o-vegetable-lunch-combo-box",
+      "priceVerified": true
+    },
+    {
+      "id": "chicken-tikka-masala",
+      "name": "Chicken Tikka Masala",
+      "category": "chicken",
+      "price": 16.95,
+      "desc": "Tender skinless and boneless chicken marinated in a blend of ginger, garlic, yogurt and herbs baked in the tandoor and sautéed with tomatoes and cream.",
+      "tags": [
+        "popular"
+      ],
+      "img": "o-chicken-tikka-masala",
+      "priceVerified": true
+    },
+    {
+      "id": "pistachio-chicken-korma",
+      "name": "Pistachio Chicken Korma",
+      "category": "chicken",
+      "price": 17.95,
+      "desc": "Boneless breast of chicken cooked in pistachio nuts, yogurt, tomatoes and spices.",
+      "tags": [
+        "popular"
+      ],
+      "img": "o-pistachio-chicken-korma",
+      "priceVerified": true
+    },
+    {
+      "id": "chicken-curry",
+      "name": "Chicken Curry",
+      "category": "chicken",
+      "price": 16.95,
+      "desc": "Skinless, boneless chicken cooked in our mildly spiced curry sauce.",
+      "tags": [
+        "popular"
+      ],
+      "img": "o-chicken-curry",
+      "priceVerified": true
+    },
+    {
+      "id": "chicken-vindaloo",
+      "name": "Chicken Vindaloo",
+      "category": "chicken",
+      "price": 16.95,
+      "desc": "Very hot spiced chicken cooked with potatoes and a touch of vinegar.",
+      "tags": [
+        "spicy"
+      ],
+      "img": "o-chicken-vindaloo",
+      "priceVerified": true
+    },
+    {
+      "id": "chicken-patia",
+      "name": "Chicken Patia",
+      "category": "chicken",
+      "price": 16.95,
+      "desc": "Mildly spiced chicken cooked in mango, tomatoes and a touch of sugar, lemon juice, herbs and spices.",
+      "tags": [],
+      "img": "o-chicken-patia",
+      "priceVerified": true
+    },
+    {
+      "id": "chicken-korma",
+      "name": "Chicken Korma",
+      "category": "chicken",
+      "price": 17.95,
+      "desc": "Boneless chicken cooked in a mild rich sauce, cashews and cream.",
+      "tags": [],
+      "img": "o-chicken-korma",
+      "priceVerified": true
+    },
+    {
+      "id": "chicken-mushroom",
+      "name": "Chicken Mushroom",
+      "category": "chicken",
+      "price": 16.95,
+      "desc": "Boneless pieces of chicken and mushrooms cooked in a mild and rich gravy.",
+      "tags": [],
+      "img": "o-chicken-mushroom",
+      "priceVerified": true
+    },
+    {
+      "id": "chicken-saag",
+      "name": "Chicken Saag",
+      "category": "chicken",
+      "price": 16.95,
+      "desc": "Chicken chunks cooked in a mild spinach gravy.",
+      "tags": [],
+      "img": "o-chicken-saag",
+      "priceVerified": true
+    },
+    {
+      "id": "chicken-jalfrezi",
+      "name": "Chicken Jalfrezi",
+      "category": "chicken",
+      "price": 17.95,
+      "desc": "Tender chicken pieces with freshly ground herbs and spices sautéed with mixed vegetables.",
+      "tags": [],
+      "img": "o-chicken-jalfrezi",
+      "priceVerified": true
+    },
+    {
+      "id": "saag-paneer",
+      "name": "Saag Paneer",
+      "category": "vegetarian",
+      "price": 15.95,
+      "desc": "A delicious combination of homemade cheese and spinach.",
+      "tags": [
+        "vegetarian",
+        "popular"
+      ],
+      "img": "o-saag-paneer",
+      "priceVerified": true
+    },
+    {
+      "id": "malai-kofta",
+      "name": "Malai Kofta",
+      "category": "vegetarian",
+      "price": 14.95,
+      "desc": "Vegetable dumpling in a mild creamy sauce with nuts and raisins.",
+      "tags": [
+        "vegetarian"
+      ],
+      "img": "o-malai-kofta",
+      "priceVerified": true
+    },
+    {
+      "id": "mattar-paneer",
+      "name": "Mattar Paneer",
+      "category": "vegetarian",
+      "price": 15.95,
+      "desc": "Green peas and cheese cooked in a thick curry sauce.",
+      "tags": [
+        "vegetarian"
+      ],
+      "img": "o-mattar-paneer",
+      "priceVerified": true
+    },
+    {
+      "id": "aloo-chole",
+      "name": "Aloo Chole",
+      "category": "vegetarian",
+      "price": 14.95,
+      "desc": "Chickpeas with potatoes cooked in Indian spices.",
+      "tags": [
+        "vegan",
+        "vegetarian"
+      ],
+      "img": "o-aloo-chole",
+      "priceVerified": true
+    },
+    {
+      "id": "shaahi-mughlai-paneer",
+      "name": "Shahi Mughlai Paneer",
+      "category": "vegetarian",
+      "price": 17.95,
+      "desc": "Home made cheese simmered in a tangy tomato sauce with nuts and raisins.",
+      "tags": [
+        "vegetarian"
+      ],
+      "img": "paneer-tikka-masala",
+      "priceVerified": true
+    },
+    {
+      "id": "baingan-bharta",
+      "name": "Baingan Bharta",
+      "category": "vegetarian",
+      "price": 14.95,
+      "desc": "Eggplant baked in an oven and finished with onion, ginger and tomatoes.",
+      "tags": [
+        "vegan",
+        "vegetarian"
+      ],
+      "img": "baingan-bharta",
+      "priceVerified": true
+    },
+    {
+      "id": "aloo-gobi",
+      "name": "Aloo Gobi",
+      "category": "vegetarian",
+      "price": 15.95,
+      "desc": "Mildly spiced potato and cauliflower.",
+      "tags": [
+        "vegan",
+        "vegetarian"
+      ],
+      "img": "aloo-gobi",
+      "priceVerified": true
+    },
+    {
+      "id": "vegetable-jafrezi",
+      "name": "Vegetable Jafrezi (Vegan)",
+      "category": "vegetarian",
+      "price": 15.95,
+      "desc": "Colorful and flavorful curry made with bell pepper onions, carrot, beans, cauliflower and other fresh vegetables cooked with ginger garlic tomato and traditional Indian spices.",
+      "tags": [
+        "vegan",
+        "vegetarian"
+      ],
+      "img": "jalfrezi",
+      "priceVerified": true
+    },
+    {
+      "id": "aloo-palak",
+      "name": "Aloo Palak",
+      "category": "vegetarian",
+      "price": 14.95,
+      "desc": "Potatoes cooked with spinach in a special blend of spices.",
+      "tags": [
+        "vegan",
+        "vegetarian"
+      ],
+      "img": "aloo-palak",
+      "priceVerified": true
+    },
+    {
+      "id": "dal-tadka",
+      "name": "Dal Tadka",
+      "category": "vegetarian",
+      "price": 14.95,
+      "desc": "Yellow lentil cooked with ginger, garlic, onion, tomato and spices.",
+      "tags": [
+        "vegan",
+        "vegetarian"
+      ],
+      "img": "dal-tadka",
+      "priceVerified": true
+    },
+    {
+      "id": "vegetable-curry",
+      "name": "Vegetable Curry (Vegan)",
+      "category": "vegetarian",
+      "price": 14.95,
+      "desc": "Mixed vegetables cooked with spices, garlic, onions and fresh cilantro.",
+      "tags": [
+        "vegan",
+        "vegetarian"
+      ],
+      "img": "veg-curry",
+      "priceVerified": true
+    },
+    {
+      "id": "chana-masala",
+      "name": "Chana Masala",
+      "category": "vegetarian",
+      "price": 14.95,
+      "desc": "Chick peas cooked in a spicy thick gravy topped with chopped onions, tomato and cilantro.",
+      "tags": [
+        "vegan",
+        "vegetarian"
+      ],
+      "img": "chana-masala",
+      "priceVerified": true
+    },
+    {
+      "id": "aloo-mattar",
+      "name": "Aloo Matar",
+      "category": "vegetarian",
+      "price": 14.95,
+      "desc": "Green peas and potatoes cooked in a thick curry sauce.",
+      "tags": [
+        "vegan",
+        "vegetarian"
+      ],
+      "img": "aloo-mattar",
+      "priceVerified": true
+    },
+    {
+      "id": "saag-sabzi",
+      "name": "Saag Sabzi",
+      "category": "vegetarian",
+      "price": 14.95,
+      "desc": "Delicious mixed vegetables cooked with a spinach sauce.",
+      "tags": [
+        "vegan",
+        "vegetarian"
+      ],
+      "img": "saag-sabzi",
+      "priceVerified": true
+    },
+    {
+      "id": "baigan-masala",
+      "name": "Baigan Masala",
+      "category": "vegetarian",
+      "price": 14.95,
+      "desc": "Small eggplant stuffed with chef special spices.",
+      "tags": [
+        "vegan",
+        "vegetarian"
+      ],
+      "img": "baingan-masala",
+      "priceVerified": true
+    },
+    {
+      "id": "dal-saag",
+      "name": "Dal Saag",
+      "category": "vegetarian",
+      "price": 14.95,
+      "desc": "Chickpea lentil with spinach cooked in special blend of Indian spices.",
+      "tags": [
+        "vegan",
+        "vegetarian"
+      ],
+      "img": "dal-saag",
+      "priceVerified": true
+    },
+    {
+      "id": "mattar-mushroom",
+      "name": "Mattar Mushroom",
+      "category": "vegetarian",
+      "price": 14.5,
+      "desc": "A chef's original vegetarian delight of peas and mushrooms cooked in a mild and rich gravy.",
+      "tags": [
+        "vegan",
+        "vegetarian"
+      ],
+      "img": "mattar-mushroom",
+      "priceVerified": true
+    },
+    {
+      "id": "navrattan-korma",
+      "name": "Navrattan Korma",
+      "category": "vegetarian",
+      "price": 15.95,
+      "desc": "Nine vegetables cooked with nine spices, nuts and cream sauce.",
+      "tags": [
+        "vegetarian"
+      ],
+      "img": "navratan-korma",
+      "priceVerified": true
+    },
+    {
+      "id": "vegetable-patia",
+      "name": "Vegetable Patia",
+      "category": "vegetarian",
+      "price": 14.95,
+      "desc": "Mixed vegetables cooked in mango and blend of Indian spices.",
+      "tags": [
+        "vegan",
+        "vegetarian"
+      ],
+      "img": "veg-curry",
+      "priceVerified": true
+    },
+    {
+      "id": "dal-makhani",
+      "name": "Dal Makhani",
+      "category": "vegetarian",
+      "price": 14.95,
+      "desc": "A mix of lentils with kidney beans, flavored with ginger and cilantro.",
+      "tags": [
+        "vegetarian"
+      ],
+      "img": "dal-makhani",
+      "priceVerified": true
+    },
+    {
+      "id": "bhindi-masala",
+      "name": "Bhindi Masala",
+      "category": "vegetarian",
+      "price": 14.5,
+      "desc": "Fresh okra sautéed with onions and spices.",
+      "tags": [
+        "vegan",
+        "vegetarian"
+      ],
+      "img": "bhindi-masala",
+      "priceVerified": true
+    },
+    {
+      "id": "lamb-curry",
+      "name": "Lamb Curry",
+      "category": "lamb",
+      "price": 17.95,
+      "desc": "Tender morsels of lamb served in a robust curry of tomatoes, ginger, onions and spices.",
+      "tags": [],
+      "img": "o-lamb-curry",
+      "priceVerified": true
+    },
+    {
+      "id": "rogan-josh",
+      "name": "Rogan Josh",
+      "category": "lamb",
+      "price": 18.95,
+      "desc": "Lamb cubes cooked with tomatoes in freshly ground spices and yogurt sauce.",
+      "tags": [],
+      "img": "o-rogan-josh",
+      "priceVerified": true
+    },
+    {
+      "id": "lamb-saag",
+      "name": "Lamb Saag",
+      "category": "lamb",
+      "price": 16.95,
+      "desc": "Tender cubes of lamb cooked with spinach.",
+      "tags": [],
+      "img": "saag-lamb",
+      "priceVerified": true
+    },
+    {
+      "id": "lamb-vindaloo",
+      "name": "Lamb Vindaloo",
+      "category": "lamb",
+      "price": 16.95,
+      "desc": "Very hot and spiced lamb cooked with potatoes and a touch of vinegar.",
+      "tags": [
+        "spicy"
+      ],
+      "img": "vindaloo-lamb",
+      "priceVerified": true
+    },
+    {
+      "id": "lamb-boti-kebab-masala",
+      "name": "Lamb Boti Kebab Masala",
+      "category": "lamb",
+      "price": 18.95,
+      "desc": "A northern delicacy! Juicy pieces of lamb marinated over night and then simmered in light yogurt sauce, onion and mild spices.",
+      "tags": [],
+      "img": "lamb-curry",
+      "priceVerified": true
+    },
+    {
+      "id": "lamb-pasanda",
+      "name": "Lamb Pasanda",
+      "category": "lamb",
+      "price": 18.95,
+      "desc": "Lamb cubes cooked with light creamy sauce, herbs, spices and cashew nuts.",
+      "tags": [],
+      "img": "lamb-korma",
+      "priceVerified": true
+    },
+    {
+      "id": "lamb-bhuna",
+      "name": "Lamb Bhuna",
+      "category": "lamb",
+      "price": 18.95,
+      "desc": "Lamb sautéed in onions, tomatoes, green peppers and a fine selection of Indian spices, herbs and slow-cooked to a flavorsome aromatic dish.",
+      "tags": [],
+      "img": "bhuna",
+      "priceVerified": true
+    },
+    {
+      "id": "lamb-patia",
+      "name": "Lamb Patia",
+      "category": "lamb",
+      "price": 17.95,
+      "desc": "Mildly spiced lamb cooked in mango, tomatoes, touch of sugar, lemon juice, herbs and spices.",
+      "tags": [],
+      "img": "patia-lamb",
+      "priceVerified": true
+    },
+    {
+      "id": "lamb-mushroom",
+      "name": "Lamb Mushroom",
+      "category": "lamb",
+      "price": 17.95,
+      "desc": "A lamb delicacy in a mild brown sauce with mushrooms.",
+      "tags": [],
+      "img": "mushroom-lamb",
+      "priceVerified": true
+    },
+    {
+      "id": "lamb-korma",
+      "name": "Lamb Korma",
+      "category": "lamb",
+      "price": 18.95,
+      "desc": "Lamb cubes cooked in a mild rich sauce, cashews and cream.",
+      "tags": [],
+      "img": "lamb-korma",
+      "priceVerified": true
+    },
+    {
+      "id": "lamb-jalfrezi",
+      "name": "Lamb Jalfrezi",
+      "category": "lamb",
+      "price": 16.95,
+      "desc": "Tender cubes of lamb and freshly ground herbs and spices sautéed with mixed vegetables.",
+      "tags": [],
+      "img": "jalfrezi-lamb",
+      "priceVerified": true
+    },
+    {
+      "id": "garlic-naan",
+      "name": "Garlic Naan",
+      "category": "breads-sides",
+      "price": 3.95,
+      "desc": "Clay oven baked bread stuffed with fresh garlic and green coriander.",
+      "tags": [
+        "vegetarian"
+      ],
+      "img": "o-garlic-naan",
+      "priceVerified": true
+    },
+    {
+      "id": "paneer-naan",
+      "name": "Paneer Naan",
+      "category": "breads-sides",
+      "price": 4.95,
+      "desc": "Leavened bread stuffed with homemade cheese and herbs, baked in tandoor oven.",
+      "tags": [
+        "vegetarian"
+      ],
+      "img": "o-paneer-naan",
+      "priceVerified": true
+    },
+    {
+      "id": "naan",
+      "name": "Naan",
+      "category": "breads-sides",
+      "price": 2.95,
+      "desc": "Unleavened handmade bread baked in a clay oven.",
+      "tags": [
+        "vegetarian"
+      ],
+      "img": "o-naan",
+      "priceVerified": true
+    },
+    {
+      "id": "roti",
+      "name": "Roti",
+      "category": "breads-sides",
+      "price": 2.95,
+      "desc": "Unleavened whole wheat bread baked in a clay oven.",
+      "tags": [
+        "vegan",
+        "vegetarian"
+      ],
+      "img": "o-roti",
+      "priceVerified": true
+    },
+    {
+      "id": "papadum",
+      "name": "Papadum",
+      "category": "breads-sides",
+      "price": 1.5,
+      "desc": "Chickpea flour.",
+      "tags": [
+        "vegan",
+        "vegetarian"
+      ],
+      "img": "o-papadum",
+      "priceVerified": true
+    },
+    {
+      "id": "mango-chutney",
+      "name": "Mango Chutney",
+      "category": "breads-sides",
+      "price": 2.95,
+      "desc": "Sweet-tart mango preserve.",
+      "tags": [
+        "vegan",
+        "vegetarian"
+      ],
+      "img": "o-mango-chutney",
+      "priceVerified": true
+    },
+    {
+      "id": "mix-pickles",
+      "name": "Mixed Pickles",
+      "category": "breads-sides",
+      "price": 2.95,
+      "desc": "Hot Indian pickle of mango, lime and chili in mustard oil.",
+      "tags": [
+        "vegan",
+        "vegetarian",
+        "spicy"
+      ],
+      "img": "o-mix-pickles",
+      "priceVerified": true
+    },
+    {
+      "id": "poori",
+      "name": "Poori",
+      "category": "breads-sides",
+      "price": 7.75,
+      "desc": "2 pieces of unleavened deep fried puffed bread.",
+      "tags": [
+        "vegan",
+        "vegetarian"
+      ],
+      "img": "poori",
+      "priceVerified": true
+    },
+    {
+      "id": "aloo-naan",
+      "name": "Aloo Naan",
+      "category": "breads-sides",
+      "price": 3.95,
+      "desc": "Leavened bread stuffed with potatoes mixed with herbs and spices baked in tandoor oven.",
+      "tags": [
+        "vegetarian"
+      ],
+      "img": "naan-stuffed",
+      "priceVerified": true
+    },
+    {
+      "id": "aloo-paratha",
+      "name": "Aloo Paratha",
+      "category": "breads-sides",
+      "price": 4.95,
+      "desc": "Layered bread stuffed with potatoes and peas.",
+      "tags": [
+        "vegetarian"
+      ],
+      "img": "paratha",
+      "priceVerified": true
+    },
+    {
+      "id": "peshawari-naan",
+      "name": "Peshawari Naan",
+      "category": "breads-sides",
+      "price": 4.95,
+      "desc": "Leavened bread stuffed with nuts, raisins and coconut, baked in tandoor oven.",
+      "tags": [
+        "vegetarian"
+      ],
+      "img": "naan-stuffed",
+      "priceVerified": true
+    },
+    {
+      "id": "basil-naan",
+      "name": "Basil Naan",
+      "category": "breads-sides",
+      "price": 3.95,
+      "desc": "Leavened bread stuffed with fresh basil and baked in the tandoor oven.",
+      "tags": [
+        "vegetarian"
+      ],
+      "img": "naan",
+      "priceVerified": true
+    },
+    {
+      "id": "keema-naan",
+      "name": "Keema Naan",
+      "category": "breads-sides",
+      "price": 4.95,
+      "desc": "Clay oven bread stuffed with minced lamb with herbs and spices.",
+      "tags": [],
+      "img": "naan-stuffed",
+      "priceVerified": true
+    },
+    {
+      "id": "plain-paratha",
+      "name": "Plain Paratha",
+      "category": "breads-sides",
+      "price": 3.95,
+      "desc": "Unleavened multi-layered whole wheat bread.",
+      "tags": [
+        "vegetarian"
+      ],
+      "img": "paratha",
+      "priceVerified": true
+    },
+    {
+      "id": "pudina-paratha",
+      "name": "Pudina Paratha",
+      "category": "breads-sides",
+      "price": 3.95,
+      "desc": "Buttered and layered whole wheat bread with dry mint.",
+      "tags": [
+        "vegetarian"
+      ],
+      "img": "paratha",
+      "priceVerified": true
+    },
+    {
+      "id": "combo-bread-basket",
+      "name": "Combination Bread Basket",
+      "category": "breads-sides",
+      "price": 11.95,
+      "desc": "Garlic naan, plain naan and roti.",
+      "tags": [
+        "vegetarian"
+      ],
+      "img": "bread-basket",
+      "priceVerified": true
+    },
+    {
+      "id": "chicken-naan",
+      "name": "Chicken Naan",
+      "category": "breads-sides",
+      "price": 4.95,
+      "desc": "Clay oven bread stuffed with chopped tandoori chicken and spices.",
+      "tags": [],
+      "img": "naan-stuffed",
+      "priceVerified": true
+    },
+    {
+      "id": "onion-kulcha",
+      "name": "Onion Kulcha",
+      "category": "breads-sides",
+      "price": 4.95,
+      "desc": "Clay oven baked bread stuffed with fresh onions, green coriander.",
+      "tags": [
+        "vegetarian"
+      ],
+      "img": "kulcha",
+      "priceVerified": true
+    },
+    {
+      "id": "raita",
+      "name": "Raita",
+      "category": "breads-sides",
+      "price": 2.95,
+      "desc": "Yogurt with cucumber sauce.",
+      "tags": [
+        "vegetarian"
+      ],
+      "img": "raita",
+      "priceVerified": true
+    },
+    {
+      "id": "goat-biryani",
+      "name": "Goat Biryani",
+      "category": "biryani-rice",
+      "price": 17.95,
+      "desc": "Bone-in goat cooked with basmati rice in a special mix of mild spices and nuts.",
+      "tags": [],
+      "img": "o-goat-biryani",
+      "priceVerified": true
+    },
+    {
+      "id": "plain-basmati-rice",
+      "name": "Plain Basmati Rice",
+      "category": "biryani-rice",
+      "price": 5,
+      "desc": "Fragrant basmati, steamed with saffron.",
+      "tags": [
+        "vegan",
+        "vegetarian",
+        "popular"
+      ],
+      "img": "o-plain-basmati-rice",
+      "priceVerified": true
+    },
+    {
+      "id": "chicken-biryani",
+      "name": "Chicken Biryani",
+      "category": "biryani-rice",
+      "price": 16.95,
+      "desc": "Aromatic basmati rice cooked in a special mix of mild spices and nuts.",
+      "tags": [],
+      "img": "o-chicken-biryani",
+      "priceVerified": true
+    },
+    {
+      "id": "shrimp-biryani",
+      "name": "Shrimp Biryani",
+      "category": "biryani-rice",
+      "price": 17.95,
+      "desc": "Aromatic basmati rice cooked in a special mix of mild spices and nuts.",
+      "tags": [],
+      "img": "biryani-shrimp",
+      "priceVerified": true
+    },
+    {
+      "id": "lamb-biryani",
+      "name": "Lamb Biryani",
+      "category": "biryani-rice",
+      "price": 17.95,
+      "desc": "Aromatic basmati rice cooked in a special mix of mild spices and nuts.",
+      "tags": [],
+      "img": "biryani-lamb",
+      "priceVerified": true
+    },
+    {
+      "id": "house-special-biryani",
+      "name": "House Special Biryani",
+      "category": "biryani-rice",
+      "price": 21.95,
+      "desc": "Aromatic basmati rice cooked with shrimp, lamb, chicken, vegetables and nuts.",
+      "tags": [],
+      "img": "biryani-house",
+      "priceVerified": true
+    },
+    {
+      "id": "sadani-pulao",
+      "name": "Sadani Pulao",
+      "category": "biryani-rice",
+      "price": 13.95,
+      "desc": "Basmati rice sautéed with eggs, nuts and raisins.",
+      "tags": [
+        "vegetarian"
+      ],
+      "img": "pulao",
+      "priceVerified": true
+    },
+    {
+      "id": "peas-pulao",
+      "name": "Peas Pulao",
+      "category": "biryani-rice",
+      "price": 9.95,
+      "desc": "Basmati rice sautéed with green peas, nuts and raisins.",
+      "tags": [
+        "vegetarian"
+      ],
+      "img": "pulao",
+      "priceVerified": true
+    },
+    {
+      "id": "vegetable-biryani",
+      "name": "Vegetable Biryani",
+      "category": "biryani-rice",
+      "price": 15.95,
+      "desc": "Mixed vegetables cooked in mild spices and nuts with aromatic basmati rice.",
+      "tags": [
+        "vegetarian"
+      ],
+      "img": "biryani-veg",
+      "priceVerified": true
+    },
+    {
+      "id": "chicken-tikka",
+      "name": "Chicken Tikka",
+      "category": "tandoori",
+      "price": 16.95,
+      "desc": "Boneless chunks of chicken delicately flavored and broiled in the tandoor oven.",
+      "tags": [],
+      "img": "o-chicken-tikka",
+      "priceVerified": true
+    },
+    {
+      "id": "chicken-tandoori",
+      "name": "Chicken Tandoori",
+      "category": "tandoori",
+      "price": 16.95,
+      "desc": "An Indian favorite! Marinated overnight in yogurt and freshly ground spices, broiled in the tandoor oven.",
+      "tags": [],
+      "img": "o-chicken-tandoori",
+      "priceVerified": true
+    },
+    {
+      "id": "boti-kebab",
+      "name": "Boti Kebab",
+      "category": "tandoori",
+      "price": 17.5,
+      "desc": "Cubes of lamb flavored with ginger and garlic cooked in the tandoor.",
+      "tags": [],
+      "img": "o-boti-kebab",
+      "priceVerified": true
+    },
+    {
+      "id": "fish-tandoori",
+      "name": "Fish Tandoori",
+      "category": "tandoori",
+      "price": 18.95,
+      "desc": "Fresh salmon delicately flavored and marinated in yogurt and baked on skewers in the tandoor oven.",
+      "tags": [],
+      "img": "o-fish-tandoori",
+      "priceVerified": true
+    },
+    {
+      "id": "mixed-vegetable-grill",
+      "name": "Mixed Vegetable Grill",
+      "category": "tandoori",
+      "price": 16.95,
+      "desc": "Mixed vegetables marinated in ginger, garlic and Indian spices, broccoli, green pepper, yellow squash, corn, onion and carrots.",
+      "tags": [
+        "vegan",
+        "vegetarian"
+      ],
+      "img": "o-mixed-vegetable-grill",
+      "priceVerified": true
+    },
+    {
+      "id": "shrimp-tandoori",
+      "name": "Shrimp Tandoori",
+      "category": "tandoori",
+      "price": 18.95,
+      "desc": "Jumbo shrimp delicately spiced and marinated in yogurt and baked on skewers in the tandoor oven.",
+      "tags": [],
+      "img": "o-shrimp-tandoori",
+      "priceVerified": true
+    },
+    {
+      "id": "paneer-tikka",
+      "name": "Paneer Tikka",
+      "category": "tandoori",
+      "price": 16.95,
+      "desc": "Homemade cheese marinated overnight in yogurt.",
+      "tags": [
+        "vegetarian"
+      ],
+      "img": "o-paneer-tikka",
+      "priceVerified": true
+    },
+    {
+      "id": "tandoori-mixed-grill",
+      "name": "Tandoori Mixed Grill",
+      "category": "tandoori",
+      "price": 21.95,
+      "desc": "A platter of assorted tandoori delicacies: chicken tikka, seekh kebab, boti kebab, fish tikka, shrimp tandoori and chicken tandoori.",
+      "tags": [],
+      "img": "o-tandoori-mixed-grill",
+      "priceVerified": true
+    },
+    {
+      "id": "reshmi-kebab",
+      "name": "Reshmi Kebab",
+      "category": "tandoori",
+      "price": 16.95,
+      "desc": "Very tender pieces of chicken marinated in Indian spices with light creamy sauce.",
+      "tags": [],
+      "img": "o-reshmi-kebab",
+      "priceVerified": true
+    },
+    {
+      "id": "seekh-kebab",
+      "name": "Seekh Kebab",
+      "category": "tandoori",
+      "price": 17.95,
+      "desc": "Lamb minced meat seasoned with herbs and spices grilled on skewers.",
+      "tags": [],
+      "img": "seekh-kebab",
+      "priceVerified": true
+    },
+    {
+      "id": "butter-chicken",
+      "name": "Butter Chicken",
+      "category": "chef-specials",
+      "price": 17.95,
+      "desc": "Boneless chicken leg meat cooked with tomato and cream sauce with mild spices.",
+      "tags": [
+        "popular"
+      ],
+      "img": "o-butter-chicken",
+      "priceVerified": true
+    },
+    {
+      "id": "mango-chicken",
+      "name": "Mango Chicken",
+      "category": "chef-specials",
+      "price": 17.95,
+      "desc": "Boneless chicken with fresh cooked onion, green pepper, tomato, herbs and cooked in mango.",
+      "tags": [],
+      "img": "o-mango-chicken",
+      "priceVerified": true
+    },
+    {
+      "id": "paneer-tikka-masala",
+      "name": "Paneer Tikka Masala",
+      "category": "chef-specials",
+      "price": 17.95,
+      "desc": "Homemade cheese cooked in tomatoes and cream sauce with fresh ginger and garlic.",
+      "tags": [
+        "vegetarian"
+      ],
+      "img": "o-paneer-tikka-masala",
+      "priceVerified": true
+    },
+    {
+      "id": "chicken-chilli",
+      "name": "Chicken Chili",
+      "category": "chef-specials",
+      "price": 17.95,
+      "desc": "Boneless chicken cooked with fresh diced onions, tomatoes, green pepper, green chili in soya sauce, Worcestershire sauce, ketchup and other special Indian spices.",
+      "tags": [
+        "spicy"
+      ],
+      "img": "o-chicken-chilli",
+      "priceVerified": true
+    },
+    {
+      "id": "goat-kashmiri",
+      "name": "Goat Kashmiri",
+      "category": "chef-specials",
+      "price": 18.95,
+      "desc": "Bone-in goat cooked with fresh tomatoes, onions, in a touch of homemade yogurt sauce.",
+      "tags": [],
+      "img": "o-goat-kashmiri",
+      "priceVerified": true
+    },
+    {
+      "id": "mango-shrimp",
+      "name": "Shrimp Mango",
+      "category": "chef-specials",
+      "price": 19.95,
+      "desc": "Shrimp cooked with onions, green pepper, tomatoes, herbs and cooked in mango.",
+      "tags": [],
+      "img": "o-mango-shrimp",
+      "priceVerified": true
+    },
+    {
+      "id": "lamb-madras",
+      "name": "Lamb Madras",
+      "category": "chef-specials",
+      "price": 18.95,
+      "desc": "Boneless pieces of lamb cooked in a special chili sauce with blended spices and coconut.",
+      "tags": [
+        "spicy"
+      ],
+      "img": "madras-lamb",
+      "priceVerified": true
+    },
+    {
+      "id": "vegetable-tikka-masala",
+      "name": "Vegetable Tikka Masala",
+      "category": "chef-specials",
+      "price": 17.95,
+      "desc": "Mix of vegetables and homemade cheese cooked in tomatoes and cream sauce with fresh ginger and garlic.",
+      "tags": [
+        "vegetarian"
+      ],
+      "img": "veg-tikka-masala",
+      "priceVerified": true
+    },
+    {
+      "id": "karahi-lamb",
+      "name": "Karahi Lamb",
+      "category": "chef-specials",
+      "price": 17.95,
+      "desc": "Lamb cubes cooked with fresh tomatoes, onions, green peppers and special Indian spices.",
+      "tags": [],
+      "img": "karahi-lamb",
+      "priceVerified": true
+    },
+    {
+      "id": "karahi-paneer",
+      "name": "Karahi Paneer",
+      "category": "chef-specials",
+      "price": 16.95,
+      "desc": "Homemade cheese cooked in our special Indian style, spiced and sautéed with fresh tomato, onion and green peppers.",
+      "tags": [
+        "vegetarian"
+      ],
+      "img": "karahi-paneer",
+      "priceVerified": true
+    },
+    {
+      "id": "shrimp-madras",
+      "name": "Shrimp Madras",
+      "category": "chef-specials",
+      "price": 19.95,
+      "desc": "Shrimp cooked in a special chili sauce with blended spices and coconut.",
+      "tags": [
+        "spicy"
+      ],
+      "img": "madras-shrimp",
+      "priceVerified": true
+    },
+    {
+      "id": "karahi-shrimp",
+      "name": "Karahi Shrimp",
+      "category": "chef-specials",
+      "price": 18.95,
+      "desc": "Shrimp cooked with fresh tomato, onions, green peppers and special Indian sauce.",
+      "tags": [],
+      "img": "karahi-shrimp",
+      "priceVerified": true
+    },
+    {
+      "id": "paneer-chilli",
+      "name": "Paneer Chili",
+      "category": "chef-specials",
+      "price": 17.95,
+      "desc": "Homemade cheese cooked with fresh diced onions, tomatoes, green pepper, green chili in soya sauce, Worcestershire sauce, ketchup and other Indian spices.",
+      "tags": [
+        "vegetarian",
+        "spicy"
+      ],
+      "img": "chilli-paneer",
+      "priceVerified": true
+    },
+    {
+      "id": "mango-lamb",
+      "name": "Mango Lamb",
+      "category": "chef-specials",
+      "price": 17.95,
+      "desc": "Boneless lamb sautéed with fresh onion, green pepper, tomato, herbs and cooked in mango.",
+      "tags": [],
+      "img": "mango-curry-lamb",
+      "priceVerified": true
+    },
+    {
+      "id": "goat-curry",
+      "name": "Goat Curry",
+      "category": "chef-specials",
+      "price": 18.95,
+      "desc": "Tender goat bone-in served with tomatoes, ginger, onions and Indian curry spices.",
+      "tags": [],
+      "img": "goat-curry",
+      "priceVerified": true
+    },
+    {
+      "id": "goat-vindaloo",
+      "name": "Goat Vindaloo",
+      "category": "chef-specials",
+      "price": 18.95,
+      "desc": "Bone-in goat cooked with potatoes, tomato in curry sauce with a touch of vinegar.",
+      "tags": [
+        "spicy"
+      ],
+      "img": "goat-curry",
+      "priceVerified": true
+    },
+    {
+      "id": "chicken-madras",
+      "name": "Chicken Madras",
+      "category": "chef-specials",
+      "price": 17.95,
+      "desc": "Boneless pieces of chicken cooked in a special chili sauce with blended spices and coconut.",
+      "tags": [
+        "spicy"
+      ],
+      "img": "madras",
+      "priceVerified": true
+    },
+    {
+      "id": "karahi-chicken",
+      "name": "Karahi Chicken",
+      "category": "chef-specials",
+      "price": 17.95,
+      "desc": "Boneless chicken cooked with fresh onions, tomatoes, green peppers and other special Indian spices.",
+      "tags": [],
+      "img": "karahi",
+      "priceVerified": true
+    },
+    {
+      "id": "seafood-tikka-masala",
+      "name": "Seafood Tikka Masala",
+      "category": "seafood",
+      "price": 19.95,
+      "desc": "Fish, shrimp, scallop and mussels cooked with very mild tomato and cream.",
+      "tags": [],
+      "img": "o-seafood-tikka-masala",
+      "priceVerified": true
+    },
+    {
+      "id": "fish-curry",
+      "name": "Fish Curry",
+      "category": "seafood",
+      "price": 17.95,
+      "desc": "Fresh salmon cooked in Kerala style sauce with coconut.",
+      "tags": [],
+      "img": "o-fish-curry",
+      "priceVerified": true
+    },
+    {
+      "id": "shrimp-curry",
+      "name": "Shrimp Curry",
+      "category": "seafood",
+      "price": 18.95,
+      "desc": "Shrimp cooked with onions and fresh tomatoes.",
+      "tags": [],
+      "img": "o-shrimp-curry",
+      "priceVerified": true
+    },
+    {
+      "id": "seafood-curry",
+      "name": "Seafood Curry",
+      "category": "seafood",
+      "price": 19.95,
+      "desc": "Salmon, shrimp, scallop and mussels cooked in tomato, ginger, onion and Indian spices.",
+      "tags": [],
+      "img": "seafood-curry",
+      "priceVerified": true
+    },
+    {
+      "id": "shrimp-jalfrezi",
+      "name": "Shrimp Jalfrezi",
+      "category": "seafood",
+      "price": 18.95,
+      "desc": "Shrimp cooked in thick sauce with mixed vegetables.",
+      "tags": [],
+      "img": "shrimp-jalfrezi",
+      "priceVerified": true
+    },
+    {
+      "id": "fish-vindaloo",
+      "name": "Fish Vindaloo",
+      "category": "seafood",
+      "price": 17.95,
+      "desc": "Very hot-spiced salmon cooked with potatoes and a touch of vinegar.",
+      "tags": [
+        "spicy"
+      ],
+      "img": "fish-curry",
+      "priceVerified": true
+    },
+    {
+      "id": "shrimp-korma",
+      "name": "Shrimp Korma",
+      "category": "seafood",
+      "price": 20.95,
+      "desc": "",
+      "tags": [],
+      "img": "korma",
+      "priceVerified": true
+    },
+    {
+      "id": "fish-tikka-masala",
+      "name": "Fish Tikka Masala",
+      "category": "seafood",
+      "price": 18.95,
+      "desc": "Boneless pieces of salmon cooked with very mild tomato and cream sauce.",
+      "tags": [],
+      "img": "fish-tikka-masala",
+      "priceVerified": true
+    },
+    {
+      "id": "shrimp-vindaloo",
+      "name": "Shrimp Vindaloo",
+      "category": "seafood",
+      "price": 18.95,
+      "desc": "Very hot and spiced shrimp cooked with potatoes and a touch of vinegar.",
+      "tags": [
+        "spicy"
+      ],
+      "img": "shrimp-curry",
+      "priceVerified": true
+    },
+    {
+      "id": "scallop-tikka-masala",
+      "name": "Scallop Tikka Masala",
+      "category": "seafood",
+      "price": 21.95,
+      "desc": "Sea scallops in a mild tomato-cream tikka masala sauce.",
+      "tags": [],
+      "img": "scallop",
+      "priceVerified": true
+    },
+    {
+      "id": "seafood-vindaloo",
+      "name": "Seafood Vindaloo",
+      "category": "seafood",
+      "price": 19.95,
+      "desc": "Very hot spiced fish, shrimp, scallop and mussels cooked with potatoes and a touch of vinegar.",
+      "tags": [
+        "spicy"
+      ],
+      "img": "seafood-curry",
+      "priceVerified": true
+    },
+    {
+      "id": "shrimp-tandoori-masala",
+      "name": "Shrimp Tandoori Masala",
+      "category": "seafood",
+      "price": 18.95,
+      "desc": "Tandoori shrimp cooked in golden brown masala sauce.",
+      "tags": [],
+      "img": "shrimp-masala",
+      "priceVerified": true
+    },
+    {
+      "id": "scallop-bhuna",
+      "name": "Scallop Bhuna",
+      "category": "seafood",
+      "price": 19.95,
+      "desc": "Sea scallops slow-cooked with onion, tomato and green pepper in a thick, clinging sauce.",
+      "tags": [],
+      "img": "scallop",
+      "priceVerified": true
+    },
+    {
+      "id": "tomato-soup",
+      "name": "Tomato Soup",
+      "category": "soups",
+      "price": 5.5,
+      "desc": "Silky puréed tomato with cracked pepper and fresh coriander.",
+      "tags": [
+        "vegetarian"
+      ],
+      "img": "o-tomato-soup",
+      "priceVerified": true
+    },
+    {
+      "id": "chicken-soup",
+      "name": "Chicken Soup",
+      "category": "soups",
+      "price": 5.5,
+      "desc": "Light chicken broth with shredded chicken, warm spices and herbs.",
+      "tags": [],
+      "img": "o-chicken-soup",
+      "priceVerified": true
+    },
+    {
+      "id": "lentil-soup",
+      "name": "Lentil Soup",
+      "category": "soups",
+      "price": 5.5,
+      "desc": "Slow-simmered yellow lentils with ginger, cumin and a squeeze of lemon.",
+      "tags": [
+        "vegan",
+        "vegetarian"
+      ],
+      "img": "o-lentil-soup",
+      "priceVerified": true
+    },
+    {
+      "id": "mixed-vegetable-soup",
+      "name": "Mixed Vegetable Soup",
+      "category": "soups",
+      "price": 5.5,
+      "desc": "Seasonal vegetables in a clear, lightly spiced broth.",
+      "tags": [
+        "vegan",
+        "vegetarian"
+      ],
+      "img": "o-mixed-vegetable-soup",
+      "priceVerified": true
+    },
+    {
+      "id": "gulab-jamun",
+      "name": "Gulab Jamun",
+      "category": "desserts",
+      "price": 6.95,
+      "desc": "Cheese ball dipped in syrup.",
+      "tags": [
+        "vegetarian"
+      ],
+      "img": "o-gulab-jamun",
+      "priceVerified": true
+    },
+    {
+      "id": "ras-malai",
+      "name": "Ras Malai",
+      "category": "desserts",
+      "price": 6.95,
+      "desc": "Homemade cheese patties served in a sweet cream sauce flavored with cardamom and garnished with pistachios.",
+      "tags": [
+        "vegetarian"
+      ],
+      "img": "ras-malai",
+      "priceVerified": true
+    },
+    {
+      "id": "chocolate-kulfi",
+      "name": "Chocolate Kulfi",
+      "category": "desserts",
+      "price": 6.95,
+      "desc": "Indian chocolate ice-cream.",
+      "tags": [
+        "vegetarian"
+      ],
+      "img": "kulfi",
+      "priceVerified": true
+    },
+    {
+      "id": "kheer",
+      "name": "Kheer (Rice Pudding)",
+      "category": "desserts",
+      "price": 5.95,
+      "desc": "A famous Indian sweet made from milk, rice, dried fruits, flavored with cardamom and blended with raisins.",
+      "tags": [
+        "vegetarian"
+      ],
+      "img": "kheer",
+      "priceVerified": true
+    },
+    {
+      "id": "pistachio-ice-cream",
+      "name": "Pistachio Ice Cream",
+      "category": "desserts",
+      "price": 6.95,
+      "desc": "Pistachio ice cream.",
+      "tags": [
+        "vegetarian"
+      ],
+      "img": "ice-cream-pistachio",
+      "priceVerified": true
+    },
+    {
+      "id": "mango-ice-cream",
+      "name": "Mango Ice Cream",
+      "category": "desserts",
+      "price": 6.95,
+      "desc": "Alphonso mango ice cream.",
+      "tags": [
+        "vegetarian"
+      ],
+      "img": "ice-cream-mango",
+      "priceVerified": true
+    },
+    {
+      "id": "mango-lassi",
+      "name": "Mango Lassi",
+      "category": "beverages",
+      "price": 4.95,
+      "desc": "Yogurt blended with mango pulp and a little cardamom.",
+      "tags": [
+        "vegetarian"
+      ],
+      "img": "o-mango-lassi",
+      "priceVerified": true
+    },
+    {
+      "id": "sweet-lassi",
+      "name": "Sweet Lassi",
+      "category": "beverages",
+      "price": 3.95,
+      "desc": "Cool refreshing and delicious yogurt drink.",
+      "tags": [
+        "vegetarian"
+      ],
+      "img": "lassi",
+      "priceVerified": true
+    },
+    {
+      "id": "salted-lassi",
+      "name": "Salted Lassi",
+      "category": "beverages",
+      "price": 3.95,
+      "desc": "Cool refreshing and delicious yogurt drink.",
+      "tags": [
+        "vegetarian"
+      ],
+      "img": "lassi",
+      "priceVerified": true
+    },
+    {
+      "id": "soda",
+      "name": "Soda",
+      "category": "beverages",
+      "price": 1.95,
+      "desc": "Coke, Diet Coke, Sprite, Fanta, Lemonade or Dr. Pepper.",
+      "tags": [],
+      "img": "soda",
+      "priceVerified": true
+    },
+    {
+      "id": "mango-shake",
+      "name": "Mango Shake",
+      "category": "beverages",
+      "price": 3.95,
+      "desc": "Mango blended with milk and ice.",
+      "tags": [
+        "vegetarian"
+      ],
+      "img": "mango-shake",
+      "priceVerified": true
+    },
+    {
+      "id": "masala-chai",
+      "name": "Indian Chai Tea",
+      "category": "beverages",
+      "price": 3.5,
+      "desc": "Black tea brewed with milk, cardamom, ginger and spices.",
+      "tags": [
+        "vegetarian"
+      ],
+      "img": "chai",
+      "priceVerified": true
+    },
+    {
+      "id": "perrier",
+      "name": "Perrier Water",
+      "category": "beverages",
+      "price": 2.95,
+      "desc": "",
+      "tags": [
+        "vegan",
+        "vegetarian"
+      ],
+      "img": "sparkling-water",
+      "priceVerified": true
+    },
+    {
+      "id": "masala-tea",
+      "name": "Masala Tea",
+      "category": "beverages",
+      "price": 2.95,
+      "desc": "",
+      "tags": [],
+      "img": "chai",
+      "priceVerified": true
+    },
+    {
+      "id": "coffee",
+      "name": "Coffee",
+      "category": "beverages",
+      "price": 1.95,
+      "desc": "",
+      "tags": [
+        "vegan",
+        "vegetarian"
+      ],
+      "img": "coffee",
+      "priceVerified": true
+    },
+    {
+      "id": "mango-juice",
+      "name": "Mango Juice",
+      "category": "beverages",
+      "price": 2.95,
+      "desc": "",
+      "tags": [
+        "vegan",
+        "vegetarian"
+      ],
+      "img": "juice-mango",
+      "priceVerified": true
+    }
+  ]
+}
