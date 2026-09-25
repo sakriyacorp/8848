@@ -5,6 +5,8 @@ import { HOTSPOTS } from "@/data/everest";
 import { SplitHeading, Reveal } from "@/components/fx/Reveal";
 import { EverestSection } from "@/components/story/EverestSection";
 import type { PairDish } from "@/components/setpieces/Everest3D";
+import { Polaroids } from "@/components/setpieces/Polaroids";
+import { SingingBowl } from "@/components/setpieces/SingingBowl";
 
 /* The story page's interactive pieces. Each is a set-piece behind its own flag. */
 export function StoryExtras() {
@@ -16,6 +18,22 @@ export function StoryExtras() {
   }
   return (
     <>
+      {isOn("polaroids") && (
+        <section aria-labelledby="snaps-title" className="walnut relative overflow-hidden py-20 md:py-28">
+          <div className="container-x relative">
+            <Reveal as="p" className="eyebrow text-brass">
+              On the string
+            </Reveal>
+            <SplitHeading id="snaps-title" text="Snapshots from the *trail.*" className="display mt-4 text-[clamp(2.5rem,6vw,4.6rem)] text-brass-hi" />
+            <Reveal delay={0.1} as="p" className="mt-4 max-w-[48ch] text-[16px] leading-relaxed text-text/80">
+              Pinned up behind the bar. Tap one to read what&rsquo;s written on the back.
+            </Reveal>
+            <div className="mt-10">
+              <Polaroids />
+            </div>
+          </div>
+        </section>
+      )}
       {isOn("everest3d") && (
         <section aria-labelledby="massif-title" className="relative overflow-hidden bg-night py-20 md:py-28">
           <div aria-hidden="true" className="lamp-glow left-1/2 top-10 h-[50vmin] w-[50vmin] -translate-x-1/2" />
@@ -29,6 +47,20 @@ export function StoryExtras() {
             </Reveal>
             <div className="mt-10">
               <EverestSection dishes={dishes} />
+            </div>
+          </div>
+        </section>
+      )}
+      {isOn("singingBowl") && (
+        <section aria-labelledby="bowl-title" className="relative overflow-hidden bg-night py-20 md:py-28">
+          <div aria-hidden="true" className="lamp-glow -left-20 top-10 h-[420px] w-[420px]" />
+          <div className="container-x relative">
+            <Reveal as="p" className="eyebrow text-brass">
+              Tengboche monastery · 3,867 m
+            </Reveal>
+            <SplitHeading id="bowl-title" text="Play the *bowl.*" className="display mt-4 text-[clamp(2.5rem,6vw,4.6rem)] text-brass-hi" />
+            <div className="mt-10">
+              <SingingBowl />
             </div>
           </div>
         </section>

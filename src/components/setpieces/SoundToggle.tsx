@@ -26,7 +26,7 @@ export function SoundToggle({ className, label = true }: { className?: string; l
         toggle();
         if (next) bowl({ freq: 220, gain: 0.18, dur: 5 });
       }}
-      className={cn("sound-toggle group inline-flex items-center gap-2 rounded-full text-[13px] text-muted transition-colors hover:text-brass-hi", on && "is-on text-brass-hi", className)}
+      className={cn("sound-toggle group inline-flex shrink-0 items-center gap-2 whitespace-nowrap rounded-full text-[13px] text-muted transition-colors hover:text-brass-hi", on && "is-on text-brass-hi", className)}
     >
       <svg viewBox="0 0 32 24" width="26" height="20" aria-hidden="true" className="overflow-visible">
         <path d="M4 11h24c-.6 6.2-5.6 10-12 10S4.6 17.2 4 11Z" fill="currentColor" opacity=".9" />
