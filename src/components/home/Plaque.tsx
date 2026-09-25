@@ -1,9 +1,13 @@
 "use client";
 
-import { forwardRef, useEffect, useRef, type CSSProperties } from "react";
+import dynamic from "next/dynamic";
+import { forwardRef, useEffect, useRef, useState, type CSSProperties } from "react";
 import { cn } from "@/lib/cn";
+import { isOn } from "@/config/features";
 import { subscribeTilt } from "@/lib/tilt";
 import { Logo } from "@/components/brand/Logo";
+
+const PlaqueGL = dynamic(() => import("@/components/setpieces/PlaqueGL"), { ssr: false });
 
 /* The brass table plaque from the reference photo, in CSS: brushed brass face with the logo
    engraved, a walnut stand, a soft shadow on the table. The specular highlight and a few
@@ -13,6 +17,23 @@ export const Plaque = forwardRef<HTMLDivElement, { className?: string; style?: C
   function Plaque({ className, style, interactive = true }, logoRef) {
     const face = useRef<HTMLDivElement>(null);
     const tiltEl = useRef<HTMLDivElement>(null);
+    const [gl, setGl] = useState(false);
+
+    // three.js face while the plaque is on (or near) screen; the CSS face underneath is the
+    // fallback and is what you see when WebGL is missing, off, or reduced motion is set
+    useEffect(() => {
+      const f = face.current;
+      if (!f || !interactive || !isOn("plaque")) return;
+      if (matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+      let ok = false;
+      try {
+        ok = !!document.createElement("canvas").getContext("webgl2");
+      } catch {}
+      if (!ok) return;
+      const io = new IntersectionObserver(([e]) => setGl(e.isIntersecting), { rootMargin: "30% 0px" });
+      io.observe(f);
+      return () => io.disconnect();
+    }, [interactive]);
 
     useEffect(() => {
       const f = face.current;
@@ -33,6 +54,7 @@ export const Plaque = forwardRef<HTMLDivElement, { className?: string; style?: C
         <div ref={tiltEl} className="plaque-tilt relative">
           <div ref={face} className="plaque-face brass sheen relative aspect-[1/1.04] w-full rounded-[3px]" style={{ ["--sheen-delay" as string]: "1.2s" }}>
             <div aria-hidden="true" className="plaque-band" />
+            {gl && <PlaqueGL />}
             <div ref={logoRef} className="absolute inset-[9%_9%_11%]">
               <Logo variant="lockup" material="engraved" className="h-full w-full" title="8848 Himalayan Fusion & Bar, engraved on a brass plaque" />
             </div>

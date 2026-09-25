@@ -113,6 +113,8 @@ export function Hero() {
       const summitIn = smooth(0.64, 0.8, p);
 
       stg.style.setProperty("--nf", numFade.toFixed(3));
+      // the three.js plaque face reads these (numerals sinking, hand-off as the zoom starts)
+      (window as unknown as { __plaque: { nf: number; zoom: number } }).__plaque = { nf: numFade, zoom };
       rg.style.transform = `scale(${zoom.toFixed(4)})`;
       rg.style.visibility = zoom > geo.smax * 0.98 ? "hidden" : "visible";
       if (copy.current) {

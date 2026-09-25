@@ -2999,3 +2999,23 @@ html.quake body {
     transform: translateX(-130%);
   }
 }
+
+/* ---------- three.js plaque face (over the CSS plaque) ---------- */
+.plaque-gl {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  width: 100%;
+  height: 100%;
+  border-radius: inherit;
+  opacity: var(--gl, 0);
+  transition: opacity 0.5s var(--ease);
+  pointer-events: none;
+}
+.plaque-face.gl-on .logo8848,
+.plaque-face.gl-on .plaque-band {
+  opacity: calc(1 - var(--gl, 0));
+}
+.plaque-face.gl-on::after {
+  display: none;
+}

@@ -13,7 +13,7 @@ export const FEATURES = {
 
   // Hero + intro
   intro: { on: true, desc: "First-visit logo draw-on intro: arc strokes on, peaks rise, sun rises, numerals settle." },
-  plaque: { on: true, desc: "3D brushed-brass plaque on a walnut stand; light follows cursor / phone tilt; scroll pushes through the arc." },
+  plaque: { on: true, desc: "three.js brushed-brass plaque face (engraved via height/normal map, anisotropic lamp highlight following cursor / phone tilt) on the walnut stand; scroll pushes through the arc. Off → CSS plaque." },
   skyTime: { on: true, desc: "Hero sky matches the current time in Harrisonburg (dawn, day, golden hour, night + moon)." },
   lampLight: { on: true, desc: "Warm lamp glow follows cursor/finger on dark sections and reveals engraved contour lines." },
 
