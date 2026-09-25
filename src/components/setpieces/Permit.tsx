@@ -9,6 +9,7 @@ import { getOrder, type Order } from "@/lib/orders";
 import { site, mapsUrl } from "@/config/site";
 import { isOn } from "@/config/features";
 import { Logo } from "@/components/brand/Logo";
+import { ShareSummit } from "@/components/order/ShareSummit";
 import { sfx } from "@/lib/sound";
 import { stamp as stampSound } from "@/lib/audio";
 
@@ -197,6 +198,7 @@ export function Permit({ id }: { id: string | null }) {
           <a href={site.phoneHref} className="btn btn-ghost px-6 py-3.5 text-[15px]">
             Questions? {site.phone}
           </a>
+          {isOn("shareSummit") && <ShareSummit first={first} />}
           <Link href="/menu" className="btn btn-ghost px-6 py-3.5 text-[15px]">
             Order again
           </Link>

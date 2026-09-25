@@ -6,7 +6,8 @@ import { addToPack } from "@/lib/add-to-pack";
 import { formatPrice } from "@/lib/format";
 import { getDishImage } from "@/lib/dish-path";
 import { useSound } from "@/lib/sound";
-import { bowl } from "@/lib/audio";
+import { bowl, tick as click } from "@/lib/audio";
+import { sfx } from "@/lib/sound";
 
 /* The oracle: a brass mani wheel engraved with ॐ मणि पद्मे हूँ. Swipe it (it only turns
    clockwise, as prayer wheels do) or press Spin. The counterweight swings out on its chain as it
@@ -22,7 +23,7 @@ export function PrayerWheel({ dishes }: { dishes: OracleDish[] }) {
   const band = useRef<HTMLDivElement>(null);
   const weight = useRef<HTMLDivElement>(null);
   const card = useRef<HTMLDivElement>(null);
-  const st = useRef({ angle: 0, v: 0, spun: false, raf: 0, last: 0, dragging: false, px: 0, pt: 0 });
+  const st = useRef({ angle: 0, v: 0, spun: false, raf: 0, last: 0, dragging: false, px: 0, pt: 0, sector: 0, lastClick: 0 });
   const [result, setResult] = useState<number | null>(null);
   const [spinning, setSpinning] = useState(false);
 
@@ -50,6 +51,18 @@ export function PrayerWheel({ dishes }: { dishes: OracleDish[] }) {
       s.last = now;
       if (!s.dragging) s.v *= Math.exp(-dt * 0.9);
       s.angle += s.v * dt;
+      // a detent per dish: clicks (and a buzz on phones) as each one passes, once it slows
+      const sector = Math.floor(s.angle / (TAU / dishes.length));
+      if (sector !== s.sector) {
+        s.sector = sector;
+        if (s.v < 5.5 && now - s.lastClick > 70) {
+          s.lastClick = now;
+          sfx(() => click(0.85 + (sector % 2) * 0.1));
+          try {
+            navigator.vibrate?.(6);
+          } catch {}
+        }
+      }
       render();
       if (!s.dragging && s.v < 0.06) {
         s.v = 0;

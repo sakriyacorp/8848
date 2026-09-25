@@ -14,6 +14,7 @@ import { Logo } from "@/components/brand/Logo";
 import { TrekPack } from "@/components/icons/Icons";
 import { ButterLamp } from "@/components/setpieces/ButterLamp";
 import { SoundToggle } from "@/components/setpieces/SoundToggle";
+import { SheetAltimeter } from "@/components/layout/SheetAltimeter";
 import { isOn } from "@/config/features";
 import { useLiquidGlass } from "@/components/fx/useLiquidGlass";
 import { useNavLens } from "@/components/layout/useNavLens";
@@ -77,11 +78,13 @@ export function Nav() {
     const trigger = menuButton.current;
     document.addEventListener("keydown", onKey);
     document.documentElement.style.overflow = "hidden";
+    document.documentElement.classList.add("nav-open");
     const raf = requestAnimationFrame(() => firstLink.current?.focus());
     return () => {
       cancelAnimationFrame(raf);
       document.removeEventListener("keydown", onKey);
       document.documentElement.style.overflow = "";
+      document.documentElement.classList.remove("nav-open");
       trigger?.focus();
     };
   }, [open]);
@@ -187,6 +190,10 @@ export function Nav() {
         )}
       >
         <div aria-hidden="true" className="lamp-glow -right-24 top-10 h-80 w-80" />
+        {(() => {
+          const here = pathname === "/" ? { alt: 405, label: "Base Camp" } : NAV_LINKS.find((l) => pathname.startsWith(l.href));
+          return here && isOn("sheetAltimeter") ? <SheetAltimeter alt={here.alt} label={here.label} /> : null;
+        })()}
         <p className="eyebrow mb-6 text-brass">The climb</p>
         <ul className="flex flex-col">
           {[{ href: "/", label: "Base Camp", alt: 405 }, ...NAV_LINKS].map((l, i) => (

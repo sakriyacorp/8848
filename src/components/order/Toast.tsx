@@ -27,7 +27,8 @@ export function Toast() {
     <div
       aria-live="polite"
       aria-atomic="true"
-      className="pointer-events-none fixed inset-x-0 bottom-5 z-[80] flex justify-center px-4"
+      data-toast-root
+      className="pointer-events-none fixed inset-x-0 bottom-5 z-[80] flex justify-center px-4 transition-[bottom] duration-300"
     >
       <AnimatePresence>
         {toast && (

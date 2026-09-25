@@ -4,7 +4,8 @@ import { useEffect, useState } from "react";
 import { Snow } from "@/components/setpieces/Snow";
 import { useUI } from "@/lib/ui";
 
-/* Easter egg: type 8848 anywhere (outside a form field), or tap the logo eight times. The page
+/* Easter egg: type 8848 anywhere (outside a form field), tap the logo eight times, or give your
+   phone a good shake (Android; iOS once "Tilt to shine" has been allowed). The page
    gives a small shudder, a powder cloud rolls down off the top of the screen, a burst of snow
    follows, and a line of yeti footprints wanders across and fades. Every Snow on the page also
    hears the "8848:avalanche" event and joins in. */
@@ -39,11 +40,31 @@ export function Avalanche() {
         fire();
       }
     };
+    // shake: three hard jolts inside a second (cool-down so it can't machine-gun)
+    let jolts: number[] = [];
+    let quiet = 0;
+    const motion = (e: DeviceMotionEvent) => {
+      const g = e.acceleration ?? e.accelerationIncludingGravity;
+      if (!g || g.x == null || g.y == null || g.z == null) return;
+      const m = Math.hypot(g.x, g.y, g.z) - (e.acceleration ? 0 : 9.81);
+      const now = performance.now();
+      if (now < quiet || m < 17) return;
+      if (jolts.length && now - jolts[jolts.length - 1] < 120) return;
+      jolts = jolts.filter((t) => now - t < 1000);
+      jolts.push(now);
+      if (jolts.length >= 3) {
+        jolts = [];
+        quiet = now + 9000;
+        fire();
+      }
+    };
     addEventListener("keydown", key);
     addEventListener("click", click, true);
+    addEventListener("devicemotion", motion);
     return () => {
       removeEventListener("keydown", key);
       removeEventListener("click", click, true);
+      removeEventListener("devicemotion", motion);
     };
   }, []);
 

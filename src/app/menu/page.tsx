@@ -8,6 +8,7 @@ import { OrderModeBar } from "@/components/menu/OrderModeBar";
 import { SplitHeading } from "@/components/fx/Reveal";
 import { MenuExtras } from "@/components/menu/MenuExtras";
 import { MomoCounter } from "@/components/setpieces/MomoCounter";
+import { PackBar } from "@/components/order/PackBar";
 
 export const metadata: Metadata = {
   title: "Menu",
@@ -83,6 +84,7 @@ export default function MenuPage() {
         </div>
         {(isOn("momoBuilder") || isOn("thali") || isOn("prayerWheel")) && <MenuExtras />}
       </div>
+      {isOn("packBar") && <PackBar />}
     </div>
   );
 }

@@ -3137,3 +3137,32 @@ body {
   transition: opacity 0.35s;
   will-change: transform;
 }
+
+/* ---------- mobile pack bar ---------- */
+.packbar {
+  transform: translateY(120%);
+  transition: transform 0.55s var(--ease-bounce);
+}
+.packbar.is-on {
+  transform: none;
+}
+@media (max-width: 767px) {
+  .packbar-on [data-toast-root] {
+    bottom: calc(84px + env(safe-area-inset-bottom));
+  }
+}
+
+.sheet-alt-dot {
+  filter: drop-shadow(0 0 6px rgba(242, 226, 182, 0.9));
+  animation: lamp-breathe-dot 2.4s ease-in-out infinite;
+  transform-box: fill-box;
+  transform-origin: center;
+}
+@keyframes lamp-breathe-dot {
+  50% {
+    transform: scale(1.25);
+  }
+}
+.nav-open .packbar {
+  transform: translateY(120%);
+}

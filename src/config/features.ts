@@ -37,7 +37,10 @@ export const FEATURES = {
   momoBuilder: { on: true, desc: "Build a momo: pick filling + style, watch it pleat and cook, add it to the bag." },
   thali: { on: true, desc: "Top-down dal bhat thali; tap each katori to learn what it is." },
   permit: { on: true, desc: "Order confirmation as a stamped Sagarmatha trekking permit + summit flag." },
-  prayerWheel: { on: true, desc: "Spin a brass prayer wheel; where it stops suggests a dish (menu)." },
+  prayerWheel: { on: true, desc: "Spin a brass prayer wheel (clockwise only, ratchets + buzzes as it slows); where it stops suggests a dish (menu)." },
+  packBar: { on: true, desc: "Phones: a brass pack bar rises on the menu once something's packed (count, weight, subtotal → drawer)." },
+  sheetAltimeter: { on: true, desc: "Phone menu sheet shows a little mountain with a glowing 'you are here' at this page's altitude." },
+  shareSummit: { on: true, desc: "Summit permit: 'Share your summit' via the phone's share sheet (clipboard fallback)." },
 
   // The Bar
   nightSky: { on: true, desc: "Milky Way, twinkling stars and shooting stars over the peaks (bar). Tap a shooting star to catch it: sparks + a wish." },
@@ -57,7 +60,7 @@ export const FEATURES = {
   altitudeTitle: { on: true, desc: "Browser tab title shows your altitude while you climb the home page." },
 
   // Easter eggs
-  avalanche: { on: true, desc: "Tap the logo 8 times or type 8848: gentle avalanche + yeti footprints." },
+  avalanche: { on: true, desc: "Tap the logo 8 times, type 8848, or shake your phone: gentle avalanche + yeti footprints." },
   blizzard404: { on: true, desc: "404: lost in a whiteout with a spinning brass compass that locks onto 'Return to Base Camp' when you point at it." },
 } as const;
 

@@ -67,6 +67,9 @@ export function needsTiltPermission(): boolean {
 
 export async function requestTilt(): Promise<boolean> {
   const DOE = window.DeviceOrientationEvent as unknown as { requestPermission?: () => Promise<string> } | undefined;
+  // motion too (the shake easter egg); same tap, separate prompt on iOS
+  const DME = window.DeviceMotionEvent as unknown as { requestPermission?: () => Promise<string> } | undefined;
+  DME?.requestPermission?.().catch(() => {});
   if (!DOE?.requestPermission) return true;
   try {
     const r = await DOE.requestPermission();
