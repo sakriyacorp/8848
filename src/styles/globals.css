@@ -2241,3 +2241,29 @@ body:has(.whiteout) header nav {
 .everest-hint {
   animation: fade 1s var(--ease) 1s both;
 }
+
+/* ============================================================================================
+   ★ Globe
+   ========================================================================================== */
+.globe-section {
+  background:
+    radial-gradient(60% 50% at 50% 45%, rgba(58, 36, 22, 0.55), transparent 70%),
+    var(--night);
+}
+
+.globe-line {
+  bottom: 0;
+  opacity: 0;
+  transform: translateY(18px);
+  filter: blur(6px);
+  transition:
+    opacity 0.8s var(--ease),
+    transform 0.8s var(--ease),
+    filter 0.8s var(--ease);
+}
+
+.globe-line.is-on {
+  opacity: 1;
+  transform: none;
+  filter: none;
+}

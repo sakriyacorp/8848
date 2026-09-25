@@ -7,6 +7,7 @@ import { ClimbSection } from "@/components/home/ClimbSection";
 import { BarTeaser } from "@/components/home/BarTeaser";
 import { TestimonialsSection } from "@/components/testimonials/TestimonialsSection";
 import { VisitSection } from "@/components/home/VisitSection";
+import { GlobeSection } from "@/components/home/GlobeSection";
 
 /* Home is the whole climb: the table → through the arc → the mountain → the story → a menu to
    read → a menu to climb → the bar at the summit → postcards home → base camp in Harrisonburg. */
@@ -21,6 +22,7 @@ export default function HomePage() {
         <ClimbSection />
         <BarTeaser />
         <TestimonialsSection />
+        <GlobeSection />
         <VisitSection />
       </div>
     </>

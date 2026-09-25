@@ -93,7 +93,7 @@ export default function StoryPage() {
             {[
               { v: <Counter to={EVEREST.metres} decimals={2} />, u: "metres", l: "height of Sagarmatha, re-measured in 2020" },
               { v: <Counter to={EVEREST.feet} decimals={1} />, u: "feet", l: "for the Americans at the table" },
-              { v: <Counter to={12490} />, u: "kilometres", l: "Kathmandu to Harrisonburg, as the crow flies" },
+              { v: <Counter to={12476} />, u: "kilometres", l: "Kathmandu to Harrisonburg, as the crow flies" },
               { v: <Counter to={2} duration={1} />, u: "kitchens", l: "one wok, one tandoor, both on fire" },
             ].map((s, i) => (
               <div key={i} className="bg-night/95 p-6 md:p-8">
