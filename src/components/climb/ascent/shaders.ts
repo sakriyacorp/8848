@@ -3,9 +3,11 @@
 
 export const terrainVert = /* glsl */ `
   varying vec3 vWorld;
+  varying vec3 vNormal;
   void main() {
     vec4 wp = modelMatrix * vec4(position, 1.0);
     vWorld = wp.xyz;
+    vNormal = normalize(mat3(modelMatrix) * normal);
     gl_Position = projectionMatrix * viewMatrix * wp;
   }
 `;
@@ -21,11 +23,14 @@ export const terrainFrag = /* glsl */ `
   uniform float uContour;
   uniform float uAlpen;
   uniform float uMode;
+  uniform float uSmooth;
   varying vec3 vWorld;
+  varying vec3 vNormal;
 
   void main() {
     vec3 n = normalize(cross(dFdx(vWorld), dFdy(vWorld)));
     if (dot(n, uCam - vWorld) < 0.0) n = -n;
+    n = normalize(mix(n, normalize(vNormal), uSmooth));
     float slope = clamp(n.y, 0.0, 1.0);
     float h = vWorld.y;
 

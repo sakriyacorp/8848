@@ -2150,3 +2150,94 @@ body:has(.whiteout) header nav {
   transform-box: fill-box;
   animation: spin 5s linear infinite reverse;
 }
+
+/* ============================================================================================
+   ★ Everest 3D (story)
+   ========================================================================================== */
+.everest3d.is-brass {
+  background:
+    radial-gradient(70% 60% at 50% 40%, rgba(238, 211, 165, 0.12), transparent 70%),
+    radial-gradient(120% 100% at 50% 100%, #2a1b12, #120d09 70%);
+}
+
+.everest3d.is-snow {
+  background: linear-gradient(180deg, #3b3228 0%, #7a6a56 45%, #d8c7a6 100%);
+}
+
+.everest-spot {
+  transition: opacity 0.3s var(--ease);
+}
+
+.everest-dot {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 14px;
+  height: 14px;
+  margin: -7px 0 0 -7px;
+  border-radius: 50%;
+  background: radial-gradient(circle, #fff6dc 0 30%, #dcbf7b 40%, rgba(220, 191, 123, 0) 72%);
+  box-shadow: 0 0 0 1.5px rgba(242, 233, 207, 0.9);
+  animation: spot-pulse 2.4s ease-in-out infinite;
+}
+
+.everest-spot::before {
+  /* a generous invisible tap target */
+  content: "";
+  position: absolute;
+  left: -22px;
+  top: -22px;
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+}
+
+@keyframes spot-pulse {
+  0%,
+  100% {
+    box-shadow: 0 0 0 1.5px rgba(242, 233, 207, 0.9), 0 0 0 0 rgba(220, 191, 123, 0.5);
+  }
+  50% {
+    box-shadow: 0 0 0 1.5px rgba(242, 233, 207, 0.9), 0 0 0 10px rgba(220, 191, 123, 0);
+  }
+}
+
+.everest-label {
+  position: absolute;
+  left: 12px;
+  top: -9px;
+  white-space: nowrap;
+  font-size: 9.5px;
+  color: var(--brass-hi);
+  background: rgba(14, 10, 7, 0.72);
+  border: 1px solid rgba(220, 191, 123, 0.35);
+  border-radius: 999px;
+  padding: 3px 9px;
+  opacity: 0;
+  transform: translateX(-4px);
+  transition:
+    opacity 0.3s var(--ease),
+    transform 0.3s var(--ease);
+  pointer-events: none;
+}
+
+.everest-spot:hover .everest-label,
+.everest-spot:focus-visible .everest-label,
+.everest-spot.is-open .everest-label {
+  opacity: 1;
+  transform: none;
+}
+
+@media (min-width: 768px) {
+  .everest-label {
+    opacity: 0.8;
+  }
+}
+
+.everest-card {
+  animation: ascent-card-in 0.6s var(--ease) both;
+}
+
+.everest-hint {
+  animation: fade 1s var(--ease) 1s both;
+}

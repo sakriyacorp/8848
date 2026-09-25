@@ -152,6 +152,7 @@ export default function Ascent3D({ dishes, onFail }: { dishes: Record<string, Cl
       uContour: { value: 0.55 },
       uAlpen: { value: 0 },
       uMode: { value: 0 },
+      uSmooth: { value: 0 },
     };
     const terrainMat = new THREE.ShaderMaterial({ vertexShader: terrainVert, fragmentShader: terrainFrag, uniforms: terrainU });
     const terrain = new THREE.Mesh(geo, terrainMat);

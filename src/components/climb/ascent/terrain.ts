@@ -162,8 +162,10 @@ export function height(x: number, z: number): number {
     const dz = z - p.z;
     const d = (Math.hypot(dx, dz) * 0.65 + (Math.abs(dx) + Math.abs(dz)) * 0.35 * 0.82) / p.r;
     if (d < 1) {
-      const cone = p.h * Math.pow(1 - d, p.sharp);
-      h = Math.max(h, cone + floor * 0.25 * (1 - d));
+      // the cone tops out exactly at the peak's height (no slicing flat at the top)
+      const lift = floor * 0.25;
+      const cone = (p.h - lift) * Math.pow(1 - d, p.sharp) + lift * (1 - d);
+      h = Math.max(h, cone);
     }
   }
 
