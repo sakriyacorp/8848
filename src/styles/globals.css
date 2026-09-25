@@ -3039,3 +3039,81 @@ html.quake body {
 .anim-paused::after {
   animation-play-state: paused !important;
 }
+
+/* ---------- footer horizon details ---------- */
+.footer-horizon .fh-shoot {
+  opacity: 0;
+  transform: translate(180px, 30px);
+  animation: fh-shoot 11s linear 3s infinite;
+}
+@keyframes fh-shoot {
+  0%,
+  88% {
+    opacity: 0;
+    transform: translate(180px, 30px);
+  }
+  89% {
+    opacity: 0.9;
+  }
+  94% {
+    opacity: 0;
+    transform: translate(560px, 130px);
+  }
+  100% {
+    opacity: 0;
+    transform: translate(560px, 130px);
+  }
+}
+.footer-horizon .fh-lodge circle {
+  transform-box: fill-box;
+  transform-origin: center;
+  animation: fh-window 3.2s ease-in-out infinite;
+}
+@keyframes fh-window {
+  0%,
+  100% {
+    opacity: 0.85;
+  }
+  40% {
+    opacity: 1;
+  }
+  55% {
+    opacity: 0.7;
+  }
+}
+.footer-horizon .fh-flag {
+  transform-box: fill-box;
+  transform-origin: 50% 0;
+  animation: fh-flag 2.4s ease-in-out infinite;
+}
+@keyframes fh-flag {
+  0%,
+  100% {
+    transform: skewX(0deg);
+  }
+  50% {
+    transform: skewX(-14deg) scaleY(0.94);
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .footer-horizon .fh-shoot {
+    display: none;
+  }
+  .footer-horizon .fh-lodge circle,
+  .footer-horizon .fh-flag {
+    animation: none;
+  }
+}
+
+/* fieldsets default to min-width: min-content, which lets a scrolling chip row inside one
+   stretch the whole page on phones */
+fieldset {
+  min-width: 0;
+}
+
+/* belt and braces: no sideways page scroll on phones, ever (clip, unlike hidden, doesn't make a
+   scroll container, so the sticky/pinned scenes keep working) */
+html,
+body {
+  overflow-x: clip;
+}

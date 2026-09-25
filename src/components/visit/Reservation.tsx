@@ -123,8 +123,8 @@ export function Reservation() {
   }
 
   return (
-    <form onSubmit={submit} noValidate className="grid gap-8 lg:grid-cols-[1.1fr_0.9fr] lg:gap-12">
-      <div className="space-y-8">
+    <form onSubmit={submit} noValidate className="grid grid-cols-[minmax(0,1fr)] gap-8 lg:grid-cols-[minmax(0,1.1fr)_minmax(0,0.9fr)] lg:gap-12">
+      <div className="min-w-0 space-y-8">
         <fieldset>
           <legend className="caps text-[10.5px] text-brass">Day</legend>
           <div className="no-scrollbar -mx-[var(--gutter)] mt-3 flex gap-2 overflow-x-auto px-[var(--gutter)] pb-1 md:mx-0 md:flex-wrap md:px-0">
