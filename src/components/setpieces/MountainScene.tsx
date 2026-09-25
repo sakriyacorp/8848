@@ -26,9 +26,13 @@ type Props = {
   arc?: boolean;
   style?: CSSProperties;
   onSky?: (s: Sky) => void;
+  /** No sky and no background: just the mountains, for laying over another sky. */
+  transparent?: boolean;
+  /** Pull the snow down a stop so the massif sits back behind text. */
+  dim?: boolean;
 };
 
-export function MountainScene({ className, phase: forced, parallax = true, arc = true, style, onSky }: Props) {
+export function MountainScene({ className, phase: forced, parallax = true, arc = true, style, onSky, transparent = false, dim = false }: Props) {
   const root = useRef<HTMLDivElement>(null);
   const u = useId().replace(/:/g, "");
   const [sky, setSky] = useState<Sky | null>(null);
@@ -85,9 +89,9 @@ export function MountainScene({ className, phase: forced, parallax = true, arc =
   return (
     <div
       ref={root}
-      className={cn("mountain-scene absolute inset-0 overflow-hidden", className)}
+      className={cn("mountain-scene absolute inset-0 overflow-hidden", dim && "ms-dim", transparent && "ms-transparent", className)}
       data-phase={phase}
-      style={{ ...style, background: c.top }}
+      style={{ ...style, background: transparent ? "transparent" : c.top }}
       role="img"
       aria-label={`Illustration: the Everest massif under a ${sky?.label.toLowerCase() ?? "night"} sky`}
     >

@@ -1,15 +1,28 @@
 import { isOn } from "@/config/features";
 import { Hero } from "@/components/home/Hero";
 import { Intro } from "@/components/setpieces/Intro";
+import { StorySnippet } from "@/components/home/StorySnippet";
+import { Signatures } from "@/components/home/Signatures";
+import { ClimbSection } from "@/components/home/ClimbSection";
+import { BarTeaser } from "@/components/home/BarTeaser";
+import { TestimonialsSection } from "@/components/testimonials/TestimonialsSection";
+import { VisitSection } from "@/components/home/VisitSection";
 
+/* Home is the whole climb: the table → through the arc → the mountain → the story → a menu to
+   read → a menu to climb → the bar at the summit → postcards home → base camp in Harrisonburg. */
 export default function HomePage() {
   return (
     <>
       {isOn("intro") && <Intro />}
       <Hero />
-      <section className="relative z-10 flex min-h-[80svh] items-center justify-center bg-night">
-        <p className="display text-[40px] text-brass-hi">Base camp.</p>
-      </section>
+      <div className="relative z-10">
+        <StorySnippet />
+        <Signatures />
+        <ClimbSection />
+        <BarTeaser />
+        <TestimonialsSection />
+        <VisitSection />
+      </div>
     </>
   );
 }

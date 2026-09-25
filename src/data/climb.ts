@@ -1,0 +1,163 @@
+/* The South Col route, Kathmandu to the summit. Shared by the 3D ascent and its SVG fallback.
+   Temperatures are typical spring-season figures; O₂ is the share of sea-level oxygen. */
+
+export type Waypoint = {
+  id: string;
+  name: string;
+  alt: number;
+  title: string;
+  body: string;
+  dish: string;
+  link: { href: string; label: string };
+  temp: number;
+  o2: number;
+  /** position along the 3D route, 0–1 */
+  t: number;
+};
+
+export const WAYPOINTS: Waypoint[] = [
+  {
+    id: "kathmandu",
+    name: "Kathmandu",
+    alt: 1400,
+    title: "Every climb starts with momos.",
+    body: "Before anyone goes up, they eat in a Kathmandu momo shop: steam, pleats, a bowl of sesame-tomato achar. So do we.",
+    dish: "chicken-momo",
+    link: { href: "/menu#cat-momo", label: "The momo" },
+    temp: 24,
+    o2: 86,
+    t: 0,
+  },
+  {
+    id: "lukla",
+    name: "Lukla",
+    alt: 2860,
+    title: "A runway on a cliff.",
+    body: "The flight in is short and loud. The first night's snack is sekuwa off the grill and a cold drink on a stone wall.",
+    dish: "chicken-sekuwa",
+    link: { href: "/menu#cat-small-plates", label: "Small plates" },
+    temp: 14,
+    o2: 73,
+    t: 0.1,
+  },
+  {
+    id: "namche",
+    name: "Namche Bazaar",
+    alt: 3440,
+    title: "Thukpa weather.",
+    body: "Namche is where the wind finds you. Everyone orders the same thing: a deep bowl of noodle soup with a spoon of chilli.",
+    dish: "chicken-thukpa",
+    link: { href: "/menu#cat-noodles-soups", label: "Noodles & soups" },
+    temp: 10,
+    o2: 68,
+    t: 0.2,
+  },
+  {
+    id: "tengboche",
+    name: "Tengboche",
+    alt: 3867,
+    title: "Monastery bells, wok fire.",
+    body: "Kathmandu's Indo-Chinese kitchens climbed the trail too. Chilli chicken tastes better with a view of Ama Dablam.",
+    dish: "chilli-chicken",
+    link: { href: "/menu#cat-indo-chinese", label: "Indo-Chinese" },
+    temp: 7,
+    o2: 65,
+    t: 0.3,
+  },
+  {
+    id: "basecamp",
+    name: "Everest Base Camp",
+    alt: 5364,
+    title: "Dal bhat power, 24 hour.",
+    body: "The meal that climbs Everest: rice, lentils, tarkari, achar, and refills until you say stop. It's on our menu every day.",
+    dish: "dal-bhat-veg",
+    link: { href: "/menu#cat-nepali-mains", label: "Thali & mains" },
+    temp: -5,
+    o2: 53,
+    t: 0.42,
+  },
+  {
+    id: "icefall",
+    name: "Khumbu Icefall",
+    alt: 5500,
+    title: "The dangerous part.",
+    body: "Ladders over crevasses. Our equivalent is spice level four: laphing, cold noodles with chilli oil. Go carefully.",
+    dish: "laphing",
+    link: { href: "/menu#cat-noodles-soups", label: "Try the laphing" },
+    temp: -10,
+    o2: 52,
+    t: 0.5,
+  },
+  {
+    id: "camp1",
+    name: "Camp I",
+    alt: 6065,
+    title: "Warmth from the clay oven.",
+    body: "At six thousand metres you want anything hot. The tandoor runs all night: tikka, tandoori chicken, naan off the wall.",
+    dish: "chicken-tandoori",
+    link: { href: "/menu#cat-tandoor-curries", label: "Tandoor & curries" },
+    temp: -15,
+    o2: 49,
+    t: 0.58,
+  },
+  {
+    id: "camp2",
+    name: "Camp II",
+    alt: 6400,
+    title: "Carb up.",
+    body: "Advanced base camp is for eating. Biryani, garlic naan, rice. Nobody at Camp II has ever regretted a second naan.",
+    dish: "goat-biryani",
+    link: { href: "/menu#cat-rice-breads", label: "Rice & breads" },
+    temp: -18,
+    o2: 47,
+    t: 0.66,
+  },
+  {
+    id: "camp3",
+    name: "Camp III",
+    alt: 7200,
+    title: "Something sweet on the Lhotse Face.",
+    body: "Juju dhau, the king curd of Bhaktapur, set in a clay pot. Sugar is fuel up here.",
+    dish: "juju-dhau",
+    link: { href: "/menu#cat-desserts", label: "Desserts" },
+    temp: -24,
+    o2: 42,
+    t: 0.75,
+  },
+  {
+    id: "camp4",
+    name: "South Col",
+    alt: 7950,
+    title: "Chiya on the col.",
+    body: "Last camp before the summit push. The stove hisses, the masala chiya is sweet and very hot. Refills are on us.",
+    dish: "masala-chiya",
+    link: { href: "/menu#cat-chiya-soft", label: "Chiya & soft drinks" },
+    temp: -27,
+    o2: 38,
+    t: 0.84,
+  },
+  {
+    id: "hillary",
+    name: "Hillary Step",
+    alt: 8790,
+    title: "One last step: the bar.",
+    body: "Brown-butter rum, timur-pepper margaritas and Nepali lagers under a sky full of stars. Open late on weekends.",
+    dish: "yak-and-yeti",
+    link: { href: "/bar", label: "Step into the bar" },
+    temp: -30,
+    o2: 34,
+    t: 0.93,
+  },
+  {
+    id: "summit",
+    name: "Summit",
+    alt: 8848.86,
+    title: "You made it. Now eat.",
+    body: "Pickup in about twenty minutes, delivery around Harrisonburg and JMU, or a table by the lamps.",
+    dish: "momo-platter",
+    link: { href: "/menu", label: "Order now" },
+    temp: -32,
+    o2: 33,
+    t: 1,
+  },
+];
