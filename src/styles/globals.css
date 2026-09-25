@@ -2267,3 +2267,179 @@ body:has(.whiteout) header nav {
   transform: none;
   filter: none;
 }
+
+/* ============================================================================================
+   Ambient life: singing-bowl ripples, sound toggle, page-edge climber, avalanche egg
+   ========================================================================================== */
+.bowl-ripple {
+  position: fixed;
+  z-index: 70;
+  width: 0;
+  height: 0;
+  pointer-events: none;
+}
+.bowl-ripple i {
+  position: absolute;
+  left: -90px;
+  top: -90px;
+  width: 180px;
+  height: 180px;
+  border-radius: 50%;
+  border: 1px solid rgba(220, 191, 123, 0.55);
+  box-shadow: 0 0 18px rgba(220, 191, 123, 0.12), inset 0 0 12px rgba(220, 191, 123, 0.08);
+  transform: scale(0.05);
+  opacity: 0;
+  animation: bowl-ring 1.9s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+.bowl-ripple i:nth-child(2) {
+  animation-delay: 0.16s;
+  border-color: rgba(242, 226, 182, 0.4);
+}
+.bowl-ripple i:nth-child(3) {
+  animation-delay: 0.34s;
+  border-color: rgba(182, 158, 112, 0.3);
+}
+@keyframes bowl-ring {
+  0% {
+    transform: scale(0.05);
+    opacity: 0.9;
+  }
+  100% {
+    transform: scale(1.35);
+    opacity: 0;
+  }
+}
+
+.sound-toggle .sound-wave {
+  opacity: 0;
+  transform: translateY(2px);
+  transition:
+    opacity 0.4s var(--ease),
+    transform 0.4s var(--ease);
+}
+.sound-toggle.is-on .sound-wave {
+  opacity: 1;
+  transform: none;
+  animation: sound-wave 2.4s ease-in-out infinite;
+}
+@keyframes sound-wave {
+  50% {
+    opacity: 0.45;
+    transform: translateY(-1px);
+  }
+}
+
+.scroll-climber-flag {
+  opacity: 0;
+  transform-origin: 1px 18px;
+  transform: translate(-1px, -100%) scaleY(0);
+  transition:
+    opacity 0.3s,
+    transform 0.6s var(--ease-bounce, cubic-bezier(0.34, 1.56, 0.64, 1));
+}
+.scroll-climber.at-top .scroll-climber-flag {
+  opacity: 1;
+  transform: translate(-1px, -100%) scaleY(1);
+}
+
+html.quake body {
+  animation: quake 0.8s cubic-bezier(0.36, 0.07, 0.19, 0.97) both;
+}
+@keyframes quake {
+  10%,
+  90% {
+    transform: translate3d(-1px, 0, 0);
+  }
+  20%,
+  80% {
+    transform: translate3d(2px, 1px, 0);
+  }
+  30%,
+  50%,
+  70% {
+    transform: translate3d(-3px, -1px, 0);
+  }
+  40%,
+  60% {
+    transform: translate3d(3px, 1px, 0);
+  }
+}
+
+.avalanche-cloud i {
+  position: absolute;
+  top: -60vh;
+  width: 90vmax;
+  height: 70vh;
+  border-radius: 50%;
+  background: radial-gradient(closest-side, rgba(242, 233, 207, 0.55), rgba(230, 224, 214, 0.18) 60%, transparent);
+  filter: blur(24px);
+  animation: powder 3.6s cubic-bezier(0.3, 0.1, 0.3, 1) forwards;
+}
+.avalanche-cloud i:nth-child(1) {
+  left: 30%;
+}
+.avalanche-cloud i:nth-child(2) {
+  left: -20%;
+  animation-delay: 0.25s;
+}
+.avalanche-cloud i:nth-child(3) {
+  left: 55%;
+  animation-delay: 0.45s;
+  height: 55vh;
+}
+.avalanche-cloud i:nth-child(4) {
+  left: 5%;
+  animation-delay: 0.7s;
+  height: 50vh;
+}
+@keyframes powder {
+  0% {
+    transform: translate3d(8vw, 0, 0) scale(0.8);
+    opacity: 0;
+  }
+  25% {
+    opacity: 1;
+  }
+  100% {
+    transform: translate3d(-10vw, 150vh, 0) scale(1.4);
+    opacity: 0;
+  }
+}
+
+.yeti-step {
+  transform-box: fill-box;
+  transform-origin: center;
+  fill: rgba(230, 224, 214, 0.5);
+  stroke: rgba(242, 233, 207, 0.55);
+  stroke-width: 1;
+  opacity: 0;
+  animation: yeti-step 7s ease-out forwards;
+}
+@keyframes yeti-step {
+  0% {
+    opacity: 0;
+    transform: scale(0.6);
+  }
+  4% {
+    opacity: 1;
+    transform: scale(1.06);
+  }
+  8% {
+    transform: none;
+  }
+  70% {
+    opacity: 0.9;
+  }
+  100% {
+    opacity: 0;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .avalanche-cloud {
+    display: none;
+  }
+  .yeti-step {
+    animation-duration: 6s;
+  }
+}

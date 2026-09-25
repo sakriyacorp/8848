@@ -38,9 +38,11 @@ export function MountainScene({ className, phase: forced, parallax = true, arc =
   const [sky, setSky] = useState<Sky | null>(null);
 
   useEffect(() => {
-    const s = skyAt(new Date());
+    // skyTime off → always the golden-hour plate
+    const s = isOn("skyTime") ? skyAt(new Date()) : { ...skyAt(new Date()), phase: "golden" as SkyPhase };
     setSky(s);
     onSky?.(s);
+    if (!isOn("skyTime")) return;
     const id = setInterval(() => setSky(skyAt(new Date())), 5 * 60_000);
     return () => clearInterval(id);
   }, [onSky]);

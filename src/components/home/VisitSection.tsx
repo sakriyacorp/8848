@@ -5,12 +5,17 @@ import { SplitHeading, Reveal } from "@/components/fx/Reveal";
 import { StreetMap } from "@/components/layout/StreetMap";
 import { HoursTable } from "@/components/visit/HoursTable";
 import { LiveStatus } from "@/components/visit/LiveStatus";
+import { PrayerFlags } from "@/components/setpieces/PrayerFlags";
+import { Snow } from "@/components/setpieces/Snow";
+import { isOn } from "@/config/features";
 
 /* Base camp, for real: address, today's hours, the map, and a table. */
 export function VisitSection() {
   return (
     <section id="visit" aria-labelledby="visit-title" className="relative overflow-hidden bg-night py-24 md:py-32">
       <div aria-hidden="true" className="lamp-glow -right-24 top-10 h-[420px] w-[420px]" />
+      {isOn("snow") && <Snow density={0.4} wind={0.25} avalanche />}
+      {isOn("prayerFlags") && <PrayerFlags className="top-0" height={110} />}
       <div className="container-x relative grid gap-12 lg:grid-cols-[1fr_1.05fr] lg:gap-16">
         <div>
           <Reveal as="p" className="eyebrow text-brass">

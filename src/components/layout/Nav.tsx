@@ -13,6 +13,8 @@ import { formatWhole } from "@/lib/format";
 import { Logo } from "@/components/brand/Logo";
 import { TrekPack } from "@/components/icons/Icons";
 import { ButterLamp } from "@/components/setpieces/ButterLamp";
+import { SoundToggle } from "@/components/setpieces/SoundToggle";
+import { isOn } from "@/config/features";
 import { useLiquidGlass } from "@/components/fx/useLiquidGlass";
 import { useNavLens } from "@/components/layout/useNavLens";
 
@@ -213,9 +215,12 @@ export function Nav() {
             Call
           </a>
         </div>
-        <p className="mt-6 flex items-center gap-2 text-[13px] text-muted">
-          <ButterLamp lit={!!st?.open} size={14} /> {st?.line ?? ""}
-        </p>
+        <div className="mt-6 flex items-center justify-between gap-4">
+          <p className="flex items-center gap-2 text-[13px] text-muted">
+            <ButterLamp lit={!!st?.open} size={14} /> {st?.line ?? ""}
+          </p>
+          {isOn("sound") && <SoundToggle className="shrink-0" />}
+        </div>
       </div>
     </>
   );

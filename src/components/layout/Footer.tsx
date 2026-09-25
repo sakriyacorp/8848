@@ -8,6 +8,7 @@ import { StreetMap } from "@/components/layout/StreetMap";
 import { HoursTable } from "@/components/visit/HoursTable";
 import { FooterHorizon } from "@/components/setpieces/FooterHorizon";
 import { FooterStatus } from "@/components/layout/FooterStatus";
+import { SoundToggle } from "@/components/setpieces/SoundToggle";
 
 export function Footer() {
   return (
@@ -97,6 +98,7 @@ export function Footer() {
           <p>
             © 2026 {site.legalName} · {site.fullName} · {fullAddress}
           </p>
+          {isOn("sound") && <SoundToggle className="-my-1 self-start py-1 md:self-auto" />}
           <p className="caps text-[10px] tracking-[0.3em] text-brass/80">
             Base camp 405 m · Summit {EVEREST.metres.toLocaleString("en-US", { minimumFractionDigits: 2 })} m
           </p>

@@ -8,6 +8,7 @@ import { RouteMap } from "@/components/setpieces/RouteMap";
 import { Counter } from "@/components/setpieces/Counter";
 import { LampLight } from "@/components/setpieces/LampLight";
 import { StoryExtras } from "@/components/story/StoryExtras";
+import { PrayerFlags } from "@/components/setpieces/PrayerFlags";
 
 export const metadata: Metadata = {
   title: "Our story",
@@ -64,8 +65,9 @@ export default function StoryPage() {
         </div>
       </section>
 
-      <section className="paper relative py-20 md:py-28" aria-label="Chapters">
-        <div className="container-x grid gap-16 md:gap-24">
+      <section className="paper relative pb-20 pt-28 md:pb-28 md:pt-36" aria-label="Chapters">
+        {isOn("prayerFlags") && <PrayerFlags className="top-0" height={110} tone="paper" />}
+        <div className="container-x relative grid gap-16 md:gap-24">
           {CHAPTERS.map((c, i) => (
             <article key={c.title} className="grid gap-6 md:grid-cols-[0.8fr_1.2fr] md:gap-12">
               <Reveal>

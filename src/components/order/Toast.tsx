@@ -4,7 +4,7 @@ import { useEffect } from "react";
 import { AnimatePresence, motion } from "motion/react";
 import { useBag } from "@/lib/bag";
 import { useUI } from "@/lib/ui";
-import { TrekPack } from "@/components/icons/Icons";
+import { Peak, TrekPack } from "@/components/icons/Icons";
 
 export function Toast() {
   const toast = useUI((s) => s.toast);
@@ -24,7 +24,11 @@ export function Toast() {
   }, [toast, dismiss]);
 
   return (
-    <div aria-live="polite" aria-atomic="true" className="pointer-events-none fixed inset-x-0 bottom-5 z-[80] flex justify-center px-4">
+    <div
+      aria-live="polite"
+      aria-atomic="true"
+      className="pointer-events-none fixed inset-x-0 bottom-5 z-[80] flex justify-center px-4"
+    >
       <AnimatePresence>
         {toast && (
           <motion.div
@@ -36,9 +40,13 @@ export function Toast() {
             className="glass pointer-events-auto flex max-w-[calc(100vw-32px)] items-center gap-3 rounded-full py-2 pl-3 pr-2 text-[14px] text-text [--glass-base:rgba(20,14,10,0.94)]"
           >
             <span className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-brass/15 text-brass-hi">
-              <TrekPack size={16} />
+              {toast.plain ? <Peak size={16} /> : <TrekPack size={16} />}
             </span>
-            <span className="truncate">{toast.message}</span>
+            <span
+              className={toast.plain ? "py-1 pr-3 leading-snug" : "truncate"}
+            >
+              {toast.message}
+            </span>
             {toast.undo && (
               <button
                 type="button"
@@ -51,16 +59,18 @@ export function Toast() {
                 Undo
               </button>
             )}
-            <button
-              type="button"
-              onClick={() => {
-                openDrawer();
-                dismiss();
-              }}
-              className="shrink-0 rounded-full bg-brass/15 px-3.5 py-1.5 text-[13px] font-medium text-brass-hi transition-colors hover:bg-brass/25"
-            >
-              View
-            </button>
+            {!toast.plain && (
+              <button
+                type="button"
+                onClick={() => {
+                  openDrawer();
+                  dismiss();
+                }}
+                className="shrink-0 rounded-full bg-brass/15 px-3.5 py-1.5 text-[13px] font-medium text-brass-hi transition-colors hover:bg-brass/25"
+              >
+                View
+              </button>
+            )}
           </motion.div>
         )}
       </AnimatePresence>

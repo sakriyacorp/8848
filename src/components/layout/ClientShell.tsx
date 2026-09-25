@@ -8,6 +8,7 @@ import { useBag } from "@/lib/bag";
    shortly after paint, so they never compete with the hero. The bag rehydrates immediately so
    the pack badge is right on load. */
 const Overlays = dynamic(() => import("@/components/order/Overlays").then((m) => m.Overlays), { ssr: false });
+const Ambient = dynamic(() => import("@/components/layout/Ambient").then((m) => m.Ambient), { ssr: false });
 
 const WAKE = ["pointerdown", "keydown", "touchstart", "scroll"] as const;
 
@@ -28,5 +29,10 @@ export function ClientShell({ available }: { available: string[] }) {
     };
   }, []);
 
-  return ready ? <Overlays available={available} /> : null;
+  return ready ? (
+    <>
+      <Overlays available={available} />
+      <Ambient />
+    </>
+  ) : null;
 }

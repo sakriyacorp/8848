@@ -453,6 +453,10 @@ export default function Ascent3D({ dishes, onFail }: { dishes: Record<string, Cl
         setFinale(fOn);
       }
       if (altRef.current) altRef.current.textContent = Math.round(fin > 0.05 ? 8848.86 : alt).toLocaleString("en-US");
+      // the browser tab climbs too (AltitudeTitle)
+      const tab = window as unknown as { __8848alt: number; __8848altAt: number };
+      tab.__8848alt = fin > 0.05 ? 8849 : alt;
+      tab.__8848altAt = performance.now();
       if (fin > 0.05 && altRef.current) altRef.current.textContent = "8,848.86";
       if (placeRef.current) placeRef.current.textContent = WAYPOINTS[Math.round(i + local)]?.name ?? "";
       const wi = Math.min(N - 2, i);

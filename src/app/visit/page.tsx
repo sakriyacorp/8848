@@ -9,6 +9,8 @@ import { LiveStatus } from "@/components/visit/LiveStatus";
 import { Reservation } from "@/components/visit/Reservation";
 import { TwinClocks } from "@/components/setpieces/TwinClocks";
 import { LampLight } from "@/components/setpieces/LampLight";
+import { PrayerFlags } from "@/components/setpieces/PrayerFlags";
+import { Snow } from "@/components/setpieces/Snow";
 
 export const metadata: Metadata = {
   title: "Visit & reservations",
@@ -27,6 +29,7 @@ export default function VisitPage() {
     <div className="relative">
       <section className="relative overflow-hidden pb-16 pt-32 md:pt-40">
         {isOn("lampLight") && <LampLight />}
+        {isOn("snow") && <Snow density={0.5} wind={0.3} avalanche />}
         <div className="container-x relative grid gap-12 lg:grid-cols-[1fr_1fr] lg:items-end">
           <div>
             <Reveal as="p" className="eyebrow text-brass">
@@ -70,7 +73,8 @@ export default function VisitPage() {
       )}
 
       <section id="reserve" aria-labelledby="reserve-title" className="relative scroll-mt-24 py-20 md:py-28">
-        <div className="container-x">
+        {isOn("prayerFlags") && <PrayerFlags className="top-0" height={100} tilt={-0.06} />}
+        <div className="container-x relative">
           <Reveal as="p" className="eyebrow text-brass">
             Reservations
           </Reveal>

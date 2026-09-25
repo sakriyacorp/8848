@@ -1,5 +1,6 @@
 import Image from "next/image";
 import { cn } from "@/lib/cn";
+import { isOn } from "@/config/features";
 import { getDishImage } from "@/lib/dish-path";
 import type { MenuItem } from "@/lib/menu";
 
@@ -25,7 +26,7 @@ export function DishImage({ item, available, sizes, alt = "", priority, classNam
         <DishIllustration kind={kindOf(item.category)} />
       )}
       <span aria-hidden="true" className="dish-vignette" />
-      {steam && <Steam />}
+      {steam && isOn("steam") && <Steam />}
     </div>
   );
 }

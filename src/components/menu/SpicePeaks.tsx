@@ -1,5 +1,6 @@
 import { cn } from "@/lib/cn";
 import type { Spice, Tag } from "@/lib/menu";
+import { isOn } from "@/config/features";
 
 const LABEL = ["No heat", "Gentle", "Warm", "Hot", "Very hot", "Himalayan hot"];
 
@@ -7,6 +8,8 @@ const LABEL = ["No heat", "Gentle", "Warm", "Hot", "Very hot", "Himalayan hot"];
    card (see .heat in globals.css). Plain-HTML twin: spicePeaksHtml() in DishCard. */
 export function SpicePeaks({ level, tone = "paper", className }: { level: Spice; tone?: "paper" | "dark"; className?: string }) {
   if (level === 0) return null;
+  // flag off: the same information as plain words
+  if (!isOn("spicePeaks")) return <span className={cn("caps text-[10px]", tone === "dark" ? "text-lamp" : "text-bronze", className)}>{LABEL[level]}</span>;
   return (
     <span role="img" aria-label={`Spice: ${LABEL[level]}`} className={cn("spice-peaks inline-flex items-end gap-[2px]", `tone-${tone}`, className)}>
       {[1, 2, 3, 4, 5].map((n) => (

@@ -73,6 +73,7 @@ export function Effects() {
     const decay = () => {
       v *= 0.92;
       root.style.setProperty("--scroll-v", v.toFixed(3));
+      (window as unknown as { __scrollV: number }).__scrollV = v;
       vraf = Math.abs(v) > 0.002 ? requestAnimationFrame(decay) : 0;
     };
     const onScroll = () => {

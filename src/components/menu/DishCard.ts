@@ -1,4 +1,5 @@
 import { formatPrice } from "@/lib/format";
+import { isOn } from "@/config/features";
 import { getDishImage } from "@/lib/dish-path";
 import { hasSpiceControl, type MenuItem, type Tag } from "@/lib/menu";
 
@@ -18,6 +19,7 @@ const SPICE_LABEL = ["No heat", "Gentle", "Warm", "Hot", "Very hot", "Himalayan 
 
 function peaksHtml(level: number): string {
   if (!level) return "";
+  if (!isOn("spicePeaks")) return `<span class="caps text-[10px] text-bronze">${SPICE_LABEL[level]}</span>`;
   const peaks = [1, 2, 3, 4, 5]
     .map((n) => `<svg viewBox="0 0 10 8" width="11" height="9" aria-hidden="true"${n <= level ? ' class="lit"' : ""}><path d="M0.5 7.5 5 0.8l4.5 6.7Z"/></svg>`)
     .join("");
@@ -41,7 +43,7 @@ function dietHtml(tags: Tag[]): string {
 
 function imageHtml(item: MenuItem, available: boolean): string {
   const cls = "dish-photo relative h-[92px] w-[92px] shrink-0 overflow-hidden rounded-[16px] bg-walnut-deep md:h-auto md:w-full md:aspect-[4/3] md:rounded-[18px]";
-  const steam = '<span class="steam" aria-hidden="true"><i></i><i></i><i></i></span>';
+  const steam = isOn("steam") ? '<span class="steam" aria-hidden="true"><i></i><i></i><i></i></span>' : "";
   if (!available) {
     return `<div class="${cls}" data-photo><div class="dish-fallback absolute inset-0" data-kind="${item.category}"></div><span class="dish-vignette"></span>${steam}</div>`;
   }
@@ -65,7 +67,7 @@ export function dishCardHtml(item: MenuItem, available: boolean): string {
       : "";
   const np = item.np ? `<p lang="ne" class="np mt-0.5 text-[13px] text-bronze/80">${escapeHtml(item.np)}</p>` : "";
   return (
-    `<article data-item="${item.id}" data-name="${name}" data-spiceable="${hasSpiceControl(item) ? "1" : ""}" data-spice="${item.spice}" data-search="${search}" data-tags="${item.tags.join(" ")}" class="dish-card @container group relative flex items-start gap-4 rounded-[22px] p-2.5 transition-[transform,background-color,box-shadow] duration-500 ease-out md:block md:p-3 md:hover:-translate-y-1${item.spice >= 3 ? " heat" : ""}">` +
+    `<article data-item="${item.id}" data-name="${name}" data-spiceable="${hasSpiceControl(item) ? "1" : ""}" data-spice="${item.spice}" data-search="${search}" data-tags="${item.tags.join(" ")}" class="dish-card @container group relative flex items-start gap-4 rounded-[22px] p-2.5 transition-[transform,background-color,box-shadow] duration-500 ease-out md:block md:p-3 md:hover:-translate-y-1${item.spice >= 3 && isOn("spicePeaks") ? " heat" : ""}">` +
     `<button type="button" data-action="open" aria-label="${name}, ${price}. Details" class="absolute inset-0 z-[1] rounded-[22px]"></button>` +
     imageHtml(item, available) +
     `<div class="min-w-0 flex-1 pr-11 md:mt-3.5 md:pr-0">` +
