@@ -1,5 +1,5 @@
 import type { Metadata, Viewport } from "next";
-import { Cinzel, Cormorant, Jost } from "next/font/google";
+import { Cinzel, Cormorant, Jost, Noto_Serif_Devanagari } from "next/font/google";
 import "@/styles/globals.css";
 import { site } from "@/config/site";
 import { SITE_URL } from "@/lib/site-url";
@@ -34,6 +34,17 @@ const jost = Jost({
   display: "swap",
 });
 
+const devanagari = Noto_Serif_Devanagari({
+  subsets: ["devanagari"],
+  weight: ["500"],
+  variable: "--font-np",
+  display: "swap",
+  preload: false,
+});
+
+const INTRO_GATE =
+  "try{if(localStorage.getItem('8848-intro-seen')||matchMedia('(prefers-reduced-motion: reduce)').matches)document.documentElement.classList.add('intro-seen')}catch(e){}";
+
 const TITLE = `${site.fullName} · Harrisonburg, VA`;
 
 export const metadata: Metadata = {
@@ -60,8 +71,10 @@ export const viewport: Viewport = {
 
 export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
   return (
-    <html lang="en" className={cn(cormorant.variable, cinzel.variable, jost.variable)}>
+    <html lang="en" className={cn(cormorant.variable, cinzel.variable, jost.variable, devanagari.variable)} suppressHydrationWarning>
       <body>
+        {/* Before first paint: skip the intro on return visits and for reduced motion. */}
+        <script dangerouslySetInnerHTML={{ __html: INTRO_GATE }} />
         <a
           href="#main"
           className="sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-[100] focus:rounded-full focus:bg-brass focus:px-4 focus:py-2 focus:text-choc"

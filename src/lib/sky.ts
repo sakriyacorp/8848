@@ -47,7 +47,17 @@ export type Sky = {
   sunset: Date;
 };
 
+/* ?sky=dawn|day|golden|dusk|night pins the sky, for demos and screenshots. */
+function override(): SkyPhase | null {
+  if (typeof window === "undefined") return null;
+  const v = new URLSearchParams(window.location.search).get("sky");
+  return v === "dawn" || v === "day" || v === "golden" || v === "dusk" || v === "night" ? v : null;
+}
+
+const DEMO_T: Record<SkyPhase, number> = { dawn: 0.02, day: 0.45, golden: 0.9, dusk: 0.08, night: 0.55 };
+
 export function skyAt(now: Date, where: { lat: number; lng: number } = HARRISONBURG): Sky {
+  const forced = override();
   const l = toLocal(now);
   const { sunrise, sunset } = sunTimesUTC(l.y, l.m, l.d, where.lat, where.lng);
   const t = now.getTime();
@@ -56,17 +66,18 @@ export function skyAt(now: Date, where: { lat: number; lng: number } = HARRISONB
   const min = 60_000;
 
   let phase: SkyPhase;
-  if (t < rise - 50 * min || t > set + 45 * min) phase = "night";
+  if (forced) phase = forced;
+  else if (t < rise - 50 * min || t > set + 45 * min) phase = "night";
   else if (t < rise + 35 * min) phase = "dawn";
   else if (t > set) phase = "dusk";
   else if (t > set - 80 * min) phase = "golden";
   else phase = "day";
 
-  const sun = Math.max(0, Math.min(1, (t - rise) / (set - rise)));
+  const sun = forced ? DEMO_T[forced] : Math.max(0, Math.min(1, (t - rise) / (set - rise)));
   // Night runs sunset → next sunrise (~ previous sunset if we're before dawn).
   const nightLen = 24 * 60 * min - (set - rise);
   const sinceSet = t > set ? t - set : t - (set - 24 * 60 * min);
-  const moon = Math.max(0, Math.min(1, sinceSet / nightLen));
+  const moon = forced ? DEMO_T[forced] : Math.max(0, Math.min(1, sinceSet / nightLen));
 
   const synodic = 29.530588853;
   const ref = Date.UTC(2000, 0, 6, 18, 14);
@@ -87,7 +98,7 @@ export function skyAt(now: Date, where: { lat: number; lng: number } = HARRISONB
 
 /* Sky gradients per phase: zenith → mid → horizon, plus the light the mountains catch. */
 export const SKY_COLORS: Record<SkyPhase, { top: string; mid: string; low: string; rim: string; haze: string; stars: number }> = {
-  night: { top: "#07060a", mid: "#110d10", low: "#2a1d18", rim: "#6b5a44", haze: "rgba(238,211,165,0.06)", stars: 1 },
+  night: { top: "#08070a", mid: "#15110f", low: "#35271d", rim: "#cfc2a6", haze: "rgba(238,211,165,0.08)", stars: 1 },
   dawn: { top: "#1b1618", mid: "#4a3a33", low: "#c79a6c", rim: "#f0cf9c", haze: "rgba(240,190,140,0.22)", stars: 0.25 },
   day: { top: "#3b3a3a", mid: "#8a7e6e", low: "#d9c8a6", rim: "#f6ead0", haze: "rgba(246,234,208,0.25)", stars: 0 },
   golden: { top: "#241a14", mid: "#6e4a2c", low: "#e0a866", rim: "#ffd79a", haze: "rgba(255,200,130,0.28)", stars: 0.05 },

@@ -28,7 +28,7 @@ export function Footer() {
             <Logo variant="lockup" material="brass" className="w-[210px] md:w-[240px]" />
             <p className="mt-6 max-w-[34ch] text-[15px] leading-relaxed text-muted">
               Momos, thukpa and dal bhat, Indo-Chinese fire and a full bar, {Math.round(7760).toLocaleString("en-US")} miles from{" "}
-              <span lang="ne" className="text-brass-hi">
+              <span lang="ne" className="np text-brass-hi">
                 {EVEREST.nepali}
               </span>
               .
