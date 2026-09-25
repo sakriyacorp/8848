@@ -7,6 +7,7 @@ import { MenuClient } from "@/components/menu/MenuClient";
 import { OrderModeBar } from "@/components/menu/OrderModeBar";
 import { SplitHeading } from "@/components/fx/Reveal";
 import { MenuExtras } from "@/components/menu/MenuExtras";
+import { MomoCounter } from "@/components/setpieces/MomoCounter";
 
 export const metadata: Metadata = {
   title: "Menu",
@@ -36,6 +37,7 @@ export default function MenuPage() {
           <p className="mt-5 max-w-[52ch] text-[16px] leading-relaxed text-text/80 md:text-[17px]">
             From Kathmandu to the summit: momos first, the bar at the top. Pleated by hand, fired in the wok, baked in the tandoor. Tap a dish for spice and notes, or tap + to pack it.
           </p>
+          {isOn("momoCounter") && <MomoCounter className="mt-4" />}
           <OrderModeBar />
         </div>
       </header>

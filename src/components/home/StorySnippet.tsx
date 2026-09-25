@@ -36,7 +36,7 @@ export function StorySnippet() {
             { v: <Counter to={EVEREST.metres} decimals={2} />, u: "metres", l: "Sagarmatha, summit" },
             { v: <Counter to={EVEREST.feet} decimals={1} />, u: "feet", l: "the same, in feet" },
             { v: <Counter to={7752} />, u: "miles", l: "Kathmandu → Reservoir St" },
-            { v: <Counter to={40} duration={1.4} />, u: "pleats", l: "on a proper momo, give or take" },
+            { v: <Counter to={18} duration={1.4} />, u: "pleats", l: "on every momo we fold" },
           ].map((s, i) => (
             <div key={i} className="bg-night/95 p-5 md:p-7">
               <p className="display text-[clamp(1.9rem,4.4vw,3rem)] leading-none text-brass-hi">{s.v}</p>
