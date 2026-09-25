@@ -18,3 +18,10 @@ Choices made without asking, per PROMPT.md §10. Newest at the bottom.
    says plainly that it's a demo. Keeps the mock honest and avoids a fake credential form.
 8. **Confirmation route is `/order/permit?id=…`** (search param, not a dynamic segment) so the whole
    site can be statically exported.
+
+## 9. Performance: no layout reads in render loops, no root CSS-var writes, pause off-screen CSS animation
+Profiling home at 390px with 4× CPU throttle showed ~70% of main-thread time in forced style/layout. Three causes, three rules:
+- **Render loops never ask the DOM where things are.** `lib/section-track.ts` measures a section's page offsets once (and on resize) and answers progress/rects from `scrollY`. Used by the hero, ascent, globe, footer horizon, snow, lamp light and prayer flags. Canvas sizes are cached in `size()`; the ascent's leader-line card box is re-measured only for a few frames after the camp changes. DOM text in the altimeter is written only when it changes.
+- **Nothing writes CSS variables on `<html>` per frame.** The old pointer (`--mx/--my`) and scroll-velocity (`--scroll-v`) variables had no consumers and restyled the whole document every frame; scroll velocity now lives on `window.__scrollV` only.
+- **Off-screen sections pause their CSS animations.** `Effects.tsx` observes every `main section` and the footer and adds `.anim-paused` (→ `animation-play-state: paused`) when they leave the viewport. Twinkle keyframes for HTML stars use plain numbers (no `var()`) so the compositor can run them.
+Result at 390px/4× throttle (software rendering): menu 100–200 ms → 8–32 ms per frame, postcards 400 → 26 ms, story/visit mostly < 40 ms. Remaining home cost is software-rendered WebGL/clip-path, which a real GPU absorbs.

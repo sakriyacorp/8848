@@ -239,9 +239,12 @@ export default function Everest3D({ dishes }: { dishes: Record<string, PairDish>
     canvas.addEventListener("wheel", wheel, { passive: false });
     canvas.addEventListener("keydown", key);
 
+    const view = { w: 1, h: 1 };
     const size = () => {
       const w = box.clientWidth;
       const h = box.clientHeight;
+      view.w = w;
+      view.h = h;
       renderer.setSize(w, h, false);
       camera.aspect = w / h;
       camera.updateProjectionMatrix();
@@ -301,9 +304,9 @@ export default function Everest3D({ dishes }: { dishes: Record<string, PairDish>
 
       renderer.render(scene, camera);
 
-      // pin the HTML hotspots
-      const w = box.clientWidth;
-      const h = box.clientHeight;
+      // pin the HTML hotspots (sizes cached by size(); no layout reads per frame)
+      const w = view.w;
+      const h = view.h;
       HOTSPOTS.forEach((hs, i) => {
         const b = spotRefs.current[i];
         if (!b) return;

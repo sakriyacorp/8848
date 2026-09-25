@@ -14,7 +14,7 @@ const DRINKS = ["yak-and-yeti", "timur-margarita", "sagarmatha-old-fashioned"];
 export function BarTeaser() {
   const available = new Set(availableDishImages());
   const drinks = picks(DRINKS);
-  const field = stars(90, 21, 100, 60);
+  const field = stars(64, 21, 100, 60);
   return (
     <section id="bar" aria-labelledby="bar-title" className="relative isolate overflow-hidden bg-[#08070a] py-24 md:py-36">
       <div aria-hidden="true" className="absolute inset-x-0 bottom-0 h-[55%] opacity-70 md:h-[70%]">
@@ -24,8 +24,8 @@ export function BarTeaser() {
         {field.map((s, i) => (
           <span
             key={i}
-            className="bar-star absolute rounded-full bg-brass-hi"
-            style={{ left: `${s.x}%`, top: `${s.y}%`, width: s.r * 1.4, height: s.r * 1.4, opacity: s.o, ["--o" as string]: s.o, animationDelay: `${s.d}s` }}
+            className="bar-star absolute rounded-full"
+            style={{ left: `${s.x}%`, top: `${s.y}%`, width: s.r * 1.4, height: s.r * 1.4, background: `rgba(242,233,207,${s.o.toFixed(2)})`, animationDelay: `${s.d}s` }}
           />
         ))}
       </div>

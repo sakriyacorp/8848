@@ -17,10 +17,9 @@ import { ARC_PATH } from "@/components/brand/Logo";
 type HeroLink = { __plaque?: { nf: number; zoom: number } };
 
 const VIEW = { x: 70, y: 36, w: 1780, h: 1634 };
-const SIZE = 1024;
 const ASPECT = 1.04; // face height / width
 
-function buildMask(): HTMLCanvasElement {
+function buildMask(SIZE: number): HTMLCanvasElement {
   const c = document.createElement("canvas");
   c.width = c.height = SIZE;
   const g = c.getContext("2d")!;
@@ -40,6 +39,7 @@ function buildMask(): HTMLCanvasElement {
   // R: the mark (arc + peaks)
   g.fillStyle = g.strokeStyle = "rgb(255,0,0)";
   g.lineWidth = 23;
+  g.lineJoin = "round";
   g.stroke(new Path2D(ARC_PATH));
   g.save();
   g.beginPath();
@@ -67,6 +67,7 @@ void main() {
 const frag = /* glsl */ `
 precision highp float;
 uniform sampler2D uMask;
+uniform sampler2D uBlur;
 uniform vec2 uRes;
 uniform vec3 uLight;
 uniform float uNum;
@@ -80,8 +81,12 @@ float noise(vec2 p) {
   f = f * f * (3.0 - 2.0 * f);
   return mix(mix(hash(i), hash(i + vec2(1, 0)), f.x), mix(hash(i + vec2(0, 1)), hash(i + vec2(1, 1)), f.x), f.y);
 }
-float engr(vec2 uv, float lod) {
-  vec4 m = texture2D(uMask, uv, lod);
+float engr(vec2 uv) {
+  vec4 m = texture2D(uMask, uv);
+  return clamp(m.r + m.g * uNum, 0.0, 1.0);
+}
+float engrSoft(vec2 uv) {
+  vec4 m = texture2D(uBlur, uv);
   return clamp(m.r + m.g * uNum, 0.0, 1.0);
 }
 
@@ -89,13 +94,12 @@ void main() {
   vec2 uv = vUv;
   float px = 1.0 / uRes.x;
 
-  // engraving: crisp for colour, blurred (mip bias) for the bevelled walls
-  float inside = smoothstep(0.3, 0.7, engr(uv, 0.0));
+  // engraving: crisp for colour, a pre-blurred copy for the bevelled walls
+  float inside = smoothstep(0.3, 0.7, engr(uv));
   float d = 1.6 * px;
-  float lod = 1.4;
-  float ex = engr(uv + vec2(d, 0.0), lod) - engr(uv - vec2(d, 0.0), lod);
-  float ey = engr(uv + vec2(0.0, d), lod) - engr(uv - vec2(0.0, d), lod);
-  vec3 N = normalize(vec3(ex * 1.6, ey * 1.6, 1.0));
+  float ex = engrSoft(uv + vec2(d, 0.0)) - engrSoft(uv - vec2(d, 0.0));
+  float ey = engrSoft(uv + vec2(0.0, d)) - engrSoft(uv - vec2(0.0, d));
+  vec3 N = normalize(vec3(ex * 3.2, ey * 3.2, 1.0));
 
   // brushing: fine horizontal grooves in both the normal and the albedo
   float b1 = noise(vec2(uv.x * 5.0, uv.y * 950.0));
@@ -165,14 +169,31 @@ export default function PlaqueGL() {
     renderer.outputColorSpace = THREE.LinearSRGBColorSpace;
     renderer.setPixelRatio(Math.min(devicePixelRatio || 1, phone ? 1.5 : 2));
 
-    const tex = new THREE.CanvasTexture(buildMask());
-    tex.generateMipmaps = true;
-    tex.minFilter = THREE.LinearMipmapLinearFilter;
-    tex.magFilter = THREE.LinearFilter;
-    tex.anisotropy = 4;
+    // no mipmaps anywhere (some drivers hand back an empty mip chain): a crisp mask, and a soft
+    // copy made by drawing it down to a quarter size, which bilinear sampling then smooths
+    // mask resolution close to the drawn size, so the crisp lookup doesn't alias without mips
+    const drawn = canvas.clientWidth * renderer.getPixelRatio();
+    const SIZE = drawn > 620 ? 1024 : 512;
+    const mask = buildMask(SIZE);
+    const soft = document.createElement("canvas");
+    soft.width = soft.height = SIZE / 4;
+    const sg = soft.getContext("2d")!;
+    sg.imageSmoothingEnabled = true;
+    sg.imageSmoothingQuality = "high";
+    sg.drawImage(mask, 0, 0, soft.width, soft.height);
+    const mk = (c: HTMLCanvasElement) => {
+      const t = new THREE.CanvasTexture(c);
+      t.generateMipmaps = false;
+      t.minFilter = THREE.LinearFilter;
+      t.magFilter = THREE.LinearFilter;
+      return t;
+    };
+    const tex = mk(mask);
+    const blur = mk(soft);
 
     const uniforms = {
       uMask: { value: tex },
+      uBlur: { value: blur },
       uRes: { value: new THREE.Vector2(1, 1) },
       uLight: { value: new THREE.Vector3(0.62, 0.72, 0.8) },
       uNum: { value: 1 },
@@ -263,6 +284,7 @@ export default function PlaqueGL() {
       face.classList.remove("gl-on");
       face.style.removeProperty("--gl");
       tex.dispose();
+      blur.dispose();
       mat.dispose();
       geo.dispose();
       renderer.dispose();

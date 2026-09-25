@@ -7,6 +7,7 @@ import { EVEREST, site } from "@/config/site";
 import { isOn } from "@/config/features";
 import { ARC, PEAKS_BOX } from "@/components/brand/logo-paths";
 import { needsTiltPermission, requestTilt } from "@/lib/tilt";
+import { trackSection } from "@/lib/section-track";
 import { useStatus } from "@/lib/use-status";
 import type { Sky } from "@/lib/sky";
 import { Plaque } from "@/components/home/Plaque";
@@ -93,14 +94,13 @@ export function Hero() {
       frame();
     };
 
+    const track = trackSection(sec);
     let last = -1;
     let raf = 0;
     let summitShown = false;
     const frame = () => {
       raf = 0;
-      const rect = sec.getBoundingClientRect();
-      const total = rect.height - innerHeight;
-      const p = clamp(-rect.top / total);
+      const p = track.progress();
       if (Math.abs(p - last) < 0.0005 && last >= 0) return;
       last = p;
 
@@ -161,6 +161,7 @@ export function Hero() {
     // fonts/images can shift the plaque after first paint
     const t = setTimeout(measure, 600);
     return () => {
+      track.dispose();
       ro.disconnect();
       removeEventListener("scroll", onScroll);
       cancelAnimationFrame(raf);

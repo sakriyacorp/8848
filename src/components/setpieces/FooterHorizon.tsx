@@ -4,6 +4,7 @@ import { useEffect, useMemo, useRef, useState } from "react";
 import { ridgePath, stars } from "@/lib/ridge";
 import { skyAt } from "@/lib/sky";
 import { isOn } from "@/config/features";
+import { trackSection } from "@/lib/section-track";
 
 const W = 1440;
 const H = 360;
@@ -41,9 +42,10 @@ export function FooterHorizon() {
     if (matchMedia("(prefers-reduced-motion: reduce)").matches) return;
     let raf = 0;
     let visible = false;
+    const track = trackSection(el);
     const tick = () => {
       raf = 0;
-      const r = el.getBoundingClientRect();
+      const r = track.rect();
       const p = Math.max(0, Math.min(1, 1 - (r.top + r.height * 0.2) / innerHeight));
       el.style.setProperty("--fp", p.toFixed(3));
     };
@@ -57,6 +59,7 @@ export function FooterHorizon() {
     io.observe(el);
     addEventListener("scroll", onScroll, { passive: true });
     return () => {
+      track.dispose();
       io.disconnect();
       removeEventListener("scroll", onScroll);
       cancelAnimationFrame(raf);

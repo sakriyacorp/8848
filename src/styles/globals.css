@@ -1844,8 +1844,18 @@ html:not(.intro-seen) .hero-in {
   --glass-base: rgba(23, 17, 13, 0.55);
 }
 
+/* plain-number keyframes (no var()) so the compositor can run these, not the main thread */
 .bar-star {
-  animation: twinkle 4.8s ease-in-out infinite;
+  animation: twinkle-c 4.8s ease-in-out infinite;
+}
+@keyframes twinkle-c {
+  0%,
+  100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.25;
+  }
 }
 
 .sig-card {
@@ -3018,4 +3028,14 @@ html.quake body {
 }
 .plaque-face.gl-on::after {
   display: none;
+}
+
+/* Off-screen sections (Effects.tsx) stop ticking their CSS animations. */
+.anim-paused,
+.anim-paused *,
+.anim-paused *::before,
+.anim-paused *::after,
+.anim-paused::before,
+.anim-paused::after {
+  animation-play-state: paused !important;
 }

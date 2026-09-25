@@ -5,40 +5,44 @@ import { useEffect } from "react";
 
 /* Page-level effects (sakriya Effects.tsx, re-lit for 8848):
    - [data-tilt] cards tilt toward the pointer with a warm glare
-   - --mx/--my/--mxp/--myp on <html>: the pointer (or finger) position for lamp-light layers
-   - scroll velocity on <html> as --scroll-v, consumed by wind-driven pieces (prayer flags) */
+   - scroll velocity as window.__scrollV, read by the wind-driven pieces (prayer flags, snow,
+     polaroids). Deliberately not a CSS variable on <html>: writing one every frame restyles the
+     whole document.
+   - off-screen sections get .anim-paused, which pauses every CSS animation inside them, so
+     twinkling stars and flickering lamps three screens away cost nothing */
 export function Effects() {
   const pathname = usePathname();
 
   useEffect(() => {
     const reduceMotion = matchMedia("(prefers-reduced-motion: reduce)").matches;
     const finePointer = matchMedia("(hover: hover) and (pointer: fine)").matches;
-    const root = document.documentElement;
     const cleanups: Array<() => void> = [];
 
-    /* ---------- pointer → CSS vars ---------- */
-    let praf = 0;
-    let px = innerWidth / 2;
-    let py = innerHeight * 0.4;
-    const paint = () => {
-      praf = 0;
-      root.style.setProperty("--mx", `${px}px`);
-      root.style.setProperty("--my", `${py}px`);
-      root.style.setProperty("--mxp", (px / innerWidth).toFixed(3));
-      root.style.setProperty("--myp", (py / innerHeight).toFixed(3));
-    };
-    const onPointer = (e: PointerEvent) => {
-      px = e.clientX;
-      py = e.clientY;
-      if (!praf) praf = requestAnimationFrame(paint);
-    };
-    addEventListener("pointermove", onPointer, { passive: true });
-    addEventListener("pointerdown", onPointer, { passive: true });
-    paint();
+    /* ---------- pause CSS animations off-screen ---------- */
+    const pauser = new IntersectionObserver(
+      (entries) => entries.forEach((e) => e.target.classList.toggle("anim-paused", !e.isIntersecting)),
+      { rootMargin: "120px 0px" },
+    );
+    const watched = new WeakSet<Element>();
+    const watch = () =>
+      document.querySelectorAll("main section, footer, [data-pause-offscreen]").forEach((el) => {
+        if (watched.has(el)) return;
+        watched.add(el);
+        pauser.observe(el);
+      });
+    watch();
+    // lazily mounted scenes (globe, 3D sections) arrive later
+    let mraf = 0;
+    const mo = new MutationObserver(() => {
+      if (!mraf) mraf = requestAnimationFrame(() => ((mraf = 0), watch()));
+    });
+    const main = document.querySelector("main");
+    if (main) mo.observe(main, { childList: true, subtree: true });
     cleanups.push(() => {
-      removeEventListener("pointermove", onPointer);
-      removeEventListener("pointerdown", onPointer);
-      cancelAnimationFrame(praf);
+      pauser.disconnect();
+      mo.disconnect();
+      cancelAnimationFrame(mraf);
+      document.querySelectorAll(".anim-paused").forEach((el) => el.classList.remove("anim-paused"));
     });
 
     /* ---------- card tilt + glare ---------- */
@@ -72,7 +76,6 @@ export function Effects() {
     let vraf = 0;
     const decay = () => {
       v *= 0.92;
-      root.style.setProperty("--scroll-v", v.toFixed(3));
       (window as unknown as { __scrollV: number }).__scrollV = v;
       vraf = Math.abs(v) > 0.002 ? requestAnimationFrame(decay) : 0;
     };

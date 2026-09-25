@@ -2,6 +2,7 @@
 
 import { useEffect, useRef } from "react";
 import { cn } from "@/lib/cn";
+import { trackSection } from "@/lib/section-track";
 
 /* Lung-ta prayer flags on a sagging string. The string is an analytic sag curve that sways; every
    flag is verlet cloth — a small grid of particles sewn to the string — blown by a wind that rises with how fast you scroll (and gusts
@@ -259,8 +260,9 @@ export function PrayerFlags({ className, height = 130, tilt = 0.08, tone = "dark
     });
     io.observe(canvas);
 
+    const track = trackSection(canvas);
     const move = (e: PointerEvent) => {
-      const r = canvas.getBoundingClientRect();
+      const r = track.rect();
       const x = e.clientX - r.left;
       const y = e.clientY - r.top;
       if (y < -40 || y > r.height + 40) return;
@@ -277,6 +279,7 @@ export function PrayerFlags({ className, height = 130, tilt = 0.08, tone = "dark
       ro.disconnect();
       io.disconnect();
       removeEventListener("pointermove", move);
+      track.dispose();
     };
   }, [tilt, tone]);
 

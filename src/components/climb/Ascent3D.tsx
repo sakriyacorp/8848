@@ -3,6 +3,7 @@
 import Link from "next/link";
 import { useEffect, useRef, useState } from "react";
 import * as THREE from "three";
+import { trackSection } from "@/lib/section-track";
 import { ArrowRight, Plus } from "lucide-react";
 import { cn } from "@/lib/cn";
 import { formatPrice } from "@/lib/format";
@@ -327,15 +328,29 @@ export default function Ascent3D({ dishes, onFail }: { dishes: Record<string, Cl
     let finaleOn = false;
     const t0 = performance.now();
 
+    // scroll position from cached offsets: no layout reads inside the render loop
+    const track = trackSection(sec);
     const readScroll = () => {
-      const r = sec.getBoundingClientRect();
-      const total = r.height - innerHeight;
-      target = clamp(-r.top / total);
+      target = track.progress();
     };
+    // DOM text only when it actually changes (every write would invalidate layout)
+    const said = new WeakMap<HTMLElement, string>();
+    const say = (el: HTMLElement | null, v: string) => {
+      if (!el || said.get(el) === v) return;
+      said.set(el, v);
+      el.textContent = v;
+    };
+    // the card's box (relative to the stage) is measured when the camp changes, not per frame
+    let cardBox: { x: number; y: number } | null = null;
+    let cardMeasure = 0;
+    const view = { w: 1, h: 1 };
 
     const size = () => {
+      cardMeasure = 6;
       const w = canvas.clientWidth;
       const h = canvas.clientHeight;
+      view.w = w;
+      view.h = h;
       renderer.setSize(w, h, false);
       camera.aspect = w / h;
       camera.fov = w < h ? 64 : 52;
@@ -444,6 +459,7 @@ export default function Ascent3D({ dishes, onFail }: { dishes: Record<string, Cl
       const near = local < 0.42 ? i : local > 0.58 ? i + 1 : null;
       const act = fin > 0.08 ? null : near;
       if (act !== lastActive) {
+        cardMeasure = 24;
         lastActive = act;
         setActive(act);
       }
@@ -452,16 +468,15 @@ export default function Ascent3D({ dishes, onFail }: { dishes: Record<string, Cl
         finaleOn = fOn;
         setFinale(fOn);
       }
-      if (altRef.current) altRef.current.textContent = Math.round(fin > 0.05 ? 8848.86 : alt).toLocaleString("en-US");
+      say(altRef.current, fin > 0.05 ? "8,848.86" : Math.round(alt).toLocaleString("en-US"));
       // the browser tab climbs too (AltitudeTitle)
       const tab = window as unknown as { __8848alt: number; __8848altAt: number };
       tab.__8848alt = fin > 0.05 ? 8849 : alt;
       tab.__8848altAt = performance.now();
-      if (fin > 0.05 && altRef.current) altRef.current.textContent = "8,848.86";
-      if (placeRef.current) placeRef.current.textContent = WAYPOINTS[Math.round(i + local)]?.name ?? "";
+      say(placeRef.current, WAYPOINTS[Math.round(i + local)]?.name ?? "");
       const wi = Math.min(N - 2, i);
-      if (tempRef.current) tempRef.current.textContent = String(Math.round(lerp(WAYPOINTS[wi].temp, WAYPOINTS[wi + 1].temp, local)));
-      if (o2Ref.current) o2Ref.current.textContent = String(Math.round(lerp(WAYPOINTS[wi].o2, WAYPOINTS[wi + 1].o2, local)));
+      say(tempRef.current, String(Math.round(lerp(WAYPOINTS[wi].temp, WAYPOINTS[wi + 1].temp, local))));
+      say(o2Ref.current, String(Math.round(lerp(WAYPOINTS[wi].o2, WAYPOINTS[wi + 1].o2, local))));
       if (needleRef.current) needleRef.current.style.transform = `rotate(${-120 + (alt / 8848.86) * 240}deg)`;
       if (frostRef.current) frostRef.current.style.opacity = String(clamp((alt - 6900) / 1700) * 0.7 * (1 - fin * 0.6));
       if (whiteRef.current) whiteRef.current.style.opacity = String(inCloud * 0.6);
@@ -470,18 +485,23 @@ export default function Ascent3D({ dishes, onFail }: { dishes: Record<string, Cl
       // pin the card to its camp
       if (act !== null && pinRef.current) {
         tmp.copy(routePts[act]).add(new THREE.Vector3(0, 0.45, 0)).project(camera);
-        const w = canvas.clientWidth;
-        const h = canvas.clientHeight;
+        const w = view.w;
+        const h = view.h;
         const x = (tmp.x * 0.5 + 0.5) * w;
         const y = (-tmp.y * 0.5 + 0.5) * h;
         const onScreen = tmp.z < 1 && x > -40 && x < w + 40 && y > -40 && y < h + 40;
         pinRef.current.style.transform = `translate3d(${x.toFixed(1)}px, ${y.toFixed(1)}px, 0)`;
         pinRef.current.style.opacity = onScreen ? "1" : "0";
-        const card = cardRef.current?.getBoundingClientRect();
-        const stage = canvas.getBoundingClientRect();
-        if (card && leaderRef.current) {
-          const cx = card.left - stage.left + (phone ? card.width / 2 : 0);
-          const cy = phone ? card.top - stage.top : card.top - stage.top + 40;
+        // re-measure the card for a few frames after the camp changes (its content re-renders)
+        if (cardMeasure > 0 || !cardBox) {
+          cardMeasure = Math.max(0, cardMeasure - 1);
+          const card = cardRef.current?.getBoundingClientRect();
+          const stage = canvas.getBoundingClientRect();
+          cardBox = card ? { x: card.left - stage.left + (phone ? card.width / 2 : 0), y: phone ? card.top - stage.top : card.top - stage.top + 40 } : null;
+        }
+        if (cardBox && leaderRef.current) {
+          const cx = cardBox.x;
+          const cy = cardBox.y;
           leaderRef.current.setAttribute("x1", x.toFixed(1));
           leaderRef.current.setAttribute("y1", y.toFixed(1));
           leaderRef.current.setAttribute("x2", cx.toFixed(1));
@@ -524,6 +544,7 @@ export default function Ascent3D({ dishes, onFail }: { dishes: Record<string, Cl
       cancelAnimationFrame(raf);
       io.disconnect();
       ro.disconnect();
+      track.dispose();
       canvas.removeEventListener("webglcontextlost", lost);
       scene.traverse((o) => {
         const m = o as THREE.Mesh;

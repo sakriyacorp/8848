@@ -2,6 +2,7 @@
 
 import { useEffect, useRef } from "react";
 import { cn } from "@/lib/cn";
+import { trackSection } from "@/lib/section-track";
 
 /* Snow on a canvas. Flakes drift with a little wind and sway; the cursor or a finger pushes them
    aside. `blizzard` turns it into a sideways whiteout for the 404. Pauses off-screen; reduced
@@ -122,8 +123,9 @@ export function Snow({ className, density = 1, wind = 0.3, blizzard = false, int
     const ro = new ResizeObserver(resize);
     ro.observe(canvas);
 
+    const track = trackSection(canvas);
     const move = (e: PointerEvent) => {
-      const r = canvas.getBoundingClientRect();
+      const r = track.rect();
       pointer.x = e.clientX - r.left;
       pointer.y = e.clientY - r.top;
       pointer.active = true;
@@ -151,6 +153,7 @@ export function Snow({ className, density = 1, wind = 0.3, blizzard = false, int
     if (avalanche) addEventListener("8848:avalanche", burst);
 
     return () => {
+      track.dispose();
       io.disconnect();
       ro.disconnect();
       cancelAnimationFrame(raf);

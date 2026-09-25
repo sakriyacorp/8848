@@ -5,6 +5,7 @@ import * as THREE from "three";
 import { cn } from "@/lib/cn";
 import { LAND_MASK, MASK_W, MASK_H } from "@/lib/landmask";
 import { EVEREST, HARRISONBURG, KATHMANDU } from "@/config/site";
+import { trackSection } from "@/lib/section-track";
 
 /* ★ Flagship 3 — sakriya's globe, re-cast in brass on walnut and scripted by scroll:
      0.00–0.28  spin to the Himalayas; Everest pulses
@@ -301,6 +302,7 @@ export default function Globe() {
     ro.observe(canvas);
     size();
 
+    const track = trackSection(sec);
     let raf = 0;
     let visible = false;
     let last = performance.now();
@@ -313,8 +315,7 @@ export default function Globe() {
       const dt = Math.min(0.05, (now - last) / 1000);
       last = now;
       const t = (now - t0) / 1000;
-      const r = sec.getBoundingClientRect();
-      const target = clamp(-r.top / (r.height - innerHeight));
+      const target = track.progress();
       p += (target - p) * (1 - Math.exp(-dt * 6));
 
       // scripted orientation
@@ -396,6 +397,7 @@ export default function Globe() {
       cancelAnimationFrame(raf);
       io.disconnect();
       ro.disconnect();
+      track.dispose();
       canvas.removeEventListener("pointerdown", down);
       canvas.removeEventListener("pointermove", move);
       canvas.removeEventListener("pointerup", up);

@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useMemo, useRef } from "react";
+import { trackSection } from "@/lib/section-track";
 
 /* Lamp-light spotlight: a warm glow follows the cursor (or finger) across a dark section and
    reveals topographic contour lines "engraved" into the walnut — invisible everywhere else. On
@@ -58,7 +59,7 @@ export function LampLight({ className }: { className?: string }) {
       raf = requestAnimationFrame(tick);
     };
     const onMove = (e: PointerEvent) => {
-      const r = el.getBoundingClientRect();
+      const r = track.rect();
       if (e.clientY < r.top || e.clientY > r.bottom) return;
       tx = (e.clientX - r.left) / r.width;
       ty = (e.clientY - r.top) / r.height;
@@ -69,9 +70,11 @@ export function LampLight({ className }: { className?: string }) {
       if (visible && !raf) raf = requestAnimationFrame(tick);
     });
     io.observe(el);
+    const track = trackSection(el);
     addEventListener("pointermove", onMove, { passive: true });
     addEventListener("pointerdown", onMove, { passive: true });
     return () => {
+      track.dispose();
       io.disconnect();
       cancelAnimationFrame(raf);
       removeEventListener("pointermove", onMove);
