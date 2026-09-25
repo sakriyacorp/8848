@@ -63,7 +63,7 @@ export default function MenuPage() {
                     <h2 id={`cat-${category.id}-title`} className="display mt-1.5 text-[34px] text-choc md:text-[42px]">
                       {category.name}
                       {category.np && (
-                        <span lang="ne" className="np ml-3 align-middle text-[17px] text-bronze/70 md:text-[20px]">
+                        <span lang="ne" className="np ml-3 align-middle text-[17px] text-bronze md:text-[20px]">
                           {category.np}
                         </span>
                       )}

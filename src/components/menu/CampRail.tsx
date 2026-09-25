@@ -74,7 +74,7 @@ export function CampRail({ camps, activeId, onSelect, climber = true }: { camps:
                       {c.camp} · {c.altitude.toLocaleString("en-US")} m
                     </span>
                   </span>
-                  <span className="num text-[11px] text-bronze/70">{c.count}</span>
+                  <span className="num text-[11px] text-bronze">{c.count}</span>
                 </a>
               </li>
             );
@@ -104,7 +104,7 @@ export function CampChips({ camps, activeId, onSelect, climber = true }: { camps
     <div className="paper sticky top-[68px] z-30 -mx-[var(--gutter)] mt-4 border-b border-ink-line px-[var(--gutter)] pb-2 pt-2.5 shadow-[0_10px_20px_-18px_rgba(59,37,23,.6)] md:top-[76px] lg:hidden">
       <div className="flex items-center gap-3">
         <p className="num caps shrink-0 text-[10px] leading-tight text-bronze" aria-live="polite">
-          <span className="block text-[8.5px] text-bronze/70">Alt.</span>
+          <span className="block text-[8.5px] text-bronze">Alt.</span>
           {active ? `${active.altitude.toLocaleString("en-US")} m` : ""}
         </p>
         <div ref={strip} role="tablist" aria-label="Menu camps" className="no-scrollbar flex gap-2 overflow-x-auto">

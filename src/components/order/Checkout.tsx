@@ -169,7 +169,7 @@ export function Checkout({ available }: { available: string[] }) {
 
   const inputClass = (name: FieldName) =>
     cn(
-      "mt-2 h-12 w-full rounded-2xl border bg-white/50 px-4 text-[16px] text-choc outline-none transition-[border-color,background] placeholder:text-bronze/60 focus:border-choc focus:bg-white/80",
+      "mt-2 h-12 w-full rounded-2xl border bg-white/50 px-4 text-[16px] text-choc outline-none transition-[border-color,background] placeholder:text-bronze/90 focus:border-choc focus:bg-white/80",
       show(name) ? "border-[#9a4a2c]" : "border-ink-line",
     );
   const radioClass = (on: boolean) =>
@@ -398,7 +398,7 @@ function Field({ id, label, hint, error, className, children }: { id: string; la
     <div className={className}>
       <label htmlFor={id} className="block text-[13px] font-medium text-bronze">
         {label}
-        {hint && <span className="font-normal text-bronze/70"> · {hint}</span>}
+        {hint && <span className="font-normal text-bronze"> · {hint}</span>}
       </label>
       {children}
       {error && (
@@ -435,7 +435,7 @@ function Select({ id, value, onChange, onBlur, options, placeholder, invalid, re
         className={cn(
           "mt-2 h-12 w-full appearance-none rounded-2xl border bg-white/50 px-4 pr-10 text-[16px] text-choc outline-none transition-colors focus:border-choc",
           invalid ? "border-[#9a4a2c]" : "border-ink-line",
-          !value && "text-bronze/70",
+          !value && "text-bronze",
         )}
       >
         {placeholder && (

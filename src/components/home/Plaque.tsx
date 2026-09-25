@@ -30,9 +30,20 @@ export const Plaque = forwardRef<HTMLDivElement, { className?: string; style?: C
         ok = !!document.createElement("canvas").getContext("webgl2");
       } catch {}
       if (!ok) return;
-      const io = new IntersectionObserver(([e]) => setGl(e.isIntersecting), { rootMargin: "30% 0px" });
-      io.observe(f);
-      return () => io.disconnect();
+      // wait for the page to settle (first paint, fonts, hydration) before pulling in three.js;
+      // the CSS plaque is already on screen and the GL face cross-fades over it
+      let io: IntersectionObserver | null = null;
+      const w = window as unknown as { requestIdleCallback?: (cb: () => void, o?: { timeout: number }) => number; cancelIdleCallback?: (h: number) => void };
+      const start = () => {
+        io = new IntersectionObserver(([e]) => setGl(e.isIntersecting), { rootMargin: "30% 0px" });
+        io.observe(f);
+      };
+      const h = w.requestIdleCallback ? w.requestIdleCallback(start, { timeout: 1800 }) : window.setTimeout(start, 900);
+      return () => {
+        if (w.cancelIdleCallback && w.requestIdleCallback) w.cancelIdleCallback(h);
+        else clearTimeout(h);
+        io?.disconnect();
+      };
     }, [interactive]);
 
     useEffect(() => {

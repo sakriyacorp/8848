@@ -28,3 +28,11 @@ checkout, reservations).
 | Private events capacity | `src/app/visit/page.tsx` → `FAQ` | "up to 60 people" |
 | Parking note | `src/components/home/VisitSection.tsx`, `src/app/visit/page.tsx` | "street parking + lot behind the building" |
 | Beer names | `data/menu.json` (bar) | Everest / Gorkha / Nepal Ice as placeholders for what's actually stocked |
+| Polaroid captions + backs | `src/components/setpieces/Polaroids.tsx` → `SNAPS` | dish photos with invented captions ("Opening night", "Asan Tole · 2014"…); swap in the family's own snapshots |
+| Momo counter | `src/components/setpieces/MomoCounter.tsx` | "≈ N momos pleated today" is an estimate from the kitchen clock (labelled "≈"); wire to real POS counts or switch `momoCounter` off |
+| Prayer-wheel fortunes | `src/components/menu/MenuExtras.tsx` → `ORACLE` | 8 dishes + invented fortunes |
+| Momo builder fillings | `src/components/setpieces/MomoBuilder.tsx` → `FILLINGS`, `STYLES` | chicken / veg / paneer & spinach / lamb × steamed / fried / kothey / jhol / chilli, flat $15 for 10 |
+| Thali explainer copy | `src/components/setpieces/Thali.tsx` → `PARTS` | general dal bhat notes; make it describe 8848's own thali |
+| Everest camp stories + dish pairings | `src/data/everest.ts`, `src/data/climb.ts` | written for the demo; facts are real, pairings are suggestions |
+| Shooting-star wishes | `src/components/setpieces/NightSky.tsx` → `WISHES` | playful lines, change freely |
+| Site URL (for OG/sitemap/JSON-LD) | env `NEXT_PUBLIC_SITE_URL` | falls back to http://localhost:3000; set it on Vercel |

@@ -25,3 +25,8 @@ Profiling home at 390px with 4× CPU throttle showed ~70% of main-thread time in
 - **Nothing writes CSS variables on `<html>` per frame.** The old pointer (`--mx/--my`) and scroll-velocity (`--scroll-v`) variables had no consumers and restyled the whole document every frame; scroll velocity now lives on `window.__scrollV` only.
 - **Off-screen sections pause their CSS animations.** `Effects.tsx` observes every `main section` and the footer and adds `.anim-paused` (→ `animation-play-state: paused`) when they leave the viewport. Twinkle keyframes for HTML stars use plain numbers (no `var()`) so the compositor can run them.
 Result at 390px/4× throttle (software rendering): menu 100–200 ms → 8–32 ms per frame, postcards 400 → 26 ms, story/visit mostly < 40 ms. Remaining home cost is software-rendered WebGL/clip-path, which a real GPU absorbs.
+
+## 10. Final: Lenis removed, contrast floor, three.js plaque waits for idle
+- Lenis was allowed but never used; native scroll plays better with the pinned 3D scenes, sticky stages and `overflow-x: clip`, so the dependency is gone.
+- Contrast: main tokens are 6–15:1 on their backgrounds. Translucent variants below 4.5:1 were raised (bar hint, Devanagari in menu headings, camp counts, checkout hints, the static climb's upcoming camps, input placeholders).
+- The hero's three.js plaque mounts on `requestIdleCallback` (1.8 s timeout) so three.js never competes with first paint; the CSS plaque is already on screen and the GL face cross-fades over it.

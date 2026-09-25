@@ -191,7 +191,7 @@ export function Reservation() {
         <div className="grid gap-4 sm:grid-cols-2">
           <label className="block">
             <span className="text-[13px] text-muted">Name on the plaque</span>
-            <input value={name} onChange={(e) => setName(e.target.value.slice(0, 40))} autoComplete="name" aria-invalid={!!nameErr} aria-describedby={nameErr ? "res-name-err" : undefined} className="mt-2 h-12 w-full rounded-2xl border border-line-strong bg-void/40 px-4 text-[16px] text-text outline-none transition-colors placeholder:text-muted/50 focus:border-foil/70" placeholder="Your name" />
+            <input value={name} onChange={(e) => setName(e.target.value.slice(0, 40))} autoComplete="name" aria-invalid={!!nameErr} aria-describedby={nameErr ? "res-name-err" : undefined} className="mt-2 h-12 w-full rounded-2xl border border-line-strong bg-void/40 px-4 text-[16px] text-text outline-none transition-colors placeholder:text-muted/85 focus:border-foil/70" placeholder="Your name" />
             {nameErr && (
               <span id="res-name-err" role="alert" className="mt-2 block text-[13px] text-brass-hi">
                 {nameErr}
@@ -200,7 +200,7 @@ export function Reservation() {
           </label>
           <label className="block">
             <span className="text-[13px] text-muted">Phone</span>
-            <input value={phone} onChange={(e) => setPhone(formatPhone(e.target.value))} type="tel" inputMode="tel" autoComplete="tel" aria-invalid={!!phoneErr} aria-describedby={phoneErr ? "res-phone-err" : undefined} className="num mt-2 h-12 w-full rounded-2xl border border-line-strong bg-void/40 px-4 text-[16px] text-text outline-none transition-colors placeholder:text-muted/50 focus:border-foil/70" placeholder="(540) 555-0100" />
+            <input value={phone} onChange={(e) => setPhone(formatPhone(e.target.value))} type="tel" inputMode="tel" autoComplete="tel" aria-invalid={!!phoneErr} aria-describedby={phoneErr ? "res-phone-err" : undefined} className="num mt-2 h-12 w-full rounded-2xl border border-line-strong bg-void/40 px-4 text-[16px] text-text outline-none transition-colors placeholder:text-muted/85 focus:border-foil/70" placeholder="(540) 555-0100" />
             {phoneErr && (
               <span id="res-phone-err" role="alert" className="mt-2 block text-[13px] text-brass-hi">
                 {phoneErr}

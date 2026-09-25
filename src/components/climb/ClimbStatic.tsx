@@ -61,7 +61,7 @@ export function ClimbStatic({ dishes }: { dishes: Record<string, ClimbDish> }) {
           <Altimeter alt={wp.alt} temp={wp.temp} o2={wp.o2} place={wp.name} progress={active / (WAYPOINTS.length - 1)} className="hidden lg:flex" />
           <ol className="mt-6 hidden space-y-2 pl-2 lg:block" aria-label="Camps">
             {WAYPOINTS.map((w, i) => (
-              <li key={w.id} className={cn("caps flex items-center gap-2 text-[9.5px] transition-colors duration-500", i === active ? "text-brass-hi" : i < active ? "text-brass/60" : "text-muted/40")}>
+              <li key={w.id} className={cn("caps flex items-center gap-2 text-[9.5px] transition-colors duration-500", i === active ? "text-brass-hi" : i < active ? "text-brass/90" : "text-muted/80")}>
                 <span className={cn("h-1.5 w-1.5 rotate-45 transition-colors", i <= active ? "bg-foil" : "bg-muted/30")} />
                 {w.name}
               </li>

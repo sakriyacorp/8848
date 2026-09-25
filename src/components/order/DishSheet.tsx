@@ -182,7 +182,7 @@ function SheetBody({ item, available, isDesktop, onHandle }: { item: MenuItem; a
               maxLength={NOTES_MAX}
               rows={2}
               placeholder="No cilantro, extra achar on the side…"
-              className="mt-2 w-full resize-none rounded-2xl border border-line-strong bg-void/40 p-3.5 text-[16px] text-text outline-none transition-colors placeholder:text-muted/60 focus:border-foil/60"
+              className="mt-2 w-full resize-none rounded-2xl border border-line-strong bg-void/40 p-3.5 text-[16px] text-text outline-none transition-colors placeholder:text-muted/85 focus:border-foil/60"
             />
             <span className="num mt-1 block text-right text-[12px] text-muted">
               {notes.length}/{NOTES_MAX}

@@ -173,7 +173,7 @@ export function MenuClient({ camps, children }: { camps: Camp[]; children: React
             onChange={(e) => setQuery(e.target.value)}
             placeholder="Search momo, thukpa, timur…"
             autoComplete="off"
-            className="h-12 w-full rounded-full border border-ink-line bg-white/45 pl-11 pr-10 text-[16px] text-choc outline-none transition-[border-color,background] placeholder:text-bronze/70 focus:border-bronze focus:bg-white/70 [&::-webkit-search-cancel-button]:hidden"
+            className="h-12 w-full rounded-full border border-ink-line bg-white/45 pl-11 pr-10 text-[16px] text-choc outline-none transition-[border-color,background] placeholder:text-bronze/90 focus:border-bronze focus:bg-white/70 [&::-webkit-search-cancel-button]:hidden"
           />
           {query && (
             <button

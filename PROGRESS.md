@@ -1,6 +1,89 @@
 # Progress
 
-(Summary for the morning goes at the top when the night is over.)
+## Good morning — the summary
+
+**8848 — Himalayan Fusion & Bar** is built end to end: seven routes (Home, Menu, Order + Summit Permit, The Bar, Story, Visit, 404), a working pickup/delivery ordering flow (no payment data, pay at the counter), a mock reservation, and **43 set-pieces** in `src/components/setpieces/`, every one behind its own flag in `src/config/features.ts`. Next.js 15 App Router, static (all routes ○), clean `npm run build`, no console errors on any page at 390 px or 1440 px.
+
+The look is the brass plaque photo: walnut and brushed brass, lamp-lit, cream lokta paper for reading, Cormorant / Cinzel / Jost with a Devanagari accent (सगरमाथा). The logo is a real traced SVG (`scripts/trace-logo.mjs`) with engraved, foil and brass treatments.
+
+### Show people these (in this order)
+
+1. **Home, first visit** — the logo draws itself on (arc, peaks rising, sun through the arc, numerals settling), then opens onto the room. *(Clear `8848-intro-seen` from localStorage to see it again.)*
+2. **The plaque** — a three.js brushed-brass plaque with the logo engraved in chocolate lacquer. Move the mouse (or tilt the phone after "Tilt to shine") and the lamp rakes across the brushing. **Scroll**: the numerals sink, the arc becomes a window, you're pulled through it onto Sagarmatha under tonight's real Harrisonburg sky. `?sky=dawn|day|golden|dusk|night` to pin the sky.
+3. **"A menu you climb"** (home) — the 3D ascent: 12 camps from Kathmandu to the summit, altimeter HUD, the sky turning from morning to a starry night, frost creeping in, sea of clouds and a planted flag at the top. The browser tab shows your altitude. Turn **sound on** (footer, or the phone menu) first: the wind thickens as you climb and a bowl rings at the summit.
+4. **Postcards** (home) — 20 testimonials as postcards in two lanes going opposite ways; tap one to hold it.
+5. **The globe** (home) — spins to Everest, flies the arc to Harrisonburg with the mileage ticking up to 7,752, lands with ripples, hands off to Visit.
+6. **Menu** — camps on an altitude rail, spice as tiny peaks, add-to-pack sends the dish flying into the trekking pack. Under the menu: **build a momo** (watch 18 pleats fold), **take a dal bhat thali apart**, **spin the prayer wheel** for a dish and a fortune.
+7. **Checkout → Summit permit** — the order comes back as a stamped Sagarmatha trekking permit with a flag planted on top.
+8. **The Bar** — night sky with shooting stars (**tap one to catch it** and get a wish), press-and-hold the sky for the constellation, tap a cocktail and watch it pour (tilt your phone to slosh it).
+9. **Story** — the route map inks itself on lokta paper, the polaroids swing on their string (tap to read the back), **turn Everest** in brass contour lines and fly to any camp, and **play the singing bowl** (circle the rim).
+10. **Visit** — brass-dial reservation that engraves your name on a plaque and stamps a passport; twin clocks for Harrisonburg and Everest.
+11. **Easter eggs** — type **8848** anywhere (or tap the logo 8×, or shake your phone) for an avalanche and yeti footprints; visit any wrong URL for the whiteout, then point at "Return to Base Camp" and watch the compass lock on.
+
+### Every set-piece, where it is, how to trigger it
+
+| Flag | Set-piece | Where | How |
+|---|---|---|---|
+| `ascent` ★ | Scroll-driven 3D ascent (`climb/Ascent3D.tsx`) | Home, "A menu you climb" | Scroll. `?climb=static` forces the SVG fallback |
+| `everest3d` ★ | Interactive brass-contour Everest (`setpieces/Everest3D.tsx`) | Story | Drag, arrows, tap a glowing camp; Brass / Snow toggle |
+| `globe` ★ | Brass globe, Kathmandu → Harrisonburg (`setpieces/Globe.tsx`) | Home, before Visit | Scroll; drag to spin |
+| `intro` | Logo draw-on intro (`Intro.tsx`) | Home, first visit | Automatic; skippable |
+| `plaque` | three.js plaque face (`PlaqueGL.tsx`) on the walnut stand | Home hero | Mouse / phone tilt; scroll pushes through the arc |
+| `skyTime` | Real-time Harrisonburg sky (`MountainScene.tsx`) | Home hero summit | Automatic; `?sky=` overrides |
+| `lampLight` | Lamp glow revealing engraved contours (`LampLight.tsx`) | Home story, Story, Visit heroes | Move the mouse / finger |
+| `prayerFlags` | Verlet-cloth prayer flags (`PrayerFlags.tsx`) | Home Visit, Visit reservations, Story chapters | Scroll fast for wind; push with the cursor |
+| `snow` | Interactive snow (`Snow.tsx`) | Home Visit, Visit hero | Move through it |
+| `ripples` | Singing-bowl ripples (`Ripples.tsx`) | Any dark area | Tap |
+| `sound` | Synthesized sound, off by default (`SoundToggle.tsx`, `lib/audio.ts`) | Footer, phone menu | Toggle, then climb / fly / stamp / pack |
+| `butterLamps` | Butter-lamp open/closed status (`ButterLamp.tsx`) | Nav, hero, footer | Lit = open, smoke = closed |
+| `climber` | Page-edge climber (`ScrollClimber.tsx`) | Right edge, wide screens | Scroll; click the ridge to jump |
+| `cloudWipe` | Cloud-wipe page transitions (`CloudWipe.tsx`) | Between routes | Click any internal link |
+| `mandalaLoader` | Brass mandala loader (`MandalaLoader.tsx`) | While 3D loads | Automatic |
+| `tilt` | Phone-tilt parallax (`MountainScene.tsx`, `lib/tilt.ts`) | Mountain layers | Tilt the phone ("Tilt to shine" on iOS) |
+| `haptics` | Light vibration | Add to pack, wheel, stars | Android phones |
+| `campRail` | Camps on an altitude rail + climber (`CampRail.tsx`) | Menu | Scroll / tap a camp |
+| `spicePeaks` | Spice as peaks + heat shimmer (`SpicePeaks.tsx`) | Menu cards, dish sheet | — |
+| `steam` | Steam off dish photos | Menu, thali, momo builder | Hover / tap |
+| `bagFlight` | Dish flies into the trekking pack (`FlightLayer.tsx`) | Everywhere you can add | Tap + |
+| `momoBuilder` | Momo builder (`MomoBuilder.tsx`) | Menu, bottom | Pick, "Pleat it", pack |
+| `thali` | Dal bhat thali explorer (`Thali.tsx`) | Menu, bottom | Tap / hover a katori |
+| `prayerWheel` | Prayer-wheel oracle (`PrayerWheel.tsx`) | Menu, bottom | Swipe left / Spin |
+| `permit` | Summit-permit confirmation + stamp (`Permit.tsx`) | After checkout | Place an order |
+| `packBar` | Mobile pack bar (`order/PackBar.tsx`) | Menu, phones | Add anything |
+| `sheetAltimeter` | "You are here" mountain (`layout/SheetAltimeter.tsx`) | Phone menu sheet | Open the menu |
+| `shareSummit` | Share your summit (`order/ShareSummit.tsx`) | Permit | Tap |
+| `nightSky` | Night sky + catchable shooting stars (`NightSky.tsx`) | The Bar | Tap a shooting star |
+| `constellation` | Stars join into the 8848 mark (`Constellation.tsx`) | The Bar hero | Press and hold (desktop) / "Align the stars" |
+| `cocktailPour` | Cocktail pour with tilt slosh (`bar/BarPours.tsx`) | The Bar | Tap a cocktail; tilt |
+| `routeMap` | Route map inking on lokta (`RouteMap.tsx`) | Story | Scroll |
+| `counters` | Counters (8,848.86 m, 29,031.7 ft, 7,752 mi) (`Counter.tsx`) | Home, Story | Scroll into view |
+| `postcards` | Postcard testimonial wall | Home | Auto-scrolls; tap to hold; hover pauses |
+| `polaroids` | Polaroids on a string (`Polaroids.tsx`) | Story | Scroll / cursor sways; tap flips |
+| `singingBowl` | Playable singing bowl (`SingingBowl.tsx`) | Story | Tap; circle the rim |
+| `twinClocks` | Harrisonburg / Everest twin clocks (`TwinClocks.tsx`) | Visit | — |
+| `reservation` | Brass-dial reservation + plaque + passport stamp | Visit | Book a table |
+| `footerHorizon` | Footer horizon (`FooterHorizon.tsx`) | Every page | Scroll to the bottom |
+| `momoCounter` | "≈ N momos pleated today" (`MomoCounter.tsx`) | Menu header | — |
+| `altitudeTitle` | Altitude in the browser tab (`AltitudeTitle.tsx`) | Home ascent | Climb; switch tabs for the other message |
+| `avalanche` | Avalanche + yeti footprints (`Avalanche.tsx`) | Anywhere | Type 8848, tap logo 8×, shake phone |
+| `blizzard404` | Whiteout 404 + compass that locks on (`Compass404.tsx`) | Any unknown URL | Point at / tab to the button |
+
+Own inventions (beyond the brief): the plaque-to-summit portal, altitude tab title, prayer-wheel oracle, momo counter, playable singing bowl, catchable shooting-star wishes, compass that finds the exit, the pack bar and "you are here" sheet mountain, the globe's live mileage, the constellation, twin clocks, the page-edge climber's summit flag, the permit's barcode + share.
+
+### Placeholders to replace
+
+Everything is listed in **`PLACEHOLDERS.md`**. The big ones: phone, email, hours, rating and socials (`src/config/site.ts`), the whole menu and prices (`data/menu.json`), the 20 testimonials and portraits, the story copy, polaroid captions, and Natraj's dish photos (`public/dishes/o-*.jpg`). Set `NEXT_PUBLIC_SITE_URL` when deploying.
+
+### Unfinished / worth knowing
+
+- **Performance** was profiled at 390 px with 4× CPU throttling in headless Chrome with *software* WebGL. Menu, Story, Visit and the Bar are comfortably smooth; the home page's 3D scenes are heavy in software rendering and should be checked on a real mid-range phone. Every 3D scene has a designed fallback (reduced motion, no WebGL2, or its flag off).
+- **Sound** is synthesized in the browser (no files); it is off by default and has only been verified by code and in headless Chrome, not by ear on speakers. Worth a listen before launch.
+- **Shake-to-avalanche and tilt** need a real phone to test (iOS asks for permission via "Tilt to shine").
+- **Lenis** (allowed by the brief) is not used: native scroll plays better with the pinned 3D scenes, sticky stages and `overflow-x: clip`, so the dependency was removed.
+- **No git remote** is configured, so nothing was pushed. Commits are local (`git log`).
+- Lighthouse wasn't run as a tool; instead: all routes static, three.js code-split and loaded only near its scene (the plaque waits for idle), images served through next/image as AVIF/WebP, first-load JS 103–168 kB.
+
+---
 
 ## Log
 - **M1 Foundation** — Next 15.5 + Tailwind v4 tokens (brass, foil, walnut, lokta paper, warm glass), Cormorant / Cinzel / Jost, `src/config/site.ts` + `features.ts` (40 flags), lib layer ported from Natraj (hours w/ bar, bag w/ tip, orders, JSON-LD), logo traced to layered SVG (`scripts/trace-logo.mjs`) with engraved/foil/brass materials + draw-on, nav with trekking-pack bag + butter-lamp status, footer with horizon + moon on the arc, street map, hours table. 98-item placeholder menu, 90 photos (46 Pexels picks reviewed on contact sheets). Build clean.

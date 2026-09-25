@@ -54,7 +54,7 @@ export default function BarPage() {
             <span>21+ with ID</span>
           </Reveal>
           {(isOn("constellation") || isOn("nightSky")) && (
-            <p className="caps mt-8 text-[10px] text-brass/70" aria-hidden="true">
+            <p className="caps mt-8 text-[10px] text-brass/90" aria-hidden="true">
               {isOn("constellation") && <span className="hidden md:inline">Press and hold the sky · </span>}
               {isOn("nightSky") && <span>Catch a shooting star</span>}
             </p>
