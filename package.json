@@ -13,7 +13,9 @@
     "images:fetch": "node --env-file=.env.local scripts/fetch-images.mjs",
     "images:optimize": "node scripts/optimize-images.mjs",
     "shots": "node scripts/screenshots.mjs",
-    "menu": "node scripts/menu-from-md.mjs"
+    "menu": "node scripts/menu-from-md.mjs",
+    "brand-kit": "node --experimental-strip-types scripts/export-brand-kit.mts handoff/8848-menu-kit/brand",
+    "print-menu": "node scripts/print-menu.mjs"
   },
   "dependencies": {
     "lucide-react": "^1.48.0",

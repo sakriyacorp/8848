@@ -34,7 +34,7 @@ Every route is statically generated. Deploy to Vercel (or any Next.js host) as i
 |---|---|
 | Business facts (address, phone, hours, rating, socials, tax) | `src/config/site.ts` — change them once, the whole site follows |
 | Set-piece on/off switches | `src/config/features.ts` — 43 flags; switching one off leaves the page complete |
-| Menu (98 placeholder items, 10 "camps") | `data/menu.json` |
+| Menu (owner's draft: 152 dishes and drinks, 14 "camps") | `data/menu-content.md` → `npm run menu` builds `data/menu.json`. Prices are placeholders |
 | Dish photos | `public/dishes/` (credits for stock photos in `data/photo-credits.json`) |
 | Testimonials | `src/data/testimonials.ts` |
 | Everything that's invented and needs replacing | [`PLACEHOLDERS.md`](PLACEHOLDERS.md) |
@@ -71,6 +71,9 @@ scripts/                logo tracing, icons, image fetch/optimize, screenshots
 | `npm run images:fetch` | Build-time only: pull extra dish photos from Pexels (needs `PEXELS_API_KEY` in `.env.local`) |
 | `npm run images:optimize` | Downscale photos in `public/` in place |
 | `npm run shots` | Playwright screenshots of every page at 390 and 1440 px (server on :3100) |
+| `npm run menu` | Rebuild `data/menu.json` from `data/menu-content.md` (edit the .md, not the json) |
+| `npm run brand-kit` | Export the logo (SVG + PNG, four materials), textures and palette for print into `handoff/` |
+| `npm run print-menu` | Typeset the printed food menu (4 pages) and drinks menu (2 pages), US Legal, into `handoff/print/` as PDF + PNG previews |
 
 ## Accessibility and motion
 
