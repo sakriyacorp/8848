@@ -21,11 +21,11 @@ type Recipe = {
 };
 
 const RECIPES: Record<string, Recipe> = {
-  "golden-hour": { glass: "coupe", layers: [{ color: "#c98b2c", to: 0.55, label: "Gin + turmeric-honey" }, { color: "#e3b34f", to: 0.82, label: "Lemon" }], foam: "#f6ecd2", garnish: "star" },
-  "timur-margarita": { glass: "coupe", layers: [{ color: "#d9d29a", to: 0.5, label: "Tequila + lime" }, { color: "#ece6b8", to: 0.84, label: "Timur-shaken" }], garnish: "salt" },
-  "rhododendron-spritz": { glass: "wine", layers: [{ color: "#9c3f3a", to: 0.3, label: "Rhododendron-hibiscus" }, { color: "#c9744f", to: 0.62, label: "Prosecco" }, { color: "#e5a26c", to: 0.8, label: "Soda" }], ice: 3, garnish: "flower" },
-  "yak-and-yeti": { glass: "rocks", layers: [{ color: "#5a2e12", to: 0.5, label: "Brown-butter rum" }, { color: "#8a4d22", to: 0.72, label: "Chiya syrup" }], foam: "#e9dcc0", ice: 1, garnish: "cinnamon" },
-  "sagarmatha-old-fashioned": { glass: "rocks", layers: [{ color: "#7b3c12", to: 0.4, label: "Bourbon" }, { color: "#a55a1e", to: 0.66, label: "Cardamom-demerara" }], ice: 1, garnish: "orange" },
+  "summit-cocktail": { glass: "coupe", layers: [{ color: "#e2d6b0", to: 0.5, label: "8848 Vodka + lychee" }, { color: "#efe4c2", to: 0.84, label: "Elderflower + sparkling wine" }], garnish: "star" },
+  "kathmandu-old-fashioned": { glass: "rocks", layers: [{ color: "#7b3c12", to: 0.4, label: "Old Durbar whisky" }, { color: "#a55a1e", to: 0.66, label: "Demerara + bitters" }], ice: 1, garnish: "orange" },
+  "khukri-mule": { glass: "rocks", layers: [{ color: "#8a4d22", to: 0.34, label: "Khukri rum" }, { color: "#d9b56b", to: 0.78, label: "Ginger beer + lime" }], ice: 3, garnish: "lime" },
+  "timmur-margarita": { glass: "coupe", layers: [{ color: "#d9d29a", to: 0.5, label: "Reposado + lime" }, { color: "#ece6b8", to: 0.84, label: "Orange liqueur + agave" }], garnish: "salt" },
+  "everest-garden": { glass: "wine", layers: [{ color: "#d4d6a8", to: 0.34, label: "Gin + elderflower" }, { color: "#ecd7b2", to: 0.62, label: "White peach + lime" }, { color: "#f3ead6", to: 0.8, label: "Cucumber + soda" }], ice: 3, garnish: "flower" },
 };
 
 const G = {

@@ -45,8 +45,8 @@ type Kind = "steamer" | "bowl" | "glass" | "plate";
 
 export function kindOf(category: string): Kind {
   if (category === "momo") return "steamer";
-  if (category === "bar" || category === "chiya-soft") return "glass";
-  if (category === "noodles-soups" || category === "nepali-mains" || category === "tandoor-curries") return "bowl";
+  if (category === "bar" || category === "drinks") return "glass";
+  if (category === "soups-salads" || category === "entrees" || category === "signatures" || category === "biryani") return "bowl";
   return "plate";
 }
 

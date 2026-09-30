@@ -122,7 +122,7 @@ export function Permit({ id }: { id: string | null }) {
                     <p className="text-[15px] text-choc">
                       <span className="num text-bronze">{l.qty}×</span> {l.name}
                     </p>
-                    {(l.spice || l.instructions) && <p className="text-[12.5px] text-bronze">{[l.spice, l.instructions].filter(Boolean).join(" · ")}</p>}
+                    {(l.option || l.spice || l.instructions) && <p className="text-[12.5px] text-bronze">{[l.option, l.spice, l.instructions].filter(Boolean).join(" · ")}</p>}
                   </div>
                   <span className="num shrink-0 text-[14.5px] text-choc">{formatMoney(l.lineTotal)}</span>
                 </li>

@@ -17,16 +17,16 @@ import { ButterLamp } from "@/components/setpieces/ButterLamp";
 
 export const metadata: Metadata = {
   title: "The Bar",
-  description: "Signature cocktails with timur pepper, rhododendron and brown-butter rum, Nepali lagers, wine and zero-proof pours. Open late on weekends in Harrisonburg.",
+  description: "Signature cocktails with timmur, lychee and Nepali whisky, Nepal's own spirits, wine, beer and zero-proof pours. Open late on weekends in Harrisonburg.",
 };
 
-const KIND_LABEL = { beer: "Lagers & local taps", wine: "Wine by the glass", zero: "Zero-proof", spirit: "Neat" } as const;
+const KIND_LABEL = { zero: "8848 Zero-proof", wine: "Wine · glass / bottle", beer: "Beer", spirit: "The spirit collection" } as const;
 
 export default function BarPage() {
   const available = new Set(availableDishImages());
   const bar = byCategory("bar");
   const cocktails = bar.filter((i) => i.kind === "cocktail");
-  const rest = (["beer", "wine", "zero", "spirit"] as const).map((k) => ({ k, items: bar.filter((i) => i.kind === k) }));
+  const rest = (["zero", "wine", "beer", "spirit"] as const).map((k) => ({ k, items: bar.filter((i) => i.kind === k) }));
 
   return (
     <div className="bar-page relative bg-[#07060a]">
@@ -44,7 +44,7 @@ export default function BarPage() {
           </Reveal>
           <SplitHeading as="h1" id="bar-title" text="The *bar.*" className="display mt-4 text-[clamp(4rem,16vw,11rem)] leading-[0.9] text-brass-hi" />
           <Reveal delay={0.15} as="p" className="mt-5 max-w-[42ch] text-[17px] leading-relaxed text-text/80">
-            Himalayan spice behind the bar, Nepali lagers in the fridge, and the stars out over the peaks. Stay for one more.
+            Himalayan spice behind the bar, Nepal&rsquo;s own whisky, rum and vodka on the shelf, and the stars out over the peaks. Stay for one more.
           </Reveal>
           <Reveal delay={0.25} className="mt-6 flex flex-wrap items-center gap-x-6 gap-y-2 text-[14px] text-muted">
             <span className="flex items-center gap-2">
@@ -69,8 +69,8 @@ export default function BarPage() {
           <Reveal as="p" className="eyebrow text-brass">
             Signature pours
           </Reveal>
-          <SplitHeading id="pours-title" text="Seven drinks with *altitude.*" className="display mt-4 max-w-[16ch] text-[clamp(2.5rem,6vw,4.6rem)] text-brass-hi" />
-          {isOn("cocktailPour") && <BarPours ids={["golden-hour", "timur-margarita", "rhododendron-spritz", "yak-and-yeti", "sagarmatha-old-fashioned"]} />}
+          <SplitHeading id="pours-title" text="Cocktails with *altitude.*" className="display mt-4 max-w-[16ch] text-[clamp(2.5rem,6vw,4.6rem)] text-brass-hi" />
+          {isOn("cocktailPour") && <BarPours ids={["summit-cocktail", "kathmandu-old-fashioned", "timmur-margarita", "khukri-mule", "everest-garden"]} />}
           <ul className="mt-12 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
             {cocktails.map((c, i) => (
               <Reveal as="li" key={c.id} delay={(i % 3) * 0.08} className="group glass flex gap-4 overflow-hidden rounded-[24px] p-3 [--glass-base:rgba(10,8,10,0.6)]">
@@ -81,6 +81,7 @@ export default function BarPage() {
                     <p className="num text-[15px] text-brass">{formatPrice(c.price)}</p>
                   </div>
                   <p className="mt-1.5 text-[14px] leading-snug text-muted">{c.desc}</p>
+                  {c.notes && <p className="display mt-1 text-[16px] italic text-brass">{c.notes}</p>}
                 </div>
               </Reveal>
             ))}
@@ -99,14 +100,16 @@ export default function BarPage() {
               <Reveal key={k} delay={gi * 0.06} className="rounded-[26px] border border-line bg-[linear-gradient(180deg,rgba(242,233,207,0.04),rgba(242,233,207,0.01))] p-6 md:p-8">
                 <p className="caps text-[10.5px] text-brass">{KIND_LABEL[k]}</p>
                 <ul className="mt-4 space-y-4">
-                  {items.map((i) => (
+                  {items.map((i, n) => (
                     <li key={i.id}>
+                      {i.group && i.group !== items[n - 1]?.group && k !== "zero" && <p className="caps mb-2 mt-6 text-[9.5px] text-brass/90 first:mt-0">{i.group}</p>}
                       <div className="flex items-baseline gap-2">
                         <span className="display text-[21px] text-brass-hi">{i.name}</span>
                         <span aria-hidden="true" className="mb-[6px] min-w-3 flex-1 border-b border-dotted border-brass/30" />
-                        <span className="num text-[15px] text-brass">{formatPrice(i.price)}</span>
+                        <span className="num shrink-0 text-[15px] text-brass">{i.priceLabel ?? formatPrice(i.price)}</span>
                       </div>
-                      <p className="mt-0.5 text-[14px] text-muted">{i.desc}</p>
+                      {i.desc && <p className="mt-0.5 text-[14px] text-muted">{i.desc}</p>}
+                      {i.notes && <p className="display text-[16px] italic text-brass/90">{i.notes}</p>}
                     </li>
                   ))}
                 </ul>
@@ -118,7 +121,7 @@ export default function BarPage() {
             <div>
               <p className="caps text-[10px] text-bronze">Base Camp Hour</p>
               <p className="display mt-1 text-[30px] leading-tight text-choc md:text-[36px]">Tue–Thu, 4–6 PM.</p>
-              <p className="mt-1 text-[15px] text-bronze">$2 off Nepali lagers, $10 steamed momos, half-price chiya. {/* PLACEHOLDER */}</p>
+              <p className="mt-1 text-[15px] text-bronze">$2 off draft beer, $10 steamed momo, half-price masala chiya. {/* PLACEHOLDER */}</p>
             </div>
             <div className="flex flex-wrap gap-3">
               <Link href="/visit#reserve" className="btn bg-choc px-6 py-3.5 text-[15px] text-brass-hi hover:-translate-y-0.5">

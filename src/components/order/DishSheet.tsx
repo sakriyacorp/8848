@@ -6,7 +6,7 @@ import { X } from "lucide-react";
 import { cn } from "@/lib/cn";
 import { formatMoney } from "@/lib/format";
 import { useFocusTrap, useMediaQuery, useScrollLock } from "@/lib/hooks";
-import { byId, categoryById, hasSpiceControl, SPICE_LEVELS, type MenuItem, type SpiceChoice } from "@/lib/menu";
+import { byId, categoryById, hasSpiceControl, SPICE_LEVELS, unitPrice, type MenuItem, type SpiceChoice } from "@/lib/menu";
 import { getDishImage } from "@/lib/dish-path";
 import { MAX_QTY } from "@/lib/bag";
 import { useUI } from "@/lib/ui";
@@ -85,6 +85,8 @@ export function DishSheet({ available }: { available: Set<string> }) {
 
 function SheetBody({ item, available, isDesktop, onHandle }: { item: MenuItem; available: boolean; isDesktop: boolean; onHandle(e: React.PointerEvent): void }) {
   const [spice, setSpice] = useState<SpiceChoice>(item.spice >= 3 ? "Hot" : "Medium");
+  const [option, setOption] = useState<string | undefined>(item.options?.values[0]?.name);
+  const each = unitPrice(item, option);
   const [qty, setQty] = useState(1);
   const [notes, setNotes] = useState("");
   const close = useUI((s) => s.closeSheet);
@@ -94,7 +96,7 @@ function SheetBody({ item, available, isDesktop, onHandle }: { item: MenuItem; a
   const flags = item.tags.filter((t) => t === "chef" || t === "popular");
 
   const onAdd = () => {
-    addToPack(item.id, item.name, { qty, spice: spiceable ? spice : undefined, instructions: notes }, photo.current, available ? getDishImage(item) : null);
+    addToPack(item.id, item.name, { qty, option: item.options ? option : undefined, spice: spiceable ? spice : undefined, instructions: notes }, photo.current, available ? getDishImage(item) : null);
     close();
   };
 
@@ -134,14 +136,42 @@ function SheetBody({ item, available, isDesktop, onHandle }: { item: MenuItem; a
                 </p>
               )}
             </div>
-            <span className="num mt-2 shrink-0 text-[19px] text-brass-hi">{formatMoney(item.price)}</span>
+            <span className="num mt-2 shrink-0 text-[19px] text-brass-hi">{item.priceLabel && !option ? item.priceLabel : formatMoney(each)}</span>
           </div>
-          <p className="mt-4 text-[15.5px] leading-relaxed text-text/85">{item.desc}</p>
+          {item.desc && <p className="mt-4 text-[15.5px] leading-relaxed text-text/85">{item.desc}</p>}
+          {item.notes && <p className="display mt-1 text-[18px] italic text-brass">{item.notes}</p>}
           {cat?.blurb && <p className="mt-2 text-[13px] text-muted">{cat.blurb}</p>}
           <div className="mt-4 flex flex-wrap items-center gap-3">
             <SpicePeaks level={item.spice} tone="dark" />
             <DietBadges tags={item.tags} tone="dark" />
           </div>
+
+          {item.options && item.options.values.length > 1 && (
+            <fieldset className="mt-7">
+              <legend className="text-[13px] text-muted">{item.options.label}</legend>
+              <div role="radiogroup" aria-label={item.options.label} className="mt-2 flex flex-wrap gap-2">
+                {item.options.values.map((v) => {
+                  const on = v.name === option;
+                  return (
+                    <button
+                      key={v.name}
+                      type="button"
+                      role="radio"
+                      aria-checked={on}
+                      onClick={() => setOption(v.name)}
+                      className={cn(
+                        "inline-flex min-h-10 items-center gap-1.5 rounded-full border px-4 py-2 text-[13.5px] transition-[background,color,border-color] duration-300",
+                        on ? "border-foil bg-[linear-gradient(100deg,#a58a58,#e9dab0_45%,#b69e70)] text-choc shadow-[inset_0_1px_0_rgba(255,250,232,.8)]" : "border-line-strong text-muted hover:text-brass-hi",
+                      )}
+                    >
+                      {v.name}
+                      {v.add ? <span className={cn("num text-[12px]", on ? "text-choc/80" : "text-brass/90")}>+{formatMoney(v.add)}</span> : null}
+                    </button>
+                  );
+                })}
+              </div>
+            </fieldset>
+          )}
 
           {spiceable && (
             <fieldset className="mt-7">
@@ -192,7 +222,7 @@ function SheetBody({ item, available, isDesktop, onHandle }: { item: MenuItem; a
       </div>
       <div className="border-t border-line p-4 md:p-5">
         <button type="button" onClick={onAdd} data-autofocus className="btn btn-brass w-full py-4 text-[15.5px]">
-          Add to pack · {formatMoney(item.price * qty)}
+          Add to pack · {formatMoney(each * qty)}
         </button>
       </div>
     </>

@@ -1,130 +1,2251 @@
 {
-  "_notes": {
-    "placeholder": true,
-    "status": "PLACEHOLDER MENU. Names, descriptions and prices are stand-ins until the real 8848 menu arrives. Curry, tandoor, biryani, bread, dessert and lassi items reuse Natraj Indian Cuisine wording; Nepali, Himalayan, Indo-Chinese and bar items were written for 8848.",
-    "img": "Not a file path: an image family key. public/dishes/<img>.jpg. o-* photos are Natraj's own (placeholders, see PLACEHOLDERS.md); p-* photos come from Pexels via scripts/fetch-images.mjs; plain keys are Natraj's Pexels photos. Families without a file render a brass line-art illustration.",
-    "spice": "0 = none, 1 = gentle, 2 = warm, 3 = hot, 4 = very hot, 5 = Himalayan hot.",
-    "tags": "vegetarian | vegan | gf (gluten-free) | nuts | popular | chef (Chef's pick)."
+ "_notes": {
+  "source": "Generated from data/menu-content.md by scripts/menu-from-md.mjs. Edit the .md, then run npm run menu.",
+  "placeholder": true,
+  "status": "Dishes, names, sections and descriptions follow the owner's draft menu (2026). PRICES ARE PLACEHOLDERS (the draft had none; only the goat +$3.50 momo upcharge is from the draft). Heat levels and chef/popular picks are suggestions. Diet tags: only 'vegetarian' (from ingredients) and 'nuts' (where the description names nuts) are marked; gluten-free and vegan need the kitchen's confirmation.",
+  "img": "Image family key: public/dishes/<img>.jpg. Keys starting x- have no photo yet and render a brass line-art illustration.",
+  "spice": "0 = none … 4 = hot (▲ marks on the printed menu).",
+  "options": "Choices a guest picks (protein, pour…). 'add' is the extra charge on top of price."
+ },
+ "categories": [
+  {
+   "id": "appetizers",
+   "name": "Himalayan Appetizers",
+   "camp": "Kathmandu",
+   "altitude": 1400,
+   "np": "खाजा"
   },
-  "categories": [
-    { "id": "momo", "name": "Momo", "np": "मोमो", "camp": "Kathmandu", "altitude": 1400, "blurb": "Pleated by hand every morning. Served with sesame-tomato achar." },
-    { "id": "small-plates", "name": "Himalayan Small Plates", "np": "खाजा", "camp": "Lukla", "altitude": 2860, "blurb": "Khaja: the snacks you share over a drink before the real food arrives." },
-    { "id": "noodles-soups", "name": "Noodles & Soups", "np": "थुक्पा", "camp": "Namche Bazaar", "altitude": 3440, "blurb": "What trekkers eat when the wind comes up." },
-    { "id": "indo-chinese", "name": "Indo-Chinese", "camp": "Tengboche", "altitude": 3867, "blurb": "Kathmandu's favourite fusion: wok fire, soy, garlic and green chilli." },
-    { "id": "nepali-mains", "name": "Nepali Thali & Mains", "np": "दाल भात", "camp": "Everest Base Camp", "altitude": 5364, "blurb": "Dal bhat power, 24 hour. Thalis come with refills of dal and rice." },
-    { "id": "tandoor-curries", "name": "Tandoor & Curries", "camp": "Camp I", "altitude": 6065, "blurb": "North Indian favourites from the clay oven and the pot. Curries come with basmati rice." },
-    { "id": "rice-breads", "name": "Rice & Breads", "camp": "Camp II", "altitude": 6400, "blurb": "Breads are baked to order in the tandoor." },
-    { "id": "desserts", "name": "Desserts", "np": "मिठाई", "camp": "Camp III", "altitude": 7200, "blurb": "Something sweet for the last push." },
-    { "id": "chiya-soft", "name": "Chiya & Soft Drinks", "np": "चिया", "camp": "South Col", "altitude": 7950, "blurb": "Masala chiya is brewed all day." },
-    { "id": "bar", "name": "The Bar", "camp": "Summit", "altitude": 8849, "blurb": "Signature cocktails with Himalayan spice, Nepali lagers, wine and zero-proof pours. 21+ with ID." }
-  ],
-  "items": [
-    { "id": "chicken-momo", "name": "Chicken Momo", "np": "कुखुराको मोमो", "category": "momo", "style": "steamed", "price": 14, "desc": "Steamed dumplings filled with minced chicken, ginger, garlic and cilantro, served with Nepali chutney.", "tags": ["popular"], "spice": 1, "img": "o-chicken-momo" },
-    { "id": "veg-momo", "name": "Veg Momo", "np": "तरकारी मोमो", "category": "momo", "style": "steamed", "price": 13, "desc": "Steamed dumplings filled with finely chopped cabbage, carrot, onion and spices, served with Nepali chutney.", "tags": ["vegetarian"], "spice": 1, "img": "o-momo-veggie" },
-    { "id": "paneer-momo", "name": "Paneer Momo", "category": "momo", "style": "steamed", "price": 14, "desc": "Crumbled paneer with spinach, spring onion and a little cumin, pleated and steamed.", "tags": ["vegetarian"], "spice": 1, "img": "p-momo-spinach" },
-    { "id": "lamb-momo", "name": "Lamb Momo", "category": "momo", "style": "steamed", "price": 16, "desc": "Minced lamb with ginger, onion and timur, made the way buff momo is made in Kathmandu.", "tags": ["chef"], "spice": 2, "img": "p-momo-dark" },
-    { "id": "jhol-momo", "name": "Jhol Momo", "np": "झोल मोमो", "category": "momo", "style": "jhol", "price": 16, "desc": "Chicken momos sitting in a warm, tangy broth of roasted tomato, sesame and timur. Drink the broth.", "tags": ["chef", "popular"], "spice": 2, "img": "p-jhol-momo" },
-    { "id": "kothey-momo", "name": "Kothey Momo", "np": "कोठे मोमो", "category": "momo", "style": "kothey", "price": 15, "desc": "Half-moon momos pan-fried on one side until crackly, soft on top. Chicken or veg.", "tags": [], "spice": 1, "img": "p-kothey-momo" },
-    { "id": "fried-momo", "name": "Fried Momo", "category": "momo", "style": "fried", "price": 14.5, "desc": "Chicken momos fried until golden and blistered, with sesame-tomato achar for dipping.", "tags": [], "spice": 1, "img": "p-fried-momo" },
-    { "id": "c-momo", "name": "C-Momo (Chilli Momo)", "np": "सी-मोमो", "category": "momo", "style": "chilli", "price": 15.5, "desc": "Fried chicken momos stir-fried with bell peppers, onions, garlic and red chilli sauce: crisp, sticky, smoky.", "tags": ["popular"], "spice": 3, "img": "o-chicken-chili-momo" },
-    { "id": "chilli-veg-momo", "name": "Chilli Veg Momo", "category": "momo", "style": "chilli", "price": 14.5, "desc": "Veg momos stir-fried with bell peppers, onions, garlic and red chilli sauce, spicier and crispier with a smoky finish.", "tags": ["vegetarian"], "spice": 3, "img": "o-chicken-chili-momo" },
-    { "id": "tandoori-momo", "name": "Tandoori Momo", "category": "momo", "style": "tandoori", "price": 16, "desc": "Chicken momos marinated in yogurt and tandoori masala, finished in the clay oven with mint chutney.", "tags": [], "spice": 2, "img": "p-tandoori-momo" },
-    { "id": "momo-platter", "name": "Momo Platter", "category": "momo", "style": "platter", "price": 27, "desc": "Twelve momos, four ways: steamed, kothey, jhol and C-momo. Made for the middle of the table.", "tags": ["chef", "popular"], "spice": 2, "img": "p-momo-platter" },
-    { "id": "momo-your-way", "name": "Momo, Your Way", "category": "momo", "style": "custom", "price": 15, "desc": "Pick the filling and the style in the momo builder. We pleat it to order.", "tags": [], "spice": 1, "img": "o-momo-veggie" },
-
-    { "id": "chicken-choila", "name": "Chicken Choila", "np": "छोयला", "category": "small-plates", "price": 13, "desc": "Newari grilled chicken tossed with mustard oil, timur, garlic, ginger and fenugreek smoke. With beaten rice.", "tags": ["gf", "chef"], "spice": 3, "img": "p-choila" },
-    { "id": "lamb-sukuti", "name": "Lamb Sukuti", "np": "सुकुटी", "category": "small-plates", "price": 15, "desc": "Spiced dried lamb, pan-tossed with onion, tomato, green chilli and timur. Our take on buff sukuti.", "tags": ["gf"], "spice": 3, "img": "p-sukuti" },
-    { "id": "chicken-sekuwa", "name": "Chicken Sekuwa", "np": "सेकुवा", "category": "small-plates", "price": 14, "desc": "Hill-country skewers marinated in mustard oil, cumin and timur, charred over the grill.", "tags": ["gf", "popular"], "spice": 2, "img": "p-sekuwa" },
-    { "id": "lamb-sekuwa", "name": "Lamb Sekuwa", "category": "small-plates", "price": 16, "desc": "Cubes of lamb in ginger, garlic and Himalayan spices, grilled on skewers until smoky at the edges.", "tags": ["gf"], "spice": 2, "img": "o-boti-kebab" },
-    { "id": "aloo-sadheko", "name": "Aloo Sadheko", "np": "आलु सादेको", "category": "small-plates", "price": 8, "desc": "Boiled potatoes tossed with toasted sesame, mustard oil, lemon, green chilli and cilantro.", "tags": ["vegan", "vegetarian", "gf"], "spice": 2, "img": "p-aloo-sadheko" },
-    { "id": "chatpate", "name": "Chatpate", "np": "चटपटे", "category": "small-plates", "price": 7, "desc": "Kathmandu street snack: puffed rice, potato, onion, cucumber, peanuts, lemon and chilli, mixed to order.", "tags": ["vegan", "vegetarian", "nuts"], "spice": 2, "img": "p-chatpate" },
-    { "id": "sel-roti", "name": "Sel Roti", "np": "सेल रोटी", "category": "small-plates", "price": 7, "desc": "Sweet ring-shaped rice bread, crisp outside and tender inside, with spiced potato achar.", "tags": ["vegetarian"], "spice": 1, "img": "p-sel-roti" },
-    { "id": "wai-wai-sadheko", "name": "Wai Wai Sadheko", "category": "small-plates", "price": 7, "desc": "Crushed instant noodles tossed with onion, tomato, chilli, lime and cilantro. Every Nepali kid's after-school snack.", "tags": ["vegetarian"], "spice": 2, "img": "p-wai-wai" },
-    { "id": "vegetable-samosa", "name": "Vegetable Samosa", "category": "small-plates", "price": 6, "desc": "Two crispy cone pouches stuffed with mildly spiced potato and peas.", "tags": ["vegan", "vegetarian", "popular"], "spice": 1, "img": "o-vegetable-samosa" },
-    { "id": "vegetable-pakoras", "name": "Vegetable Pakoras", "category": "small-plates", "price": 7, "desc": "Mildly spiced vegetable fritters in chickpea batter.", "tags": ["vegan", "vegetarian", "gf"], "spice": 1, "img": "o-vegetable-pakoras" },
-    { "id": "paneer-pakora", "name": "Paneer Pakora", "category": "small-plates", "price": 9, "desc": "Homemade cheese dipped in chickpea batter and fried golden.", "tags": ["vegetarian", "gf"], "spice": 1, "img": "o-paneer-pakora" },
-
-    { "id": "chicken-thukpa", "name": "Chicken Thukpa", "np": "थुक्पा", "category": "noodles-soups", "price": 15, "desc": "Tibetan noodle soup: noodles, chicken and greens in a ginger-garlic broth with a spoon of chilli.", "tags": ["popular"], "spice": 2, "img": "p-thukpa" },
-    { "id": "veg-thukpa", "name": "Veg Thukpa", "category": "noodles-soups", "price": 14, "desc": "Noodles, bok choy, carrot and mushroom in a clear ginger-garlic broth.", "tags": ["vegan", "vegetarian"], "spice": 1, "img": "p-thukpa" },
-    { "id": "thenthuk", "name": "Lamb Thenthuk", "np": "थेन्थुक", "category": "noodles-soups", "price": 16, "desc": "Hand-pulled flat noodles in a hearty broth with lamb, spinach and daikon.", "tags": ["chef"], "spice": 2, "img": "p-thenthuk" },
-    { "id": "chowmein", "name": "Chicken Chowmein", "np": "चाउमिन", "category": "noodles-soups", "price": 14, "desc": "Street-style noodles wok-tossed with cabbage, carrot, onion and soy, the way Kathmandu does it.", "tags": ["popular"], "spice": 1, "img": "p-chowmein" },
-    { "id": "laphing", "name": "Laphing", "np": "लाफिङ", "category": "noodles-soups", "price": 10, "desc": "Chilled mung-bean noodles with chilli oil, garlic, soy and black vinegar. Lhasa street food, served cold.", "tags": ["vegan", "vegetarian"], "spice": 4, "img": "p-laphing" },
-    { "id": "lentil-soup", "name": "Lentil Soup", "category": "noodles-soups", "price": 6, "desc": "Slow-simmered yellow lentils with ginger, cumin and a squeeze of lemon.", "tags": ["vegan", "vegetarian", "gf"], "spice": 0, "img": "o-lentil-soup" },
-    { "id": "manchow-soup", "name": "Chicken Manchow Soup", "category": "noodles-soups", "price": 7, "desc": "Soy-ginger broth with chicken and vegetables, topped with a crunch of fried noodles.", "tags": [], "spice": 2, "img": "p-manchow-soup" },
-    { "id": "hot-sour-soup", "name": "Hot & Sour Soup", "category": "noodles-soups", "price": 7, "desc": "Tofu, mushroom and bamboo shoot in a peppery, vinegary broth.", "tags": ["vegan", "vegetarian"], "spice": 3, "img": "p-hot-sour-soup" },
-
-    { "id": "chilli-chicken", "name": "Chilli Chicken", "category": "indo-chinese", "price": 17, "desc": "Crisp boneless chicken wok-tossed with onion, green pepper, green chilli, soy and garlic.", "tags": ["popular"], "spice": 3, "img": "o-chicken-chilli" },
-    { "id": "chilli-paneer", "name": "Chilli Paneer", "category": "indo-chinese", "price": 16, "desc": "Homemade cheese with diced onion, green pepper and green chilli in a soy-garlic glaze.", "tags": ["vegetarian"], "spice": 3, "img": "p-chilli-paneer" },
-    { "id": "gobi-manchurian", "name": "Gobi Manchurian", "category": "indo-chinese", "price": 14, "desc": "Crisp cauliflower in a glossy garlic-ginger-soy Manchurian sauce with spring onion.", "tags": ["vegan", "vegetarian"], "spice": 2, "img": "p-gobi-manchurian" },
-    { "id": "dragon-chicken", "name": "Dragon Chicken", "category": "indo-chinese", "price": 17, "desc": "Crispy chicken strips tossed with cashews, peppers and a smoky red chilli sauce.", "tags": ["nuts", "chef"], "spice": 4, "img": "p-dragon-chicken" },
-    { "id": "honey-chilli-potatoes", "name": "Honey Chilli Potatoes", "category": "indo-chinese", "price": 11, "desc": "Crisp potato fingers in a sticky honey-chilli glaze with toasted sesame.", "tags": ["vegetarian", "popular"], "spice": 2, "img": "p-honey-chilli-potato" },
-    { "id": "hakka-noodles", "name": "Hakka Noodles", "category": "indo-chinese", "price": 14, "desc": "Wok-tossed noodles with cabbage, peppers, spring onion and a hit of vinegar. Add chicken +$3.", "tags": ["vegan", "vegetarian"], "spice": 1, "img": "p-hakka-noodles" },
-    { "id": "schezwan-fried-rice", "name": "Schezwan Fried Rice", "category": "indo-chinese", "price": 14, "desc": "Wok-fired rice with Schezwan chilli paste, egg and vegetables. Add chicken +$3.", "tags": ["vegetarian"], "spice": 4, "img": "p-fried-rice" },
-    { "id": "veg-manchurian", "name": "Veg Manchurian", "category": "indo-chinese", "price": 14, "desc": "Vegetable dumplings in a dark, garlicky Manchurian gravy.", "tags": ["vegan", "vegetarian"], "spice": 2, "img": "p-veg-manchurian" },
-    { "id": "chicken-lollipop", "name": "Chicken Lollipop", "category": "indo-chinese", "price": 13, "desc": "Frenched chicken wings, crisp and red, with Schezwan dip.", "tags": [], "spice": 3, "img": "p-chicken-lollipop" },
-
-    { "id": "dal-bhat-veg", "name": "Dal Bhat Thali", "np": "दाल भात", "category": "nepali-mains", "price": 19, "desc": "The meal that climbs Everest: rice, black lentil dal, seasonal tarkari, saag, achar, papad and something sweet. Refills on dal and rice.", "tags": ["vegetarian", "gf", "chef", "popular"], "spice": 2, "img": "p-dal-bhat" },
-    { "id": "dal-bhat-khasi", "name": "Khasi Dal Bhat Thali", "category": "nepali-mains", "price": 24, "desc": "The full thali with bone-in goat curry on the side.", "tags": ["gf", "chef"], "spice": 3, "img": "p-dal-bhat" },
-    { "id": "khasi-ko-masu", "name": "Khasi ko Masu", "np": "खसीको मासु", "category": "nepali-mains", "price": 21, "desc": "Goat curry, bone-in, slow-cooked the Nepali way with tomato, ginger, onion and a whisper of timur.", "tags": ["gf"], "spice": 3, "img": "goat-curry" },
-    { "id": "kukhura-ko-masu", "name": "Kukhura ko Masu", "np": "कुखुराको मासु", "category": "nepali-mains", "price": 18, "desc": "Home-style chicken curry with cumin, turmeric and plenty of fresh ginger.", "tags": ["gf"], "spice": 2, "img": "o-chicken-curry" },
-    { "id": "aloo-tama", "name": "Aloo Tama Bodi", "np": "आलु तामा", "category": "nepali-mains", "price": 15, "desc": "Potato, bamboo shoot and black-eyed peas in a tangy, gently spiced curry.", "tags": ["vegan", "vegetarian", "gf"], "spice": 2, "img": "p-aloo-tama" },
-    { "id": "gundruk", "name": "Gundruk ko Jhol", "np": "गुन्द्रुक", "category": "nepali-mains", "price": 12, "desc": "Fermented mustard greens simmered into a sour, smoky soup-curry with soybeans. An acquired taste worth acquiring.", "tags": ["vegan", "vegetarian", "gf"], "spice": 2, "img": "p-gundruk" },
-
-    { "id": "butter-chicken", "name": "Butter Chicken", "category": "tandoor-curries", "price": 18, "desc": "Boneless chicken leg cooked in tomato and cream sauce with mild spices.", "tags": ["gf", "popular"], "spice": 1, "img": "o-butter-chicken" },
-    { "id": "chicken-tikka-masala", "name": "Chicken Tikka Masala", "category": "tandoor-curries", "price": 18, "desc": "Chicken marinated in ginger, garlic and yogurt, baked in the tandoor and simmered with tomatoes and cream.", "tags": ["gf", "popular"], "spice": 1, "img": "o-chicken-tikka-masala" },
-    { "id": "pistachio-korma", "name": "Pistachio Chicken Korma", "category": "tandoor-curries", "price": 19, "desc": "Chicken breast cooked in pistachio, yogurt, tomatoes and gentle spices.", "tags": ["gf", "nuts"], "spice": 1, "img": "o-pistachio-chicken-korma" },
-    { "id": "rogan-josh", "name": "Lamb Rogan Josh", "category": "tandoor-curries", "price": 20, "desc": "Lamb cubes cooked with tomatoes, freshly ground spices and yogurt.", "tags": ["gf"], "spice": 2, "img": "o-rogan-josh" },
-    { "id": "saag-paneer", "name": "Saag Paneer", "category": "tandoor-curries", "price": 16, "desc": "Homemade cheese and spinach, slow-cooked with garlic and garam masala.", "tags": ["vegetarian", "gf", "popular"], "spice": 1, "img": "o-saag-paneer" },
-    { "id": "paneer-tikka-masala", "name": "Paneer Tikka Masala", "category": "tandoor-curries", "price": 17, "desc": "Homemade cheese in tomato and cream sauce with fresh ginger and garlic.", "tags": ["vegetarian", "gf"], "spice": 1, "img": "o-paneer-tikka-masala" },
-    { "id": "malai-kofta", "name": "Malai Kofta", "category": "tandoor-curries", "price": 16, "desc": "Vegetable dumplings in a mild creamy sauce with nuts and raisins.", "tags": ["vegetarian", "nuts"], "spice": 1, "img": "o-malai-kofta" },
-    { "id": "chana-masala", "name": "Chana Masala", "category": "tandoor-curries", "price": 15, "desc": "Chickpeas in a thick, tangy gravy topped with onion, tomato and cilantro.", "tags": ["vegan", "vegetarian", "gf"], "spice": 2, "img": "chana-masala" },
-    { "id": "dal-makhani", "name": "Dal Makhani", "category": "tandoor-curries", "price": 15, "desc": "Black lentils and kidney beans, simmered overnight with butter, ginger and cilantro.", "tags": ["vegetarian", "gf"], "spice": 1, "img": "dal-makhani" },
-    { "id": "chicken-tandoori", "name": "Tandoori Chicken", "category": "tandoor-curries", "price": 18, "desc": "Marinated overnight in yogurt and freshly ground spices, then roasted in the clay oven.", "tags": ["gf"], "spice": 2, "img": "o-chicken-tandoori" },
-    { "id": "chicken-tikka", "name": "Chicken Tikka", "category": "tandoor-curries", "price": 17, "desc": "Boneless chicken, delicately spiced and charred in the tandoor.", "tags": ["gf"], "spice": 2, "img": "o-chicken-tikka" },
-    { "id": "paneer-tikka", "name": "Paneer Tikka", "category": "tandoor-curries", "price": 16, "desc": "Homemade cheese marinated overnight in yogurt and spices, roasted with peppers and onion.", "tags": ["vegetarian", "gf"], "spice": 2, "img": "o-paneer-tikka" },
-    { "id": "tandoori-mixed-grill", "name": "Tandoori Mixed Grill", "category": "tandoor-curries", "price": 27, "desc": "Chicken tikka, seekh kebab, boti kebab, fish tikka and tandoori shrimp on a sizzling platter.", "tags": ["gf", "chef"], "spice": 2, "img": "o-tandoori-mixed-grill" },
-
-    { "id": "chicken-biryani", "name": "Chicken Biryani", "category": "rice-breads", "price": 18, "desc": "Aromatic basmati cooked with chicken, whole spices and nuts. With raita.", "tags": ["gf", "nuts", "popular"], "spice": 2, "img": "o-chicken-biryani" },
-    { "id": "goat-biryani", "name": "Goat Biryani", "category": "rice-breads", "price": 20, "desc": "Bone-in goat layered with basmati, mild spices and nuts. With raita.", "tags": ["gf", "nuts"], "spice": 2, "img": "o-goat-biryani" },
-    { "id": "vegetable-biryani", "name": "Vegetable Biryani", "category": "rice-breads", "price": 16, "desc": "Mixed vegetables cooked with basmati, mild spices and nuts. With raita.", "tags": ["vegetarian", "gf", "nuts"], "spice": 1, "img": "biryani-veg" },
-    { "id": "basmati-rice", "name": "Basmati Rice", "category": "rice-breads", "price": 4, "desc": "Fragrant basmati, steamed with saffron.", "tags": ["vegan", "vegetarian", "gf"], "spice": 0, "img": "o-plain-basmati-rice" },
-    { "id": "naan", "name": "Naan", "category": "rice-breads", "price": 3.5, "desc": "Handmade bread baked against the wall of the clay oven.", "tags": ["vegetarian"], "spice": 0, "img": "o-naan" },
-    { "id": "garlic-naan", "name": "Garlic Naan", "category": "rice-breads", "price": 4.5, "desc": "Naan stuffed with fresh garlic and green coriander.", "tags": ["vegetarian", "popular"], "spice": 0, "img": "o-garlic-naan" },
-    { "id": "paneer-naan", "name": "Paneer Naan", "category": "rice-breads", "price": 5, "desc": "Leavened bread stuffed with homemade cheese and herbs.", "tags": ["vegetarian"], "spice": 0, "img": "o-paneer-naan" },
-    { "id": "roti", "name": "Tandoori Roti", "category": "rice-breads", "price": 3.5, "desc": "Whole-wheat bread baked in the clay oven.", "tags": ["vegan", "vegetarian"], "spice": 0, "img": "o-roti" },
-    { "id": "bread-basket", "name": "Bread Basket", "category": "rice-breads", "price": 12, "desc": "Garlic naan, plain naan and roti.", "tags": ["vegetarian"], "spice": 0, "img": "bread-basket" },
-    { "id": "raita", "name": "Raita", "category": "rice-breads", "price": 3.5, "desc": "Yogurt with cucumber, cumin and mint.", "tags": ["vegetarian", "gf"], "spice": 0, "img": "raita" },
-    { "id": "achar-trio", "name": "Achar Trio", "np": "अचार", "category": "rice-breads", "price": 4, "desc": "Sesame-tomato, radish and timur achar: the Nepali table's hot sauces.", "tags": ["vegan", "vegetarian", "gf"], "spice": 3, "img": "o-mix-pickles" },
-
-    { "id": "juju-dhau", "name": "Juju Dhau", "np": "जुजु धौ", "category": "desserts", "price": 7, "desc": "King curd from Bhaktapur: thick, sweet yogurt set in a clay pot.", "tags": ["vegetarian", "gf", "chef"], "spice": 0, "img": "p-juju-dhau" },
-    { "id": "kheer", "name": "Kheer", "np": "खीर", "category": "desserts", "price": 7, "desc": "Rice pudding with cardamom, raisins and pistachio.", "tags": ["vegetarian", "gf", "nuts"], "spice": 0, "img": "p-kheer" },
-    { "id": "gulab-jamun", "name": "Gulab Jamun", "category": "desserts", "price": 7, "desc": "Warm milk dumplings soaked in rose-cardamom syrup.", "tags": ["vegetarian", "popular"], "spice": 0, "img": "o-gulab-jamun" },
-    { "id": "chiya-creme-brulee", "name": "Chiya Crème Brûlée", "category": "desserts", "price": 9, "desc": "Masala chiya custard under a crackle of burnt sugar. Our fusion finish.", "tags": ["vegetarian", "gf", "chef"], "spice": 0, "img": "p-creme-brulee" },
-    { "id": "timur-kulfi", "name": "Timur Chocolate Kulfi", "category": "desserts", "price": 8, "desc": "Dense chocolate kulfi with Himalayan-salt caramel and a crack of timur pepper.", "tags": ["vegetarian", "gf", "nuts"], "spice": 1, "img": "p-chocolate-kulfi" },
-
-    { "id": "masala-chiya", "name": "Masala Chiya", "np": "मसला चिया", "category": "chiya-soft", "price": 4, "desc": "Black tea brewed with milk, cardamom, ginger and clove. Refills while you sit.", "tags": ["vegetarian", "gf", "popular"], "spice": 0, "img": "chai" },
-    { "id": "butter-tea", "name": "Butter Tea", "np": "सुजा", "category": "chiya-soft", "price": 4.5, "desc": "Tibetan po cha: tea churned with butter and salt. Savoury, warming, for the adventurous.", "tags": ["vegetarian", "gf"], "spice": 0, "img": "p-butter-tea" },
-    { "id": "mango-lassi", "name": "Mango Lassi", "category": "chiya-soft", "price": 5, "desc": "Yogurt blended with mango pulp and a little cardamom.", "tags": ["vegetarian", "gf", "popular"], "spice": 0, "img": "o-mango-lassi" },
-    { "id": "lassi", "name": "Sweet or Salted Lassi", "category": "chiya-soft", "price": 4.5, "desc": "Cool, frothy yogurt drink. Say sweet or salted.", "tags": ["vegetarian", "gf"], "spice": 0, "img": "lassi" },
-    { "id": "ginger-lemonade", "name": "Ginger-Honey Lemonade", "category": "chiya-soft", "price": 4.5, "desc": "Fresh ginger, wildflower honey and lemon. Hot or iced.", "tags": ["vegetarian", "gf"], "spice": 0, "img": "p-ginger-lemonade" },
-    { "id": "soda", "name": "Soda", "category": "chiya-soft", "price": 3, "desc": "Coke, Diet Coke, Sprite, ginger ale or club soda.", "tags": ["vegan", "vegetarian", "gf"], "spice": 0, "img": "soda" },
-
-    { "id": "sagarmatha-old-fashioned", "name": "Sagarmatha Old Fashioned", "category": "bar", "kind": "cocktail", "price": 14, "desc": "Bourbon stirred with cardamom-demerara syrup and orange bitters, finished with a smoked cinnamon stick.", "tags": ["chef", "popular"], "spice": 0, "img": "p-old-fashioned" },
-    { "id": "timur-margarita", "name": "Timur Margarita", "category": "bar", "kind": "cocktail", "price": 13, "desc": "Tequila, lime and orange liqueur shaken with Nepali timur pepper. Himalayan pink salt rim. It tingles.", "tags": ["popular"], "spice": 1, "img": "p-margarita" },
-    { "id": "rhododendron-spritz", "name": "Rhododendron Spritz", "category": "bar", "kind": "cocktail", "price": 12, "desc": "Prosecco, rhododendron-hibiscus syrup, soda and an orange twist. Nepal's national flower, in a glass.", "tags": [], "spice": 0, "img": "p-spritz" },
-    { "id": "yak-and-yeti", "name": "Yak & Yeti", "category": "bar", "kind": "cocktail", "price": 15, "desc": "Brown-butter-washed dark rum, masala chiya syrup and a pinch of salt. Stirred, silky and bold.", "tags": ["chef"], "spice": 0, "img": "p-dark-rum" },
-    { "id": "base-camp-mule", "name": "Base Camp Mule", "category": "bar", "kind": "cocktail", "price": 12, "desc": "Vodka, fresh ginger, lime and ginger beer, served in a brass mug.", "tags": ["popular"], "spice": 1, "img": "p-mule" },
-    { "id": "jimbu-negroni", "name": "Jimbu Negroni", "category": "bar", "kind": "cocktail", "price": 14, "desc": "Gin, Campari and sweet vermouth infused with jimbu, the Himalayan allium. Savoury and bitter.", "tags": [], "spice": 0, "img": "p-negroni" },
-    { "id": "golden-hour", "name": "Golden Hour", "category": "bar", "kind": "cocktail", "price": 13, "desc": "Gin, turmeric-honey, lemon and egg white. Sunset over the Khumbu.", "tags": [], "spice": 0, "img": "p-golden-sour" },
-    { "id": "everest-lager", "name": "Everest Lager", "category": "bar", "kind": "beer", "price": 7, "desc": "Crisp Nepali lager, 5.5%. The one you see in every Thamel bar.", "tags": ["popular"], "spice": 0, "img": "p-lager" },
-    { "id": "gorkha-lager", "name": "Gorkha Lager", "category": "bar", "kind": "beer", "price": 7, "desc": "Clean, malty Nepali lager, 5%.", "tags": [], "spice": 0, "img": "p-lager" },
-    { "id": "nepal-ice", "name": "Nepal Ice", "category": "bar", "kind": "beer", "price": 7, "desc": "Strong Nepali lager, 6.1%. Order a momo with it.", "tags": [], "spice": 0, "img": "p-lager" },
-    { "id": "valley-ipa", "name": "Shenandoah Valley IPA", "category": "bar", "kind": "beer", "price": 8, "desc": "Rotating local IPA on draft. Ask what's pouring.", "tags": [], "spice": 0, "img": "p-ipa" },
-    { "id": "house-red", "name": "House Red · Malbec", "category": "bar", "kind": "wine", "price": 10, "desc": "Dark fruit, soft tannin. Good with goat curry and sekuwa.", "tags": [], "spice": 0, "img": "p-red-wine" },
-    { "id": "house-white", "name": "House White · Sauvignon Blanc", "category": "bar", "kind": "wine", "price": 10, "desc": "Bright and citrusy; it calms the heat of C-momo.", "tags": [], "spice": 0, "img": "p-white-wine" },
-    { "id": "virginia-viognier", "name": "Virginia Viognier", "category": "bar", "kind": "wine", "price": 12, "desc": "Rotating glass from a Virginia vineyard. Apricot, honeysuckle, a little spice.", "tags": [], "spice": 0, "img": "p-white-wine" },
-    { "id": "khukri-rum", "name": "Khukri Rum", "category": "bar", "kind": "spirit", "price": 9, "desc": "Nepal's famous dark rum, poured neat or on one big cube.", "tags": [], "spice": 0, "img": "p-dark-rum" },
-    { "id": "rhododendron-cooler", "name": "Rhododendron Cooler", "category": "bar", "kind": "zero", "price": 7, "desc": "Zero-proof: rhododendron-hibiscus, lime, mint and soda.", "tags": ["vegan", "vegetarian", "gf"], "spice": 0, "img": "p-mocktail" },
-    { "id": "timur-ginger-fizz", "name": "Timur Ginger Fizz", "category": "bar", "kind": "zero", "price": 7, "desc": "Zero-proof: fresh ginger, lemon, honey and a buzz of timur, topped with soda.", "tags": ["vegetarian", "gf"], "spice": 1, "img": "p-ginger-fizz" }
-  ]
+  {
+   "id": "soups-salads",
+   "name": "Soups & Salads",
+   "camp": "Lukla",
+   "altitude": 2860
+  },
+  {
+   "id": "momo",
+   "name": "Momo",
+   "camp": "Namche Bazaar",
+   "altitude": 3440,
+   "np": "मोमो",
+   "blurb": "Himalayan dumplings, pleated by hand."
+  },
+  {
+   "id": "street",
+   "name": "Nepali Street Flavors",
+   "camp": "Tengboche",
+   "altitude": 3867,
+   "blurb": "From the Terai to the Himalayas."
+  },
+  {
+   "id": "grill",
+   "name": "Tandoor & Himalayan Grill",
+   "camp": "Dingboche",
+   "altitude": 4410
+  },
+  {
+   "id": "entrees",
+   "name": "Himalayan & Indian Entrées",
+   "camp": "Lobuche",
+   "altitude": 4940,
+   "blurb": "Classic favorites, refined Himalayan flavors."
+  },
+  {
+   "id": "signatures",
+   "name": "8848 Himalayan Signatures",
+   "camp": "Gorak Shep",
+   "altitude": 5164,
+   "np": "दाल भात",
+   "blurb": "The food of home, the way Nepal eats it."
+  },
+  {
+   "id": "biryani",
+   "name": "Biryani & Rice",
+   "camp": "Everest Base Camp",
+   "altitude": 5364,
+   "blurb": "Saffron basmati layered with caramelized onion and herbs, slow-finished. Served with raita."
+  },
+  {
+   "id": "fusion",
+   "name": "8848 Fusion Favorites",
+   "camp": "Khumbu Icefall",
+   "altitude": 5500,
+   "blurb": "Familiar favorites with a Himalayan twist. Served with fries."
+  },
+  {
+   "id": "breads",
+   "name": "Breads from the Tandoor",
+   "camp": "Camp I",
+   "altitude": 6065
+  },
+  {
+   "id": "kids",
+   "name": "Little Himalayan Adventurers",
+   "camp": "Camp II",
+   "altitude": 6400,
+   "blurb": "Kids' menu · ages 12 and under."
+  },
+  {
+   "id": "desserts",
+   "name": "Desserts",
+   "camp": "South Col",
+   "altitude": 7950,
+   "np": "मिठाई"
+  },
+  {
+   "id": "drinks",
+   "name": "Tea, Coffee & Cold Drinks",
+   "camp": "The Balcony",
+   "altitude": 8400,
+   "np": "चिया"
+  },
+  {
+   "id": "bar",
+   "name": "The Bar",
+   "camp": "Summit",
+   "altitude": 8849,
+   "blurb": "Signature cocktails, Nepal's own spirits, wine, beer and zero-proof. 21+ with ID."
+  }
+ ],
+ "items": [
+  {
+   "id": "vegetable-samosa",
+   "name": "Vegetable Samosa",
+   "category": "appetizers",
+   "price": 7,
+   "desc": "Crisp pastry, spiced potato and peas, house chutney.",
+   "tags": [
+    "vegetarian",
+    "popular"
+   ],
+   "spice": 0,
+   "img": "o-vegetable-samosa"
+  },
+  {
+   "id": "samosa-chaat",
+   "name": "Samosa Chaat",
+   "category": "appetizers",
+   "price": 9,
+   "desc": "Crushed samosa, spiced chickpeas, yogurt, tamarind, mint and sev.",
+   "tags": [
+    "vegetarian"
+   ],
+   "spice": 1,
+   "img": "x-samosa-chaat"
+  },
+  {
+   "id": "aloo-chop",
+   "name": "Aloo Chop",
+   "category": "appetizers",
+   "price": 7,
+   "desc": "Nepali potato croquettes with tomato achar.",
+   "tags": [
+    "vegetarian"
+   ],
+   "spice": 1,
+   "img": "p-aloo-chop",
+   "np": "आलु चप"
+  },
+  {
+   "id": "thicheko-aalu",
+   "name": "Thicheko Aalu",
+   "category": "appetizers",
+   "price": 8,
+   "desc": "Smashed potatoes, fresh chilli, herbs and a spark of timmur.",
+   "tags": [
+    "vegetarian",
+    "chef"
+   ],
+   "spice": 2,
+   "img": "p-aloo-sadheko",
+   "np": "थिचेको आलु"
+  },
+  {
+   "id": "sweet-and-spicy-bhel-puri",
+   "name": "Sweet & Spicy Bhel Puri",
+   "category": "appetizers",
+   "price": 8,
+   "desc": "Puffed rice, sev, onion and tomato in sweet-tangy chutneys.",
+   "tags": [
+    "vegetarian"
+   ],
+   "spice": 1,
+   "img": "p-chatpate"
+  },
+  {
+   "id": "veg-mix-platter",
+   "name": "Veg Mix Platter",
+   "category": "appetizers",
+   "price": 14,
+   "desc": "The chef's pick of our vegetarian starters, with chutneys.",
+   "tags": [
+    "vegetarian"
+   ],
+   "spice": 0,
+   "img": "o-vegetable-pakoras"
+  },
+  {
+   "id": "paneer-chilli",
+   "name": "Paneer Chilli",
+   "category": "appetizers",
+   "price": 14,
+   "desc": "Crispy paneer, peppers and onion, wok-tossed in house chilli sauce.",
+   "tags": [
+    "vegetarian"
+   ],
+   "spice": 2,
+   "img": "p-chilli-paneer"
+  },
+  {
+   "id": "chicken-lollipop",
+   "name": "Chicken Lollipop",
+   "category": "appetizers",
+   "price": 13,
+   "desc": "Frenched wings fried crisp, glazed in chilli-garlic.",
+   "tags": [],
+   "spice": 2,
+   "img": "p-chicken-lollipop"
+  },
+  {
+   "id": "chilli-chicken",
+   "name": "Chilli Chicken",
+   "category": "appetizers",
+   "price": 14,
+   "desc": "The Indo-Chinese classic: crispy chicken, peppers, onion, chilli sauce.",
+   "tags": [
+    "popular"
+   ],
+   "spice": 2,
+   "img": "o-chicken-chilli"
+  },
+  {
+   "id": "sweet-and-sour-chicken",
+   "name": "Sweet & Sour Chicken",
+   "category": "appetizers",
+   "price": 14,
+   "desc": "Crispy chicken, peppers and onion in a sweet-tangy glaze.",
+   "tags": [],
+   "spice": 0,
+   "img": "p-sweet-sour-chicken"
+  },
+  {
+   "id": "poleko-moleko-chicken",
+   "name": "Poleko Moleko Chicken",
+   "category": "appetizers",
+   "price": 14,
+   "desc": "Fire-roasted chicken, Nepali spices, green chilli and mustard oil.",
+   "tags": [],
+   "spice": 2,
+   "img": "p-poleko-chicken"
+  },
+  {
+   "id": "chicken-65",
+   "name": "Chicken 65",
+   "category": "appetizers",
+   "price": 13,
+   "desc": "Fiery fried chicken with curry leaves and chilli.",
+   "tags": [],
+   "spice": 3,
+   "img": "p-dragon-chicken"
+  },
+  {
+   "id": "shrimp-chilli",
+   "name": "Shrimp Chilli",
+   "category": "appetizers",
+   "price": 16,
+   "desc": "Crispy shrimp wok-tossed with peppers, onion, garlic and chilli.",
+   "tags": [],
+   "spice": 2,
+   "img": "p-shrimp-chilli"
+  },
+  {
+   "id": "himalayan-goat-soup",
+   "name": "Himalayan Goat Soup",
+   "category": "soups-salads",
+   "price": 9,
+   "desc": "Slow-simmered goat in a ginger-garlic broth.",
+   "tags": [],
+   "spice": 1,
+   "img": "p-goat-soup",
+   "group": "Soups"
+  },
+  {
+   "id": "sweet-corn-soup",
+   "name": "Sweet Corn Soup",
+   "category": "soups-salads",
+   "price": 6,
+   "desc": "Silky Indo-Chinese corn soup.",
+   "tags": [
+    "vegetarian"
+   ],
+   "spice": 0,
+   "img": "p-sweet-corn-soup",
+   "group": "Soups",
+   "options": {
+    "label": "Choose",
+    "values": [
+     {
+      "name": "Vegetable"
+     },
+     {
+      "name": "Chicken",
+      "add": 2
+     }
+    ]
+   }
+  },
+  {
+   "id": "hot-and-sour-soup",
+   "name": "Hot & Sour Soup",
+   "category": "soups-salads",
+   "price": 6,
+   "desc": "Peppery, tangy and full of vegetables.",
+   "tags": [
+    "vegetarian"
+   ],
+   "spice": 2,
+   "img": "p-hot-sour-soup",
+   "group": "Soups",
+   "options": {
+    "label": "Choose",
+    "values": [
+     {
+      "name": "Vegetable"
+     },
+     {
+      "name": "Chicken",
+      "add": 2
+     }
+    ]
+   }
+  },
+  {
+   "id": "8848-himalayan-salad",
+   "name": "8848 Himalayan Salad",
+   "category": "soups-salads",
+   "price": 11,
+   "desc": "Greens, cucumber, tomato, avocado and toasted nuts, Himalayan citrus dressing.",
+   "tags": [
+    "vegetarian",
+    "nuts"
+   ],
+   "spice": 0,
+   "img": "p-himalayan-salad",
+   "group": "Salads"
+  },
+  {
+   "id": "himalayan-grilled-chicken-salad",
+   "name": "Himalayan Grilled Chicken Salad",
+   "category": "soups-salads",
+   "price": 15,
+   "desc": "Spiced grilled chicken over greens, cucumber, tomato and red onion.",
+   "tags": [],
+   "spice": 0,
+   "img": "p-chicken-salad",
+   "group": "Salads"
+  },
+  {
+   "id": "veg-steamed-momo",
+   "name": "Vegetable Steamed Momo",
+   "category": "momo",
+   "price": 14,
+   "desc": "Seasoned vegetables, with house tomato achar.",
+   "tags": [
+    "vegetarian",
+    "popular"
+   ],
+   "spice": 1,
+   "img": "o-momo-veggie"
+  },
+  {
+   "id": "chicken-steamed-momo",
+   "name": "Chicken Steamed Momo",
+   "category": "momo",
+   "price": 14,
+   "desc": "Spiced minced chicken, with house tomato achar.",
+   "tags": [
+    "popular"
+   ],
+   "spice": 1,
+   "img": "o-chicken-momo"
+  },
+  {
+   "id": "goat-steamed-momo",
+   "name": "Goat Steamed Momo",
+   "category": "momo",
+   "price": 17.5,
+   "desc": "Spiced goat and Himalayan herbs, with house tomato achar.",
+   "tags": [],
+   "spice": 1,
+   "img": "p-momo-dark"
+  },
+  {
+   "id": "chicken-jhol-momo",
+   "name": "Chicken Jhol Momo",
+   "category": "momo",
+   "price": 16,
+   "desc": "Chicken momo in a tangy sesame-tomato broth.",
+   "tags": [
+    "chef"
+   ],
+   "spice": 2,
+   "img": "p-jhol-momo",
+   "np": "झोल मोमो"
+  },
+  {
+   "id": "goat-jhol-momo",
+   "name": "Goat Jhol Momo",
+   "category": "momo",
+   "price": 19.5,
+   "desc": "Goat momo in a tangy sesame-tomato broth.",
+   "tags": [],
+   "spice": 2,
+   "img": "p-jhol-momo",
+   "np": "झोल मोमो"
+  },
+  {
+   "id": "kothey-momo",
+   "name": "Kothey Momo",
+   "category": "momo",
+   "price": 15,
+   "desc": "Pan-seared: crisp on one side, tender on the other.",
+   "tags": [],
+   "spice": 1,
+   "img": "p-kothey-momo",
+   "np": "कोठे मोमो",
+   "options": {
+    "label": "Choose",
+    "values": [
+     {
+      "name": "Vegetable"
+     },
+     {
+      "name": "Chicken"
+     },
+     {
+      "name": "Goat",
+      "add": 3.5
+     }
+    ]
+   }
+  },
+  {
+   "id": "chilli-fry-momo",
+   "name": "Chilli Fry Momo",
+   "category": "momo",
+   "price": 16,
+   "desc": "Fried momo wok-tossed with peppers, onion and chilli-garlic sauce.",
+   "tags": [
+    "popular"
+   ],
+   "spice": 3,
+   "img": "o-chicken-chili-momo",
+   "options": {
+    "label": "Choose",
+    "values": [
+     {
+      "name": "Vegetable"
+     },
+     {
+      "name": "Chicken"
+     },
+     {
+      "name": "Goat",
+      "add": 3.5
+     }
+    ]
+   }
+  },
+  {
+   "id": "momo-platter",
+   "name": "8848 Himalayan Momo Platter",
+   "category": "momo",
+   "price": 28,
+   "desc": "Twelve pieces. Three each of vegetable, chicken and goat, plus three chilli fry of your choice. With dipping sauces.",
+   "tags": [
+    "chef"
+   ],
+   "spice": 2,
+   "img": "p-momo-platter",
+   "options": {
+    "label": "Chilli fry momo",
+    "values": [
+     {
+      "name": "Vegetable"
+     },
+     {
+      "name": "Chicken"
+     },
+     {
+      "name": "Goat",
+      "add": 3.5
+     }
+    ]
+   }
+  },
+  {
+   "id": "macha-tareko",
+   "name": "Macha Tareko",
+   "category": "street",
+   "price": 16,
+   "desc": "Nepali-spiced fried fish with achar.",
+   "tags": [],
+   "spice": 2,
+   "img": "p-macha-tareko",
+   "np": "माछा तारेको"
+  },
+  {
+   "id": "chicken-choila",
+   "name": "Chicken Choila",
+   "category": "street",
+   "price": 14,
+   "desc": "Flame-grilled chicken, mustard oil, chilli and fresh herbs.",
+   "tags": [
+    "chef"
+   ],
+   "spice": 3,
+   "img": "p-choila",
+   "np": "छोइला"
+  },
+  {
+   "id": "soya-chilli-chaap",
+   "name": "Soya Chilli Chaap",
+   "category": "street",
+   "price": 14,
+   "desc": "Soya chaap, peppers and onion in chilli-garlic sauce.",
+   "tags": [
+    "vegetarian"
+   ],
+   "spice": 2,
+   "img": "x-soya-chilli-chaap"
+  },
+  {
+   "id": "mutton-sekuwa",
+   "name": "Mutton Sekuwa",
+   "category": "street",
+   "price": 18,
+   "desc": "Mutton marinated in Nepali spices, char-grilled.",
+   "tags": [],
+   "spice": 2,
+   "img": "p-sekuwa",
+   "np": "सेकुवा"
+  },
+  {
+   "id": "mutton-jhaneko-sekuwa",
+   "name": "Mutton Jhaneko Sekuwa",
+   "category": "street",
+   "price": 19,
+   "desc": "Sekuwa finished with a sizzling spice tempering.",
+   "tags": [
+    "chef"
+   ],
+   "spice": 3,
+   "img": "o-boti-kebab",
+   "np": "झानेको सेकुवा"
+  },
+  {
+   "id": "badel-sekuwa",
+   "name": "Badel Sekuwa",
+   "category": "street",
+   "price": 20,
+   "desc": "Wild boar, marinated and char-grilled until smoky.",
+   "tags": [],
+   "spice": 2,
+   "img": "p-badel-sekuwa",
+   "np": "बँदेल सेकुवा"
+  },
+  {
+   "id": "mutton-taas",
+   "name": "Mutton Taas",
+   "category": "street",
+   "price": 18,
+   "desc": "Terai-style spiced mutton, pan-seared.",
+   "tags": [],
+   "spice": 2,
+   "img": "p-mutton-taas",
+   "np": "तास"
+  },
+  {
+   "id": "buff-sukuti",
+   "name": "Buff Sukuti",
+   "category": "street",
+   "price": 15,
+   "desc": "Dried buffalo tossed with onion, tomato, chilli and herbs.",
+   "tags": [],
+   "spice": 3,
+   "img": "p-sukuti",
+   "np": "सुकुटी"
+  },
+  {
+   "id": "buff-chilli",
+   "name": "Buff Chilli",
+   "category": "street",
+   "price": 16,
+   "desc": "Buffalo wok-tossed with peppers, onion and fresh chilli.",
+   "tags": [],
+   "spice": 3,
+   "img": "p-buff-chilli"
+  },
+  {
+   "id": "samay-baji",
+   "name": "Samay Baji",
+   "category": "street",
+   "price": 17,
+   "desc": "The Newari feast plate: beaten rice and its classic sides.",
+   "tags": [],
+   "spice": 2,
+   "img": "x-samay-baji",
+   "np": "समय बजी"
+  },
+  {
+   "id": "chow-mein",
+   "name": "Chow Mein",
+   "category": "street",
+   "price": 13,
+   "desc": "Kathmandu street-style wok-tossed noodles.",
+   "tags": [
+    "popular"
+   ],
+   "spice": 1,
+   "img": "p-chowmein",
+   "np": "चाउमिन",
+   "options": {
+    "label": "Choose",
+    "values": [
+     {
+      "name": "Vegetable"
+     },
+     {
+      "name": "Egg",
+      "add": 1
+     },
+     {
+      "name": "Chicken",
+      "add": 2
+     },
+     {
+      "name": "Buff",
+      "add": 3
+     },
+     {
+      "name": "Shrimp",
+      "add": 4
+     },
+     {
+      "name": "Mixed",
+      "add": 4
+     }
+    ]
+   }
+  },
+  {
+   "id": "thukpa",
+   "name": "Thukpa",
+   "category": "street",
+   "price": 13,
+   "desc": "Himalayan noodle soup with vegetables and warming spice.",
+   "tags": [],
+   "spice": 1,
+   "img": "p-thukpa",
+   "np": "थुक्पा",
+   "options": {
+    "label": "Choose",
+    "values": [
+     {
+      "name": "Vegetable"
+     },
+     {
+      "name": "Chicken",
+      "add": 2
+     }
+    ]
+   }
+  },
+  {
+   "id": "fried-rice",
+   "name": "Fried Rice",
+   "category": "street",
+   "price": 12,
+   "desc": "Wok-fried rice, Nepali-style.",
+   "tags": [],
+   "spice": 0,
+   "img": "p-fried-rice",
+   "options": {
+    "label": "Choose",
+    "values": [
+     {
+      "name": "Vegetable"
+     },
+     {
+      "name": "Egg",
+      "add": 1
+     },
+     {
+      "name": "Chicken",
+      "add": 2
+     },
+     {
+      "name": "Shrimp",
+      "add": 4
+     },
+     {
+      "name": "Mixed",
+      "add": 4
+     }
+    ]
+   }
+  },
+  {
+   "id": "tandoori-chicken",
+   "name": "Tandoori Chicken",
+   "category": "grill",
+   "price": 18,
+   "desc": "Bone-in chicken in yogurt and spice, roasted in the tandoor.",
+   "tags": [],
+   "spice": 1,
+   "img": "o-chicken-tandoori"
+  },
+  {
+   "id": "chicken-tikka",
+   "name": "Chicken Tikka",
+   "category": "grill",
+   "price": 18,
+   "desc": "Boneless chicken, charred and smoky.",
+   "tags": [],
+   "spice": 1,
+   "img": "o-chicken-tikka"
+  },
+  {
+   "id": "paneer-tikka",
+   "name": "Paneer Tikka",
+   "category": "grill",
+   "price": 17,
+   "desc": "Marinated paneer, charred with peppers and onion.",
+   "tags": [
+    "vegetarian"
+   ],
+   "spice": 1,
+   "img": "o-paneer-tikka"
+  },
+  {
+   "id": "lamb-chops",
+   "name": "Lamb Chops",
+   "category": "grill",
+   "price": 32,
+   "desc": "Himalayan-spiced lamb chops, flame-grilled.",
+   "tags": [],
+   "spice": 1,
+   "img": "p-lamb-chops"
+  },
+  {
+   "id": "himalayan-wild-boar-chops",
+   "name": "Himalayan Wild Boar Chops",
+   "category": "grill",
+   "price": 30,
+   "desc": "Wild boar chops with Himalayan herbs, flame-grilled and smoky.",
+   "tags": [],
+   "spice": 1,
+   "img": "p-boar-chops"
+  },
+  {
+   "id": "grilled-salmon",
+   "name": "Grilled Salmon",
+   "category": "grill",
+   "price": 26,
+   "desc": "Salmon with Himalayan herbs and citrus, flame-grilled.",
+   "tags": [],
+   "spice": 0,
+   "img": "p-grilled-salmon"
+  },
+  {
+   "id": "tandoori-shrimp",
+   "name": "Tandoori Shrimp",
+   "category": "grill",
+   "price": 24,
+   "desc": "Jumbo shrimp in yogurt and citrus, charred in the tandoor.",
+   "tags": [],
+   "spice": 1,
+   "img": "p-tandoori-shrimp"
+  },
+  {
+   "id": "mixed-grill",
+   "name": "8848 Mixed Grill",
+   "category": "grill",
+   "price": 34,
+   "desc": "The best of the tandoor and grill, served sizzling.",
+   "tags": [
+    "chef"
+   ],
+   "spice": 1,
+   "img": "o-tandoori-mixed-grill"
+  },
+  {
+   "id": "dal-tadka",
+   "name": "Dal Tadka",
+   "category": "entrees",
+   "price": 15,
+   "desc": "Yellow lentils tempered with garlic, cumin and tomato.",
+   "tags": [
+    "vegetarian"
+   ],
+   "spice": 1,
+   "img": "p-dal-tadka",
+   "group": "Vegetarian"
+  },
+  {
+   "id": "dal-makhani",
+   "name": "Dal Makhani",
+   "category": "entrees",
+   "price": 16,
+   "desc": "Black lentils, slow-simmered with butter and cream.",
+   "tags": [
+    "vegetarian"
+   ],
+   "spice": 0,
+   "img": "dal-makhani",
+   "group": "Vegetarian"
+  },
+  {
+   "id": "palak-paneer",
+   "name": "Palak Paneer",
+   "category": "entrees",
+   "price": 17,
+   "desc": "Paneer in silky garlic spinach.",
+   "tags": [
+    "vegetarian"
+   ],
+   "spice": 1,
+   "img": "o-saag-paneer",
+   "group": "Vegetarian"
+  },
+  {
+   "id": "shahi-paneer",
+   "name": "Shahi Paneer",
+   "category": "entrees",
+   "price": 17,
+   "desc": "Paneer in a rich cashew cream sauce.",
+   "tags": [
+    "vegetarian",
+    "nuts"
+   ],
+   "spice": 0,
+   "img": "o-paneer-tikka-masala",
+   "group": "Vegetarian"
+  },
+  {
+   "id": "aloo-gobi",
+   "name": "Aloo Gobi",
+   "category": "entrees",
+   "price": 15,
+   "desc": "Potato and cauliflower with tomato and ginger.",
+   "tags": [
+    "vegetarian"
+   ],
+   "spice": 1,
+   "img": "x-aloo-gobi",
+   "group": "Vegetarian"
+  },
+  {
+   "id": "butter-chicken",
+   "name": "Butter Chicken",
+   "category": "entrees",
+   "price": 19,
+   "desc": "Tandoor-roasted chicken in tomato-butter cream.",
+   "tags": [
+    "popular"
+   ],
+   "spice": 1,
+   "img": "o-butter-chicken",
+   "group": "Chicken"
+  },
+  {
+   "id": "chicken-tikka-masala",
+   "name": "Chicken Tikka Masala",
+   "category": "entrees",
+   "price": 19,
+   "desc": "Charred tikka in a bold tomato-cream masala.",
+   "tags": [
+    "popular"
+   ],
+   "spice": 2,
+   "img": "o-chicken-tikka-masala",
+   "group": "Chicken"
+  },
+  {
+   "id": "chicken-saag",
+   "name": "Chicken Saag",
+   "category": "entrees",
+   "price": 18,
+   "desc": "Chicken simmered in spiced spinach.",
+   "tags": [],
+   "spice": 1,
+   "img": "x-chicken-saag",
+   "group": "Chicken"
+  },
+  {
+   "id": "chicken-curry",
+   "name": "Chicken Curry",
+   "category": "entrees",
+   "price": 18,
+   "desc": "Homestyle curry with onion, tomato and warm spice.",
+   "tags": [],
+   "spice": 2,
+   "img": "o-chicken-curry",
+   "group": "Chicken"
+  },
+  {
+   "id": "chicken-kadai",
+   "name": "Chicken Kadai",
+   "category": "entrees",
+   "price": 18,
+   "desc": "Peppers, onion, tomato and freshly crushed spices.",
+   "tags": [],
+   "spice": 2,
+   "img": "p-kadai",
+   "group": "Chicken"
+  },
+  {
+   "id": "chicken-vindaloo",
+   "name": "Chicken Vindaloo",
+   "category": "entrees",
+   "price": 18,
+   "desc": "Hot, tangy and heavy on the garlic.",
+   "tags": [],
+   "spice": 4,
+   "img": "p-vindaloo",
+   "group": "Chicken"
+  },
+  {
+   "id": "chicken-korma",
+   "name": "Chicken Korma",
+   "category": "entrees",
+   "price": 19,
+   "desc": "Mild and creamy, with cashew.",
+   "tags": [
+    "nuts"
+   ],
+   "spice": 0,
+   "img": "o-pistachio-chicken-korma",
+   "group": "Chicken"
+  },
+  {
+   "id": "lamb-curry",
+   "name": "Lamb Curry",
+   "category": "entrees",
+   "price": 21,
+   "desc": "Lamb slow-cooked with onion and tomato.",
+   "tags": [],
+   "spice": 2,
+   "img": "o-rogan-josh",
+   "group": "Lamb"
+  },
+  {
+   "id": "lamb-kadai",
+   "name": "Lamb Kadai",
+   "category": "entrees",
+   "price": 21,
+   "desc": "Lamb with peppers, onion and crushed spices.",
+   "tags": [],
+   "spice": 2,
+   "img": "p-kadai",
+   "group": "Lamb"
+  },
+  {
+   "id": "lamb-saag",
+   "name": "Lamb Saag",
+   "category": "entrees",
+   "price": 21,
+   "desc": "Slow-cooked lamb in spiced spinach.",
+   "tags": [],
+   "spice": 1,
+   "img": "x-lamb-saag",
+   "group": "Lamb"
+  },
+  {
+   "id": "goat-curry",
+   "name": "Goat Curry",
+   "category": "entrees",
+   "price": 20,
+   "desc": "Bone-in goat, Himalayan homestyle.",
+   "tags": [],
+   "spice": 2,
+   "img": "goat-curry",
+   "group": "Goat"
+  },
+  {
+   "id": "goat-kadai",
+   "name": "Goat Kadai",
+   "category": "entrees",
+   "price": 20,
+   "desc": "Goat with peppers, onion, tomato and ginger.",
+   "tags": [],
+   "spice": 2,
+   "img": "p-kadai",
+   "group": "Goat"
+  },
+  {
+   "id": "fish-curry",
+   "name": "Fish Curry",
+   "category": "entrees",
+   "price": 20,
+   "desc": "Fish in a ginger-garlic house curry.",
+   "tags": [],
+   "spice": 2,
+   "img": "p-fish-curry",
+   "group": "Seafood"
+  },
+  {
+   "id": "butter-shrimp",
+   "name": "Butter Shrimp",
+   "category": "entrees",
+   "price": 22,
+   "desc": "Shrimp in tomato-butter cream.",
+   "tags": [],
+   "spice": 1,
+   "img": "p-butter-shrimp",
+   "group": "Seafood"
+  },
+  {
+   "id": "coconut-shrimp-curry",
+   "name": "Coconut Shrimp Curry",
+   "category": "entrees",
+   "price": 22,
+   "desc": "Shrimp in a fragrant coconut curry.",
+   "tags": [],
+   "spice": 2,
+   "img": "p-coconut-shrimp",
+   "group": "Seafood"
+  },
+  {
+   "id": "nepali-thali",
+   "name": "8848 Signature Nepali Thali",
+   "category": "signatures",
+   "price": 20,
+   "desc": "Rice, dal, seasonal tarkari, saag, achar and papad — dal bhat, done properly.",
+   "tags": [
+    "chef"
+   ],
+   "spice": 2,
+   "img": "p-dal-bhat",
+   "np": "दाल भात",
+   "options": {
+    "label": "Choose",
+    "values": [
+     {
+      "name": "Vegetable"
+     },
+     {
+      "name": "Chicken",
+      "add": 3
+     },
+     {
+      "name": "Fish",
+      "add": 4
+     },
+     {
+      "name": "Goat",
+      "add": 5
+     },
+     {
+      "name": "Lamb",
+      "add": 5
+     }
+    ]
+   }
+  },
+  {
+   "id": "traditional-dhido-set",
+   "name": "Traditional Dhido Set",
+   "category": "signatures",
+   "price": 20,
+   "desc": "Hand-stirred dhido with dal, tarkari, saag and achar.",
+   "tags": [],
+   "spice": 2,
+   "img": "x-traditional-dhido-set",
+   "np": "ढिंडो",
+   "options": {
+    "label": "Choose",
+    "values": [
+     {
+      "name": "Vegetable"
+     },
+     {
+      "name": "Chicken",
+      "add": 3
+     },
+     {
+      "name": "Goat",
+      "add": 5
+     },
+     {
+      "name": "Lamb",
+      "add": 5
+     }
+    ]
+   }
+  },
+  {
+   "id": "traditional-khaja-set",
+   "name": "Traditional Khaja Set",
+   "category": "signatures",
+   "price": 16,
+   "desc": "Beaten rice with savory sides and achar.",
+   "tags": [],
+   "spice": 2,
+   "img": "x-traditional-khaja-set",
+   "np": "खाजा सेट",
+   "options": {
+    "label": "Choose",
+    "values": [
+     {
+      "name": "Vegetarian"
+     },
+     {
+      "name": "Non-vegetarian",
+      "add": 3
+     }
+    ]
+   }
+  },
+  {
+   "id": "himalayan-vegetable-biryani",
+   "name": "Himalayan Vegetable Biryani",
+   "category": "biryani",
+   "price": 17,
+   "desc": "Seasonal vegetables, saffron, herbs.",
+   "tags": [
+    "vegetarian"
+   ],
+   "spice": 1,
+   "img": "biryani-veg"
+  },
+  {
+   "id": "royal-chicken-biryani",
+   "name": "Royal Chicken Biryani",
+   "category": "biryani",
+   "price": 19,
+   "desc": "Spiced chicken, saffron, mint.",
+   "tags": [
+    "popular"
+   ],
+   "spice": 2,
+   "img": "o-chicken-biryani"
+  },
+  {
+   "id": "everest-goat-biryani",
+   "name": "Everest Goat Biryani",
+   "category": "biryani",
+   "price": 22,
+   "desc": "Slow-cooked goat, saffron, Himalayan spices.",
+   "tags": [],
+   "spice": 2,
+   "img": "o-goat-biryani"
+  },
+  {
+   "id": "lamb-biryani",
+   "name": "8848 Lamb Biryani",
+   "category": "biryani",
+   "price": 22,
+   "desc": "Tender lamb, saffron, mint.",
+   "tags": [],
+   "spice": 2,
+   "img": "p-lamb-biryani"
+  },
+  {
+   "id": "coastal-shrimp-biryani",
+   "name": "Coastal Shrimp Biryani",
+   "category": "biryani",
+   "price": 23,
+   "desc": "Spiced shrimp, saffron, fresh herbs.",
+   "tags": [],
+   "spice": 2,
+   "img": "p-shrimp-biryani"
+  },
+  {
+   "id": "grand-biryani",
+   "name": "8848 Grand Biryani",
+   "category": "biryani",
+   "price": 26,
+   "desc": "Chicken, lamb and shrimp in one pot.",
+   "tags": [],
+   "spice": 2,
+   "img": "p-grand-biryani"
+  },
+  {
+   "id": "butter-chicken-sandwich",
+   "name": "Butter Chicken Sandwich",
+   "category": "fusion",
+   "price": 15,
+   "desc": "Butter chicken, lettuce and onion on toasted brioche.",
+   "tags": [],
+   "spice": 1,
+   "img": "p-bc-sandwich"
+  },
+  {
+   "id": "buttermilk-chicken-sandwich",
+   "name": "Buttermilk Chicken Sandwich",
+   "category": "fusion",
+   "price": 14,
+   "desc": "Crispy buttermilk chicken, pickles and house sauce on brioche.",
+   "tags": [],
+   "spice": 0,
+   "img": "p-buttermilk-sandwich"
+  },
+  {
+   "id": "honey-glazed-spiced-chicken-wings",
+   "name": "Honey-Glazed Spiced Chicken Wings",
+   "category": "fusion",
+   "price": 15,
+   "desc": "Crispy wings in a spiced honey glaze.",
+   "tags": [],
+   "spice": 1,
+   "img": "p-wings"
+  },
+  {
+   "id": "roti",
+   "name": "Roti",
+   "category": "breads",
+   "price": 3.5,
+   "desc": "Whole-wheat, baked in the tandoor.",
+   "tags": [
+    "vegetarian"
+   ],
+   "spice": 0,
+   "img": "o-roti"
+  },
+  {
+   "id": "butter-naan",
+   "name": "Butter Naan",
+   "category": "breads",
+   "price": 3.5,
+   "desc": "Soft, blistered, buttered.",
+   "tags": [
+    "vegetarian"
+   ],
+   "spice": 0,
+   "img": "o-naan"
+  },
+  {
+   "id": "garlic-naan",
+   "name": "Garlic Naan",
+   "category": "breads",
+   "price": 4.5,
+   "desc": "Garlic, herbs, butter.",
+   "tags": [
+    "vegetarian",
+    "popular"
+   ],
+   "spice": 0,
+   "img": "o-garlic-naan"
+  },
+  {
+   "id": "cheese-naan",
+   "name": "Cheese Naan",
+   "category": "breads",
+   "price": 5.5,
+   "desc": "Filled with melted cheese.",
+   "tags": [
+    "vegetarian"
+   ],
+   "spice": 0,
+   "img": "o-paneer-naan"
+  },
+  {
+   "id": "aloo-paratha",
+   "name": "Aloo Paratha",
+   "category": "breads",
+   "price": 6,
+   "desc": "Whole-wheat flatbread stuffed with spiced potato.",
+   "tags": [
+    "vegetarian"
+   ],
+   "spice": 0,
+   "img": "p-aloo-paratha"
+  },
+  {
+   "id": "sweet-naan",
+   "name": "Sweet Naan",
+   "category": "breads",
+   "price": 6,
+   "desc": "Filled with nuts and dried fruit.",
+   "tags": [
+    "vegetarian",
+    "nuts"
+   ],
+   "spice": 0,
+   "img": "x-sweet-naan"
+  },
+  {
+   "id": "momo-mountain",
+   "name": "Momo Mountain",
+   "category": "kids",
+   "price": 9,
+   "desc": "Steamed chicken momo, mild dipping sauce.",
+   "tags": [],
+   "spice": 0,
+   "img": "o-chicken-momo"
+  },
+  {
+   "id": "everest-chicken-tender-combo",
+   "name": "Everest Chicken Tender Combo",
+   "category": "kids",
+   "price": 9,
+   "desc": "Crispy chicken tenders and fries.",
+   "tags": [],
+   "spice": 0,
+   "img": "p-chicken-tenders"
+  },
+  {
+   "id": "little-explorer-chow-mein",
+   "name": "Little Explorer Chow Mein",
+   "category": "kids",
+   "price": 9,
+   "desc": "Mild wok noodles.",
+   "tags": [],
+   "spice": 0,
+   "img": "p-chowmein",
+   "options": {
+    "label": "Choose",
+    "values": [
+     {
+      "name": "Vegetable"
+     },
+     {
+      "name": "Chicken"
+     }
+    ]
+   }
+  },
+  {
+   "id": "cheesy-naan-combo",
+   "name": "Cheesy Naan Combo",
+   "category": "kids",
+   "price": 9,
+   "desc": "Warm cheese naan and fries.",
+   "tags": [
+    "vegetarian"
+   ],
+   "spice": 0,
+   "img": "o-paneer-naan"
+  },
+  {
+   "id": "gulab-jamun",
+   "name": "Gulab Jamun",
+   "category": "desserts",
+   "price": 6,
+   "desc": "Warm milk dumplings in cardamom-rose syrup.",
+   "tags": [
+    "vegetarian"
+   ],
+   "spice": 0,
+   "img": "o-gulab-jamun"
+  },
+  {
+   "id": "rasmalai",
+   "name": "Rasmalai",
+   "category": "desserts",
+   "price": 7,
+   "desc": "Soft cheese dumplings in saffron-cardamom milk, pistachio.",
+   "tags": [
+    "vegetarian",
+    "nuts"
+   ],
+   "spice": 0,
+   "img": "x-rasmalai"
+  },
+  {
+   "id": "kheer",
+   "name": "Kheer",
+   "category": "desserts",
+   "price": 6,
+   "desc": "Slow-cooked rice pudding, cardamom and nuts.",
+   "tags": [
+    "vegetarian",
+    "nuts"
+   ],
+   "spice": 0,
+   "img": "p-kheer"
+  },
+  {
+   "id": "nepali-masala-chiya",
+   "name": "Nepali Masala Chiya",
+   "category": "drinks",
+   "price": 4,
+   "desc": "Milk tea brewed with warming spices.",
+   "tags": [],
+   "spice": 0,
+   "img": "chai",
+   "group": "Tea & coffee",
+   "np": "मसला चिया"
+  },
+  {
+   "id": "fresh-ginger-tea",
+   "name": "Fresh Ginger Tea",
+   "category": "drinks",
+   "price": 3.5,
+   "desc": "Fresh ginger, steeped strong.",
+   "tags": [],
+   "spice": 0,
+   "img": "p-ginger-tea",
+   "group": "Tea & coffee"
+  },
+  {
+   "id": "himalayan-honey-lemon-tea",
+   "name": "Himalayan Honey Lemon Tea",
+   "category": "drinks",
+   "price": 4,
+   "desc": "Lemon, honey, ginger.",
+   "tags": [],
+   "spice": 0,
+   "img": "p-honey-lemon-tea",
+   "group": "Tea & coffee"
+  },
+  {
+   "id": "green-tea",
+   "name": "Green Tea",
+   "category": "drinks",
+   "price": 3,
+   "desc": "Clean, delicate, refreshing.",
+   "tags": [],
+   "spice": 0,
+   "img": "p-green-tea",
+   "group": "Tea & coffee"
+  },
+  {
+   "id": "fresh-brewed-coffee",
+   "name": "Fresh Brewed Coffee",
+   "category": "drinks",
+   "price": 3,
+   "desc": "Freshly brewed.",
+   "tags": [],
+   "spice": 0,
+   "img": "p-coffee",
+   "group": "Tea & coffee",
+   "options": {
+    "label": "How you take it",
+    "values": [
+     {
+      "name": "Black"
+     },
+     {
+      "name": "With milk"
+     }
+    ]
+   }
+  },
+  {
+   "id": "mango-lassi",
+   "name": "Mango Lassi",
+   "category": "drinks",
+   "price": 5.5,
+   "desc": "Mango and chilled yogurt, blended smooth.",
+   "tags": [
+    "popular"
+   ],
+   "spice": 0,
+   "img": "o-mango-lassi",
+   "group": "Cold & refreshing"
+  },
+  {
+   "id": "sweet-lassi",
+   "name": "Sweet Lassi",
+   "category": "drinks",
+   "price": 5,
+   "desc": "Chilled yogurt, lightly sweetened.",
+   "tags": [],
+   "spice": 0,
+   "img": "lassi",
+   "group": "Cold & refreshing"
+  },
+  {
+   "id": "himalayan-lemonade",
+   "name": "8848 Himalayan Lemonade",
+   "category": "drinks",
+   "price": 5,
+   "desc": "Lemon, mint, Himalayan salt.",
+   "tags": [],
+   "spice": 0,
+   "img": "p-ginger-lemonade",
+   "group": "Cold & refreshing"
+  },
+  {
+   "id": "fresh-lime-soda",
+   "name": "Fresh Lime Soda",
+   "category": "drinks",
+   "price": 4.5,
+   "desc": "",
+   "tags": [],
+   "spice": 0,
+   "img": "p-lime-soda",
+   "group": "Cold & refreshing",
+   "options": {
+    "label": "Style",
+    "values": [
+     {
+      "name": "Sweet"
+     },
+     {
+      "name": "Salted"
+     },
+     {
+      "name": "Mixed"
+     }
+    ]
+   }
+  },
+  {
+   "id": "fresh-brewed-iced-tea",
+   "name": "Fresh-Brewed Iced Tea",
+   "category": "drinks",
+   "price": 3.5,
+   "desc": "",
+   "tags": [],
+   "spice": 0,
+   "img": "p-iced-tea",
+   "group": "Cold & refreshing",
+   "options": {
+    "label": "Sweetness",
+    "values": [
+     {
+      "name": "Sweet"
+     },
+     {
+      "name": "Unsweetened"
+     }
+    ]
+   }
+  },
+  {
+   "id": "soft-drinks",
+   "name": "Soft Drinks",
+   "category": "drinks",
+   "price": 3,
+   "desc": "",
+   "tags": [],
+   "spice": 0,
+   "img": "soda",
+   "group": "Cold & refreshing",
+   "options": {
+    "label": "Your drink",
+    "values": [
+     {
+      "name": "Coca-Cola"
+     },
+     {
+      "name": "Diet Coke"
+     },
+     {
+      "name": "Sprite"
+     },
+     {
+      "name": "Ginger Ale"
+     }
+    ]
+   }
+  },
+  {
+   "id": "san-pellegrino-sparkling-water",
+   "name": "San Pellegrino Sparkling Water",
+   "category": "drinks",
+   "price": 4,
+   "desc": "",
+   "tags": [],
+   "spice": 0,
+   "img": "x-san-pellegrino-sparkling-water",
+   "group": "Cold & refreshing"
+  },
+  {
+   "id": "acqua-panna-still-water",
+   "name": "Acqua Panna Still Water",
+   "category": "drinks",
+   "price": 4,
+   "desc": "",
+   "tags": [],
+   "spice": 0,
+   "img": "x-acqua-panna-still-water",
+   "group": "Cold & refreshing"
+  },
+  {
+   "id": "summit-cocktail",
+   "name": "8848 Summit",
+   "category": "bar",
+   "price": 15,
+   "desc": "8848 Vodka, lychee, elderflower, fresh lime, sparkling wine.",
+   "tags": [
+    "chef"
+   ],
+   "spice": 0,
+   "img": "x-summit-cocktail",
+   "group": "Signature cocktails",
+   "kind": "cocktail",
+   "notes": "Floral · crisp · elegant"
+  },
+  {
+   "id": "kathmandu-old-fashioned",
+   "name": "Kathmandu Old Fashioned",
+   "category": "bar",
+   "price": 15,
+   "desc": "Old Durbar whisky, demerara, aromatic bitters, orange.",
+   "tags": [
+    "chef"
+   ],
+   "spice": 0,
+   "img": "p-old-fashioned",
+   "group": "Signature cocktails",
+   "kind": "cocktail",
+   "notes": "Rich · spirit-forward"
+  },
+  {
+   "id": "khukri-mule",
+   "name": "Khukri Mule",
+   "category": "bar",
+   "price": 13,
+   "desc": "Khukri rum, fresh lime, ginger beer.",
+   "tags": [],
+   "spice": 0,
+   "img": "p-mule",
+   "group": "Signature cocktails",
+   "kind": "cocktail",
+   "notes": "Bright · spiced"
+  },
+  {
+   "id": "timmur-margarita",
+   "name": "Timmur Margarita",
+   "category": "bar",
+   "price": 14,
+   "desc": "Reposado tequila, orange liqueur, fresh lime, agave, timmur salt.",
+   "tags": [
+    "popular"
+   ],
+   "spice": 0,
+   "img": "p-margarita",
+   "group": "Signature cocktails",
+   "kind": "cocktail",
+   "notes": "Citrus · Himalayan spice"
+  },
+  {
+   "id": "everest-garden",
+   "name": "Everest Garden",
+   "category": "bar",
+   "price": 14,
+   "desc": "Gin, elderflower, white peach, lime, cucumber, soda.",
+   "tags": [],
+   "spice": 0,
+   "img": "p-everest-garden",
+   "group": "Signature cocktails",
+   "kind": "cocktail",
+   "notes": "Floral · crisp"
+  },
+  {
+   "id": "everest-cooler",
+   "name": "Everest Cooler",
+   "category": "bar",
+   "price": 8,
+   "desc": "Lychee, fresh lime, mint, sparkling soda.",
+   "tags": [],
+   "spice": 0,
+   "img": "p-mocktail",
+   "group": "Zero-proof",
+   "kind": "zero",
+   "notes": "Floral · bright"
+  },
+  {
+   "id": "himalayan-sunset",
+   "name": "Himalayan Sunset",
+   "category": "bar",
+   "price": 8,
+   "desc": "Mango, passion fruit, citrus, sparkling soda.",
+   "tags": [],
+   "spice": 0,
+   "img": "p-himalayan-sunset",
+   "group": "Zero-proof",
+   "kind": "zero",
+   "notes": "Tropical · vibrant"
+  },
+  {
+   "id": "kathmandu-garden",
+   "name": "Kathmandu Garden",
+   "category": "bar",
+   "price": 8,
+   "desc": "Cucumber, mint, elderflower, lime, soda.",
+   "tags": [],
+   "spice": 0,
+   "img": "p-kathmandu-garden",
+   "group": "Zero-proof",
+   "kind": "zero",
+   "notes": "Fresh · botanical"
+  },
+  {
+   "id": "timmur-ginger-fizz",
+   "name": "Timmur Ginger Fizz",
+   "category": "bar",
+   "price": 8,
+   "desc": "Fresh ginger, lime, honey, timmur, sparkling soda.",
+   "tags": [],
+   "spice": 0,
+   "img": "p-ginger-fizz",
+   "group": "Zero-proof",
+   "kind": "zero",
+   "notes": "Zesty · spiced"
+  },
+  {
+   "id": "la-marca-prosecco",
+   "name": "La Marca Prosecco",
+   "category": "bar",
+   "price": 11,
+   "desc": "Citrus · green apple · crisp",
+   "tags": [],
+   "spice": 0,
+   "img": "x-la-marca-prosecco",
+   "group": "Sparkling",
+   "kind": "wine",
+   "options": {
+    "label": "Pour",
+    "values": [
+     {
+      "name": "Glass"
+     },
+     {
+      "name": "Bottle",
+      "add": 31
+     }
+    ]
+   },
+   "priceLabel": "$11 / $42"
+  },
+  {
+   "id": "kim-crawford-sauvignon-blanc",
+   "name": "Kim Crawford Sauvignon Blanc",
+   "category": "bar",
+   "price": 12,
+   "desc": "Passion fruit · citrus · fresh herbs",
+   "tags": [],
+   "spice": 0,
+   "img": "p-white-wine",
+   "group": "White",
+   "kind": "wine",
+   "options": {
+    "label": "Pour",
+    "values": [
+     {
+      "name": "Glass"
+     },
+     {
+      "name": "Bottle",
+      "add": 32
+     }
+    ]
+   },
+   "priceLabel": "$12 / $44"
+  },
+  {
+   "id": "kendall-jackson-vintners-reserve-chardonnay",
+   "name": "Kendall-Jackson Vintner's Reserve Chardonnay",
+   "category": "bar",
+   "price": 12,
+   "desc": "Golden apple · vanilla · toasted oak",
+   "tags": [],
+   "spice": 0,
+   "img": "p-white-wine",
+   "group": "White",
+   "kind": "wine",
+   "options": {
+    "label": "Pour",
+    "values": [
+     {
+      "name": "Glass"
+     },
+     {
+      "name": "Bottle",
+      "add": 32
+     }
+    ]
+   },
+   "priceLabel": "$12 / $44"
+  },
+  {
+   "id": "chateau-ste-michelle-riesling",
+   "name": "Chateau Ste. Michelle Riesling",
+   "category": "bar",
+   "price": 10,
+   "desc": "Peach · citrus · off-dry",
+   "tags": [],
+   "spice": 0,
+   "img": "p-white-wine",
+   "group": "White",
+   "kind": "wine",
+   "options": {
+    "label": "Pour",
+    "values": [
+     {
+      "name": "Glass"
+     },
+     {
+      "name": "Bottle",
+      "add": 26
+     }
+    ]
+   },
+   "priceLabel": "$10 / $36"
+  },
+  {
+   "id": "whispering-angel-rose",
+   "name": "Whispering Angel Rosé",
+   "category": "bar",
+   "price": 15,
+   "desc": "Dry · red berries · citrus",
+   "tags": [],
+   "spice": 0,
+   "img": "x-whispering-angel-rose",
+   "group": "Rosé",
+   "kind": "wine",
+   "options": {
+    "label": "Pour",
+    "values": [
+     {
+      "name": "Glass"
+     },
+     {
+      "name": "Bottle",
+      "add": 41
+     }
+    ]
+   },
+   "priceLabel": "$15 / $56"
+  },
+  {
+   "id": "meiomi-pinot-noir",
+   "name": "Meiomi Pinot Noir",
+   "category": "bar",
+   "price": 13,
+   "desc": "Red fruit · mocha · soft spice",
+   "tags": [],
+   "spice": 0,
+   "img": "p-red-wine",
+   "group": "Red",
+   "kind": "wine",
+   "options": {
+    "label": "Pour",
+    "values": [
+     {
+      "name": "Glass"
+     },
+     {
+      "name": "Bottle",
+      "add": 35
+     }
+    ]
+   },
+   "priceLabel": "$13 / $48"
+  },
+  {
+   "id": "josh-cellars-cabernet-sauvignon",
+   "name": "Josh Cellars Cabernet Sauvignon",
+   "category": "bar",
+   "price": 12,
+   "desc": "Blackberry · dark cherry · oak",
+   "tags": [],
+   "spice": 0,
+   "img": "p-red-wine",
+   "group": "Red",
+   "kind": "wine",
+   "options": {
+    "label": "Pour",
+    "values": [
+     {
+      "name": "Glass"
+     },
+     {
+      "name": "Bottle",
+      "add": 32
+     }
+    ]
+   },
+   "priceLabel": "$12 / $44"
+  },
+  {
+   "id": "alamos-malbec",
+   "name": "Alamos Malbec",
+   "category": "bar",
+   "price": 11,
+   "desc": "Plum · blackberry · warm spice",
+   "tags": [],
+   "spice": 0,
+   "img": "p-red-wine",
+   "group": "Red",
+   "kind": "wine",
+   "options": {
+    "label": "Pour",
+    "values": [
+     {
+      "name": "Glass"
+     },
+     {
+      "name": "Bottle",
+      "add": 29
+     }
+    ]
+   },
+   "priceLabel": "$11 / $40"
+  },
+  {
+   "id": "modelo-especial",
+   "name": "Modelo Especial",
+   "category": "bar",
+   "price": 7,
+   "desc": "Crisp · clean",
+   "tags": [],
+   "spice": 0,
+   "img": "p-lager",
+   "group": "On draft",
+   "kind": "beer"
+  },
+  {
+   "id": "virginia-craft-ipa",
+   "name": "Virginia Craft IPA",
+   "category": "bar",
+   "price": 8,
+   "desc": "Rotating local selection · hoppy",
+   "tags": [],
+   "spice": 0,
+   "img": "p-ipa",
+   "group": "On draft",
+   "kind": "beer"
+  },
+  {
+   "id": "kingfisher-premium-lager",
+   "name": "Kingfisher Premium Lager",
+   "category": "bar",
+   "price": 7,
+   "desc": "Light · crisp",
+   "tags": [],
+   "spice": 0,
+   "img": "p-lager",
+   "group": "Bottled",
+   "kind": "beer"
+  },
+  {
+   "id": "taj-mahal-premium-lager",
+   "name": "Taj Mahal Premium Lager",
+   "category": "bar",
+   "price": 7,
+   "desc": "Clean · balanced",
+   "tags": [],
+   "spice": 0,
+   "img": "p-lager",
+   "group": "Bottled",
+   "kind": "beer"
+  },
+  {
+   "id": "corona-extra",
+   "name": "Corona Extra",
+   "category": "bar",
+   "price": 6,
+   "desc": "Crisp · light",
+   "tags": [],
+   "spice": 0,
+   "img": "x-corona-extra",
+   "group": "Bottled",
+   "kind": "beer"
+  },
+  {
+   "id": "heineken",
+   "name": "Heineken",
+   "category": "bar",
+   "price": 6,
+   "desc": "Balanced · bright",
+   "tags": [],
+   "spice": 0,
+   "img": "x-heineken",
+   "group": "Bottled",
+   "kind": "beer"
+  },
+  {
+   "id": "michelob-ultra",
+   "name": "Michelob Ultra",
+   "category": "bar",
+   "price": 5,
+   "desc": "Light · clean",
+   "tags": [],
+   "spice": 0,
+   "img": "x-michelob-ultra",
+   "group": "Bottled",
+   "kind": "beer"
+  },
+  {
+   "id": "8848-vodka",
+   "name": "8848 Vodka",
+   "category": "bar",
+   "price": 10,
+   "desc": "Clean · silky",
+   "tags": [],
+   "spice": 0,
+   "img": "x-8848-vodka",
+   "group": "Nepal Reserve",
+   "kind": "spirit"
+  },
+  {
+   "id": "old-durbar-black-chimney-whisky",
+   "name": "Old Durbar Black Chimney Whisky",
+   "category": "bar",
+   "price": 12,
+   "desc": "Rich · oak · warm spice",
+   "tags": [],
+   "spice": 0,
+   "img": "x-old-durbar-black-chimney-whisky",
+   "group": "Nepal Reserve",
+   "kind": "spirit"
+  },
+  {
+   "id": "khukri-xxx-rum",
+   "name": "Khukri XXX Rum",
+   "category": "bar",
+   "price": 10,
+   "desc": "Caramel · warm spice",
+   "tags": [],
+   "spice": 0,
+   "img": "p-dark-rum",
+   "group": "Nepal Reserve",
+   "kind": "spirit"
+  },
+  {
+   "id": "titos-handmade",
+   "name": "Tito's Handmade",
+   "category": "bar",
+   "price": 10,
+   "desc": "Clean · smooth",
+   "tags": [],
+   "spice": 0,
+   "img": "x-titos-handmade",
+   "group": "Vodka",
+   "kind": "spirit"
+  },
+  {
+   "id": "grey-goose",
+   "name": "Grey Goose",
+   "category": "bar",
+   "price": 12,
+   "desc": "Soft · refined",
+   "tags": [],
+   "spice": 0,
+   "img": "x-grey-goose",
+   "group": "Vodka",
+   "kind": "spirit"
+  },
+  {
+   "id": "makers-mark",
+   "name": "Maker's Mark",
+   "category": "bar",
+   "price": 11,
+   "desc": "Caramel · vanilla",
+   "tags": [],
+   "spice": 0,
+   "img": "x-makers-mark",
+   "group": "Bourbon & Whiskey",
+   "kind": "spirit"
+  },
+  {
+   "id": "woodford-reserve",
+   "name": "Woodford Reserve",
+   "category": "bar",
+   "price": 13,
+   "desc": "Toasted oak · caramel · spice",
+   "tags": [],
+   "spice": 0,
+   "img": "x-woodford-reserve",
+   "group": "Bourbon & Whiskey",
+   "kind": "spirit"
+  },
+  {
+   "id": "bulleit-bourbon",
+   "name": "Bulleit Bourbon",
+   "category": "bar",
+   "price": 11,
+   "desc": "Oak · vanilla · bold spice",
+   "tags": [],
+   "spice": 0,
+   "img": "x-bulleit-bourbon",
+   "group": "Bourbon & Whiskey",
+   "kind": "spirit"
+  },
+  {
+   "id": "jack-daniels-old-no-7",
+   "name": "Jack Daniel's Old No. 7",
+   "category": "bar",
+   "price": 10,
+   "desc": "Caramel · mellow",
+   "tags": [],
+   "spice": 0,
+   "img": "x-jack-daniels-old-no-7",
+   "group": "Bourbon & Whiskey",
+   "kind": "spirit"
+  },
+  {
+   "id": "jameson-irish-whiskey",
+   "name": "Jameson Irish Whiskey",
+   "category": "bar",
+   "price": 10,
+   "desc": "Smooth · vanilla",
+   "tags": [],
+   "spice": 0,
+   "img": "x-jameson-irish-whiskey",
+   "group": "Bourbon & Whiskey",
+   "kind": "spirit"
+  },
+  {
+   "id": "johnnie-walker-black-label",
+   "name": "Johnnie Walker Black Label",
+   "category": "bar",
+   "price": 13,
+   "desc": "Smoky · vanilla · dried fruit",
+   "tags": [],
+   "spice": 0,
+   "img": "x-johnnie-walker-black-label",
+   "group": "Scotch",
+   "kind": "spirit"
+  },
+  {
+   "id": "the-glenlivet-12",
+   "name": "The Glenlivet 12",
+   "category": "bar",
+   "price": 14,
+   "desc": "Orchard fruit · vanilla",
+   "tags": [],
+   "spice": 0,
+   "img": "x-the-glenlivet-12",
+   "group": "Scotch",
+   "kind": "spirit"
+  },
+  {
+   "id": "glenfiddich-12",
+   "name": "Glenfiddich 12",
+   "category": "bar",
+   "price": 14,
+   "desc": "Pear · oak · malt",
+   "tags": [],
+   "spice": 0,
+   "img": "x-glenfiddich-12",
+   "group": "Scotch",
+   "kind": "spirit"
+  },
+  {
+   "id": "lunazul-blanco",
+   "name": "Lunazul Blanco",
+   "category": "bar",
+   "price": 9,
+   "desc": "Bright agave · citrus · pepper",
+   "tags": [],
+   "spice": 0,
+   "img": "x-lunazul-blanco",
+   "group": "Tequila",
+   "kind": "spirit"
+  },
+  {
+   "id": "patron-silver",
+   "name": "Patrón Silver",
+   "category": "bar",
+   "price": 13,
+   "desc": "Fresh agave · citrus",
+   "tags": [],
+   "spice": 0,
+   "img": "x-patron-silver",
+   "group": "Tequila",
+   "kind": "spirit"
+  },
+  {
+   "id": "don-julio-reposado",
+   "name": "Don Julio Reposado",
+   "category": "bar",
+   "price": 14,
+   "desc": "Agave · vanilla · warm oak",
+   "tags": [],
+   "spice": 0,
+   "img": "x-don-julio-reposado",
+   "group": "Tequila",
+   "kind": "spirit"
+  },
+  {
+   "id": "bacardi-superior",
+   "name": "Bacardi Superior",
+   "category": "bar",
+   "price": 9,
+   "desc": "Light · clean",
+   "tags": [],
+   "spice": 0,
+   "img": "x-bacardi-superior",
+   "group": "Rum",
+   "kind": "spirit"
+  },
+  {
+   "id": "captain-morgan-spiced",
+   "name": "Captain Morgan Spiced",
+   "category": "bar",
+   "price": 9,
+   "desc": "Vanilla · caramel · spice",
+   "tags": [],
+   "spice": 0,
+   "img": "x-captain-morgan-spiced",
+   "group": "Rum",
+   "kind": "spirit"
+  },
+  {
+   "id": "tanqueray",
+   "name": "Tanqueray",
+   "category": "bar",
+   "price": 10,
+   "desc": "Juniper · citrus · classic dry",
+   "tags": [],
+   "spice": 0,
+   "img": "x-tanqueray",
+   "group": "Gin",
+   "kind": "spirit"
+  },
+  {
+   "id": "bombay-sapphire",
+   "name": "Bombay Sapphire",
+   "category": "bar",
+   "price": 10,
+   "desc": "Botanical · citrus",
+   "tags": [],
+   "spice": 0,
+   "img": "x-bombay-sapphire",
+   "group": "Gin",
+   "kind": "spirit"
+  },
+  {
+   "id": "hendricks",
+   "name": "Hendrick's",
+   "category": "bar",
+   "price": 12,
+   "desc": "Cucumber · rose",
+   "tags": [],
+   "spice": 0,
+   "img": "x-hendricks",
+   "group": "Gin",
+   "kind": "spirit"
+  },
+  {
+   "id": "hennessy-vs",
+   "name": "Hennessy VS",
+   "category": "bar",
+   "price": 13,
+   "desc": "Fruit · toasted oak",
+   "tags": [],
+   "spice": 0,
+   "img": "x-hennessy-vs",
+   "group": "Cognac",
+   "kind": "spirit"
+  },
+  {
+   "id": "remy-martin-vsop",
+   "name": "Rémy Martin VSOP",
+   "category": "bar",
+   "price": 16,
+   "desc": "Ripe fruit · vanilla · silky oak",
+   "tags": [],
+   "spice": 0,
+   "img": "x-remy-martin-vsop",
+   "group": "Cognac",
+   "kind": "spirit"
+  }
+ ]
 }

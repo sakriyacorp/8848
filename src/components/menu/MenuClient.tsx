@@ -130,6 +130,8 @@ export function MenuClient({ camps, children }: { camps: Camp[]; children: React
       if (!card || !id) return;
       if (btn.dataset.action === "open") {
         openSheet(id);
+      } else if (btn.dataset.action === "add" && card.dataset.choose) {
+        openSheet(id);
       } else if (btn.dataset.action === "add") {
         const photo = card.querySelector<HTMLElement>("[data-photo]");
         addToPack(id, card.dataset.name ?? "Dish", { spice: card.dataset.spiceable ? (Number(card.dataset.spice) >= 3 ? "Hot" : "Medium") : undefined }, photo, photo?.dataset.src ?? null);
@@ -171,7 +173,7 @@ export function MenuClient({ camps, children }: { camps: Camp[]; children: React
             type="search"
             value={query}
             onChange={(e) => setQuery(e.target.value)}
-            placeholder="Search momo, thukpa, timur…"
+            placeholder="Search momo, sekuwa, biryani…"
             autoComplete="off"
             className="h-12 w-full rounded-full border border-ink-line bg-white/45 pl-11 pr-10 text-[16px] text-choc outline-none transition-[border-color,background] placeholder:text-bronze/90 focus:border-bronze focus:bg-white/70 [&::-webkit-search-cancel-button]:hidden"
           />

@@ -1,12 +1,20 @@
 import type { BagLine } from "@/lib/bag";
-import { byId } from "@/lib/menu";
+import { byId, chosenOption, unitPrice } from "@/lib/menu";
 import { site } from "@/config/site";
 
 /* Prices are looked up from menu.json at render time, never stored in the bag.
    Kept apart from the store so the nav badge doesn't pull the menu data into its chunk. */
 export function lineTotal(line: BagLine): number {
   const item = byId(line.itemId);
-  return item ? item.price * line.qty : 0;
+  return item ? Math.round(unitPrice(item, line.option) * line.qty * 100) / 100 : 0;
+}
+
+/* What to print under a line: option, spice and notes, e.g. "Goat · Hot · no cilantro". Only
+   shows the option for dishes that have one (the default counts: "Vegetable"). */
+export function lineDetails(line: BagLine): string {
+  const item = byId(line.itemId);
+  const opt = item ? chosenOption(item, line.option)?.name : line.option;
+  return [opt, line.spice, line.instructions].filter(Boolean).join(" · ");
 }
 
 const round2 = (n: number) => Math.round(n * 100) / 100;

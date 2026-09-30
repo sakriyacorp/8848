@@ -8,7 +8,7 @@ import { SplitHeading, Reveal } from "@/components/fx/Reveal";
 import { DishImage } from "@/components/menu/DishImage";
 import { MountainScene } from "@/components/setpieces/MountainScene";
 
-const DRINKS = ["yak-and-yeti", "timur-margarita", "sagarmatha-old-fashioned"];
+const DRINKS = ["kathmandu-old-fashioned", "timmur-margarita", "khukri-mule"];
 
 /* The bar, glimpsed: the summit at night, three pours, and a door. */
 export function BarTeaser() {
@@ -36,7 +36,7 @@ export function BarTeaser() {
         </Reveal>
         <SplitHeading id="bar-title" text="Last orders at the *summit.*" className="display mt-4 max-w-[14ch] text-[clamp(2.7rem,7vw,5.6rem)] text-brass-hi" />
         <Reveal delay={0.1} as="p" className="mt-5 max-w-[46ch] text-[16.5px] leading-relaxed text-text/80">
-          Timur pepper in the margarita, brown-butter rum in the Yak &amp; Yeti, Nepali lagers ice-cold. Open till midnight on Fridays and Saturdays.
+          Timmur salt on the margarita, Old Durbar whisky in the Old Fashioned, Khukri rum in the mule. Open till midnight on Fridays and Saturdays.
         </Reveal>
         <ul className="mt-12 grid gap-4 sm:grid-cols-3 md:mt-16 md:gap-6">
           {drinks.map((d, i) => (

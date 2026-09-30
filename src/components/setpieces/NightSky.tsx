@@ -11,10 +11,10 @@ import { bowl } from "@/lib/audio";
 /* Things a caught shooting star grants. */
 const WISHES = [
   "Wish granted: your momos arrive steaming.",
-  "Wish granted: the next round tastes like timur and moonlight.",
+  "Wish granted: the next round tastes like timmur and moonlight.",
   "Wish granted: a table by the lamps, whenever you want one.",
   "Wish granted: clear skies over the Khumbu tonight.",
-  "Wish granted: the dal is bottomless. (It always was.)",
+  "Wish granted: your chilli fry momo is exactly as hot as you hoped.",
   "Wish granted: someone else is paying.",
 ];
 

@@ -7,7 +7,7 @@ import type { SpiceChoice } from "@/lib/menu";
 import { sfx } from "@/lib/sound";
 import { pluck } from "@/lib/audio";
 
-type Opts = { qty?: number; spice?: SpiceChoice; instructions?: string };
+type Opts = { qty?: number; option?: string; spice?: SpiceChoice; instructions?: string };
 
 /* Every "add" in the site goes through here: the bag, the flight of the dish into the trekking
    pack, a light haptic tick, and the undo toast. `from` is the element the dish flies out of
@@ -29,5 +29,5 @@ export function addToPack(itemId: string, name: string, opts: Opts = {}, from?: 
     } catch {}
   }
   const qty = opts.qty && opts.qty > 1 ? `${opts.qty} × ` : "";
-  ui.showToast(`${qty}${name} is in your pack`, { undo: true });
+  ui.showToast(`${qty}${name}${opts.option ? ` (${opts.option})` : ""} is in your pack`, { undo: true });
 }

@@ -9,7 +9,7 @@ export const HOTSPOTS: Hotspot[] = [
     alt: "5,364 m",
     story: "A tent city on the Khumbu Glacier. Every spring it fills with climbers, Sherpa teams and cooks.",
     fact: "Base Camp sits on moving ice: the ground under the tents shifts through the season.",
-    dish: "dal-bhat-veg",
+    dish: "nepali-thali",
   },
   {
     route: 5,
@@ -17,7 +17,7 @@ export const HOTSPOTS: Hotspot[] = [
     alt: "5,500 m",
     story: "The most dangerous part of the route: a frozen waterfall of seracs, crossed on aluminium ladders.",
     fact: "The glacier here can move about a metre a day. The Icefall Doctors re-lay the ladders all season.",
-    dish: "laphing",
+    dish: "buff-sukuti",
   },
   {
     route: 6,
@@ -25,7 +25,7 @@ export const HOTSPOTS: Hotspot[] = [
     alt: "6,065 m",
     story: "Top of the Icefall, bottom of the Western Cwm. Climbers arrive at dawn to beat the heat off the snow.",
     fact: "In the Cwm the sun reflects off every wall; on a still day it can feel hotter than Kathmandu.",
-    dish: "chicken-tandoori",
+    dish: "tandoori-chicken",
   },
   {
     route: 7,
@@ -33,7 +33,7 @@ export const HOTSPOTS: Hotspot[] = [
     alt: "6,400 m",
     story: "Advanced Base Camp: a cook tent, a dining tent, and the last proper hot meals for a while.",
     fact: "Teams rest here for days at a time to acclimatise before the Lhotse Face.",
-    dish: "goat-biryani",
+    dish: "everest-goat-biryani",
   },
   {
     route: 8,
@@ -41,7 +41,7 @@ export const HOTSPOTS: Hotspot[] = [
     alt: "7,200 m",
     story: "Tents cut into the Lhotse Face on a slope of about forty degrees. Nobody sleeps well.",
     fact: "Most climbers start using bottled oxygen from here up.",
-    dish: "juju-dhau",
+    dish: "kheer",
   },
   {
     route: 9,
@@ -49,7 +49,7 @@ export const HOTSPOTS: Hotspot[] = [
     alt: "7,950 m",
     story: "A windswept saddle between Everest and Lhotse, and the last camp before the summit push.",
     fact: "Above about 8,000 m is the 'death zone': the body can't acclimatise, only endure.",
-    dish: "masala-chiya",
+    dish: "nepali-masala-chiya",
   },
   {
     route: 11,

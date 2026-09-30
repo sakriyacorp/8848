@@ -9,7 +9,7 @@ import { formatMoney } from "@/lib/format";
 import { useFocusTrap, useScrollLock } from "@/lib/hooks";
 import { byId } from "@/lib/menu";
 import { MAX_QTY, TIP_OPTIONS, useBag, type BagLine } from "@/lib/bag";
-import { bagTotals, lineTotal, packWeightKg } from "@/lib/bag-totals";
+import { bagTotals, lineDetails, lineTotal, packWeightKg } from "@/lib/bag-totals";
 import { useUI } from "@/lib/ui";
 import { LEAD_MINUTES } from "@/lib/fulfillment";
 import { site } from "@/config/site";
@@ -177,7 +177,7 @@ function LineRow({ line, available }: { line: BagLine; available: Set<string> })
   const remove = useBag((s) => s.remove);
   const item = byId(line.itemId);
   if (!item) return null;
-  const details = [line.spice, line.instructions].filter(Boolean).join(" · ");
+  const details = lineDetails(line);
   return (
     <div className="flex gap-3.5">
       <DishImage item={item} available={available.has(item.img)} sizes="64px" className="h-16 w-16 shrink-0 rounded-xl" />

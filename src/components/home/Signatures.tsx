@@ -5,7 +5,7 @@ import { categoryById, hasSpiceControl, picks } from "@/lib/menu";
 import { SplitHeading, Reveal } from "@/components/fx/Reveal";
 import { SignatureRail, type RailEntry } from "@/components/home/SignatureRail";
 
-const FEATURED = ["momo-platter", "jhol-momo", "c-momo", "dal-bhat-veg", "chicken-choila", "chilli-chicken", "laphing", "khasi-ko-masu", "butter-chicken", "juju-dhau"];
+const FEATURED = ["momo-platter", "chicken-jhol-momo", "chilli-fry-momo", "nepali-thali", "chicken-choila", "chilli-chicken", "mutton-sekuwa", "goat-curry", "butter-chicken", "kheer"];
 
 /* Reading the menu: the first cream-paper section. Ten signatures on a rail. */
 export function Signatures() {

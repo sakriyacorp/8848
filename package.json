@@ -12,7 +12,8 @@
     "icons": "node scripts/make-icons.mjs",
     "images:fetch": "node --env-file=.env.local scripts/fetch-images.mjs",
     "images:optimize": "node scripts/optimize-images.mjs",
-    "shots": "node scripts/screenshots.mjs"
+    "shots": "node scripts/screenshots.mjs",
+    "menu": "node scripts/menu-from-md.mjs"
   },
   "dependencies": {
     "lucide-react": "^1.48.0",

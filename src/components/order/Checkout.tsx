@@ -6,8 +6,8 @@ import { useRouter } from "next/navigation";
 import { ChevronDown, Loader2 } from "lucide-react";
 import { cn } from "@/lib/cn";
 import { TIP_OPTIONS, useBag } from "@/lib/bag";
-import { bagTotals, lineTotal, packWeightKg } from "@/lib/bag-totals";
-import { byId } from "@/lib/menu";
+import { bagTotals, lineDetails, lineTotal, packWeightKg } from "@/lib/bag-totals";
+import { byId, chosenOption, unitPrice } from "@/lib/menu";
 import { site } from "@/config/site";
 import { addDays, dayName, formatTime, isOpenAt, nextOpening, pickupSlots, sameLocalDay, toLocal } from "@/lib/hours";
 import { LEAD_MINUTES, MODE_LABEL, deliveryFeeNote, formatAddress, type DeliveryAddress } from "@/lib/fulfillment";
@@ -138,7 +138,7 @@ export function Checkout({ available }: { available: string[] }) {
       payment: delivery ? "on-delivery" : "at-pickup",
       lines: lines.flatMap((l) => {
         const item = byId(l.itemId);
-        return item ? [{ itemId: l.itemId, name: item.name, qty: l.qty, spice: l.spice, instructions: l.instructions, unitPrice: item.price, lineTotal: lineTotal(l) }] : [];
+        return item ? [{ itemId: l.itemId, name: item.name, qty: l.qty, option: chosenOption(item, l.option)?.name, spice: l.spice, instructions: l.instructions, unitPrice: unitPrice(item, l.option), lineTotal: lineTotal(l) }] : [];
       }),
       ...totals,
     };
@@ -340,7 +340,7 @@ export function Checkout({ available }: { available: string[] }) {
                 {lines.map((l) => {
                   const item = byId(l.itemId);
                   if (!item) return null;
-                  const details = [l.spice, l.instructions].filter(Boolean).join(" · ");
+                  const details = lineDetails(l);
                   return (
                     <li key={l.key} className="flex gap-3 py-3">
                       <DishImage item={item} available={availableSet.has(item.img)} sizes="48px" className="h-12 w-12 shrink-0 rounded-xl" />

@@ -5,6 +5,7 @@ export type OrderLine = {
   itemId: string;
   name: string;
   qty: number;
+  option?: string;
   spice?: SpiceChoice;
   instructions?: string;
   unitPrice: number;

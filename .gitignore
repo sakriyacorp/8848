@@ -8,3 +8,6 @@ next-env.d.ts
 /shots/
 /scratch/
 .DS_Store
+
+# print/menu kits (built by scripts/export-brand-kit.mts; large binaries)
+/handoff/

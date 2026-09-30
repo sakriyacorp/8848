@@ -2,7 +2,8 @@ import type { Metadata } from "next";
 import { availableDishImages } from "@/lib/dish-images";
 import { menuSections, items } from "@/lib/menu";
 import { isOn } from "@/config/features";
-import { dishCardHtml } from "@/components/menu/DishCard";
+import { dishCardHtml, dishRowHtml } from "@/components/menu/DishCard";
+import type { MenuItem } from "@/lib/menu";
 import { MenuClient } from "@/components/menu/MenuClient";
 import { OrderModeBar } from "@/components/menu/OrderModeBar";
 import { SplitHeading } from "@/components/fx/Reveal";
@@ -13,7 +14,7 @@ import { PackBar } from "@/components/order/PackBar";
 export const metadata: Metadata = {
   title: "Menu",
   description:
-    "Momos steamed, fried, kothey, jhol and C-momo; thukpa, sekuwa, dal bhat, Indo-Chinese chilli dishes, tandoor and curries, and the bar. Order pickup or delivery in Harrisonburg.",
+    "Himalayan appetizers and Indo-Chinese chilli dishes, momo steamed, jhol, kothey and chilli fry, sekuwa, choila and sukuti, the tandoor, curries, Nepali thali and dhido, biryani, and the bar. Order pickup or delivery in Harrisonburg.",
 };
 
 export default function MenuPage() {
@@ -33,10 +34,12 @@ export default function MenuPage() {
         <div aria-hidden="true" className="lamp-glow -left-20 top-10 h-96 w-96" />
         <div aria-hidden="true" className="lamp-glow right-0 top-0 h-80 w-80 [animation-delay:-3s]" />
         <div className="container-x relative">
-          <p className="eyebrow text-brass">Ten camps · {items.length} dishes</p>
+          <p className="eyebrow text-brass">
+            {sections.length} camps · {items.length} dishes and drinks
+          </p>
           <SplitHeading as="h1" text="The *menu.*" className="display mt-4 text-[clamp(3.4rem,11vw,7rem)] text-brass-hi" />
           <p className="mt-5 max-w-[52ch] text-[16px] leading-relaxed text-text/80 md:text-[17px]">
-            From Kathmandu to the summit: momos first, the bar at the top. Pleated by hand, fired in the wok, baked in the tandoor. Tap a dish for spice and notes, or tap + to pack it.
+            From Kathmandu to the summit: small plates first, the bar at the top. Momos pleated by hand, chilli dishes off the wok, the tandoor, the thali. Tap a dish for choices and spice, or tap + to pack it.
           </p>
           {isOn("momoCounter") && <MomoCounter className="mt-4" />}
           <OrderModeBar />
@@ -74,10 +77,7 @@ export default function MenuPage() {
                   </span>
                 </div>
                 {category.blurb && <p className="mt-2 max-w-[60ch] text-[15px] text-bronze">{category.blurb}</p>}
-                <div
-                  className="mt-6 grid grid-cols-1 gap-x-4 gap-y-2 md:grid-cols-2 md:gap-y-4 xl:grid-cols-3"
-                  dangerouslySetInnerHTML={{ __html: items.map((item) => dishCardHtml(item, available.has(item.img))).join("") }}
-                />
+                <div dangerouslySetInnerHTML={{ __html: sectionHtml(items, available) }} />
               </section>
             ))}
           </MenuClient>
@@ -87,4 +87,27 @@ export default function MenuPage() {
       {isOn("packBar") && <PackBar />}
     </div>
   );
+}
+
+const ROW_KINDS = new Set(["wine", "beer", "spirit"]);
+
+/* A section's cards, split under its group headings (Vegetarian, Chicken… / Sparkling, Red…).
+   Wine, beer and spirits are compact rows; everything else is a photo card. */
+function sectionHtml(items: MenuItem[], available: Set<string>): string {
+  const chunks: { group?: string; rows: boolean; items: MenuItem[] }[] = [];
+  for (const item of items) {
+    const rows = !!item.kind && ROW_KINDS.has(item.kind);
+    const last = chunks[chunks.length - 1];
+    if (last && last.group === item.group && last.rows === rows) last.items.push(item);
+    else chunks.push({ group: item.group, rows, items: [item] });
+  }
+  return chunks
+    .map((c) => {
+      const head = c.group ? `<h3 class="caps menu-group mt-8 flex items-center gap-3 text-[10.5px] text-bronze first:mt-6">${c.group}</h3>` : "";
+      const body = c.rows
+        ? `<div class="mt-3 grid grid-cols-1 gap-x-8 gap-y-0.5 md:grid-cols-2">${c.items.map((i) => dishRowHtml(i)).join("")}</div>`
+        : `<div class="mt-6 grid grid-cols-1 gap-x-4 gap-y-2 md:grid-cols-2 md:gap-y-4 xl:grid-cols-3">${c.items.map((i) => dishCardHtml(i, available.has(i.img))).join("")}</div>`;
+      return head + body;
+    })
+    .join("");
 }

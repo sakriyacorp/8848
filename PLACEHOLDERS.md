@@ -17,17 +17,19 @@ checkout, reservations).
 | Order lead times | `src/lib/fulfillment.ts` → `LEAD_MINUTES` | pickup 20 min, delivery 45 min |
 | Delivery area copy | `src/config/site.ts` → `deliveryArea` | "Harrisonburg and JMU campus" |
 | Opening year | `src/config/site.ts` → `foundedYear` | 2025 |
-| **Whole menu** | `data/menu.json` (`_notes.placeholder: true`) | 98 items. Curry/tandoor/biryani/bread/dessert/lassi wording reused from Natraj; Nepali, Indo-Chinese and bar items written for the demo; all prices invented |
-| Nepali names | `data/menu.json` → `np` | best-effort Devanagari; have a native speaker check |
+| **Menu prices** | `data/menu-content.md` → `npm run menu` | The menu itself now follows the owner's 2026 draft (152 dishes and drinks, descriptions trimmed). **Every price is a placeholder**: the draft had none except goat +$3.50 on kothey / chilli fry momo. Choice upcharges (egg, chicken, shrimp, thali meats…) are guesses too |
+| Heat levels, chef's picks, "most loved" | `data/menu-content.md` (▲ marks), `scripts/menu-from-md.mjs` (`CHEF`, `POPULAR`) | our suggestions; the kitchen should set them |
+| Diet tags | `data/menu-content.md` (V, N) | only vegetarian and "contains nuts" (where a description names nuts) are marked. Vegan, gluten-free and nut-free filters were removed until the kitchen confirms them dish by dish |
+| Names to confirm | `data/menu-content.md` | "Bysen – Buff Sukuti" printed as Buff Sukuti; "Poleko Moleko Chicken" spelling; "Timmur" spelling now used everywhere |
+| Nepali names | `data/menu-content.md` | Devanagari on 19 dishes; have a native speaker check |
 | Natraj photos (`o-*.jpg`) | `public/dishes/o-*.jpg` | Natraj Indian Cuisine's own dish photos, used as stand-ins. Replace with 8848 photography |
 | Pexels photos (`p-*.jpg` and plain names) | `public/dishes/` | free-licence stock (credits in `data/photo-credits.json`); fine to keep, better to replace |
 | Testimonials (all 20) | `src/data/testimonials.ts` | invented sample reviews |
 | Testimonial portraits | `public/people/*.jpg` | randomuser.me placeholder portraits |
 | Story copy | `src/app/story/page.tsx` → `CHAPTERS` | tasteful boilerplate; replace with the owners' own words |
-| Base Camp Hour (happy hour) | `src/app/bar/page.tsx` | Tue–Thu 4–6 PM, $2 off lagers, $10 momos |
+| Base Camp Hour (happy hour) | `src/app/bar/page.tsx` | Tue–Thu 4–6 PM, $2 off draft beer, $10 steamed momo, half-price masala chiya (invented) |
 | Private events capacity | `src/app/visit/page.tsx` → `FAQ` | "up to 60 people" |
 | Parking note | `src/components/home/VisitSection.tsx`, `src/app/visit/page.tsx` | "street parking + lot behind the building" |
-| Beer names | `data/menu.json` (bar) | Everest / Gorkha / Nepal Ice as placeholders for what's actually stocked |
 | Polaroid captions + backs | `src/components/setpieces/Polaroids.tsx` → `SNAPS` | dish photos with invented captions ("Opening night", "Asan Tole · 2014"…); swap in the family's own snapshots |
 | Momo counter | `src/components/setpieces/MomoCounter.tsx` | "≈ N momos pleated today" is an estimate from the kitchen clock (labelled "≈"); wire to real POS counts or switch `momoCounter` off |
 | Prayer-wheel fortunes | `src/components/menu/MenuExtras.tsx` → `ORACLE` | 8 dishes + invented fortunes |

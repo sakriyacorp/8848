@@ -2657,7 +2657,7 @@ html.quake body {
 .thali[data-active="tarkari"] .th-part[data-id="tarkari"],
 .thali[data-active="saag"] .th-part[data-id="saag"],
 .thali[data-active="achar"] .th-part[data-id="achar"],
-.thali[data-active="dahi"] .th-part[data-id="dahi"],
+.thali[data-active="masu"] .th-part[data-id="masu"],
 .thali[data-active="papad"] .th-part[data-id="papad"] {
   transform: translate(-3px, -6px) scale(1.08);
   filter: drop-shadow(6px 12px 10px rgba(0, 0, 0, 0.45)) brightness(1.06);
@@ -3165,4 +3165,20 @@ body {
 }
 .nav-open .packbar {
   transform: translateY(120%);
+}
+
+/* ---------- menu group headings + compact rows (wine, beer, spirits) ---------- */
+.menu-group::after {
+  content: "";
+  height: 1px;
+  flex: 1;
+  background: linear-gradient(90deg, rgba(97, 74, 50, 0.3), transparent);
+}
+.dish-row .leader {
+  border-bottom: 1px dotted rgba(97, 74, 50, 0.35);
+}
+@media (hover: hover) {
+  .dish-row:hover {
+    background: rgba(255, 252, 244, 0.5);
+  }
 }

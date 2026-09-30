@@ -8,12 +8,9 @@ export type More = "chef" | "popular";
 
 export type FilterOption<T extends string> = { id: T; label: string };
 
-export const DIET_OPTIONS: FilterOption<Diet>[] = [
-  { id: "vegetarian", label: "Vegetarian" },
-  { id: "vegan", label: "Vegan" },
-  { id: "gf", label: "Gluten-free" },
-  { id: "nutfree", label: "No nuts" },
-];
+/* Only diet facts the menu can vouch for. Vegan, gluten-free and nut-free filters come back once
+   the kitchen confirms them dish by dish (a wrong "no nuts" is an allergy risk). */
+export const DIET_OPTIONS: FilterOption<Diet>[] = [{ id: "vegetarian", label: "Vegetarian" }];
 
 export const HEAT_OPTIONS: FilterOption<Heat>[] = [
   { id: "mild", label: "Mild" },

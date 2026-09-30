@@ -9,17 +9,17 @@ import { formatPrice } from "@/lib/format";
    meal and that bowl lifts off the plate while a card tells you what it is and why it's there.
    Ends with the thali itself, into the pack. */
 
-const DISH = { id: "dal-bhat-veg", name: "Dal Bhat Thali", price: 19 };
+const DISH = { id: "nepali-thali", name: "8848 Signature Nepali Thali", price: 20 };
 
 type Part = { id: string; name: string; np: string; what: string; why: string; x: number; y: number; r: number };
 
 const PARTS: Part[] = [
-  { id: "bhat", name: "Bhat", np: "भात", what: "Steamed rice, the middle of the plate.", why: "On the trail it's refilled until you say stop, and then once more.", x: 178, y: 222, r: 70 },
+  { id: "bhat", name: "Bhat", np: "भात", what: "Steamed rice, the middle of the plate.", why: "Everything else on the plate is there to go with it.", x: 178, y: 222, r: 70 },
   { id: "dal", name: "Dal", np: "दाल", what: "Black lentils tempered with jimbu, cumin and ghee.", why: "Poured over the rice. Porters swear by it: “dal bhat power, 24 hour.”", x: 292, y: 146, r: 46 },
   { id: "tarkari", name: "Tarkari", np: "तरकारी", what: "The day's vegetable curry: potato, cauliflower, beans.", why: "Whatever the garden gave. It changes with the season, like ours.", x: 118, y: 112, r: 42 },
   { id: "saag", name: "Saag", np: "साग", what: "Mustard greens wilted with garlic and a little chilli.", why: "Something green and iron-rich for the climb.", x: 302, y: 268, r: 38 },
-  { id: "achar", name: "Achar", np: "अचार", what: "Sesame-tomato achar, bright and sharp.", why: "The bite that wakes the whole plate up. Ask for extra; everyone does.", x: 208, y: 94, r: 28 },
-  { id: "dahi", name: "Dahi", np: "दही", what: "Cool, thick homemade yogurt.", why: "To put the fire out, or to finish on something gentle.", x: 104, y: 282, r: 34 },
+  { id: "achar", name: "Achar", np: "अचार", what: "Sesame-tomato achar, bright and sharp.", why: "The bite that wakes the whole plate up.", x: 208, y: 94, r: 28 },
+  { id: "masu", name: "Masu", np: "मासु", what: "Chicken, goat, lamb or fish curry.", why: "Order the thali with meat or fish and it arrives in its own katori.", x: 104, y: 282, r: 34 },
   { id: "papad", name: "Papad", np: "पापड", what: "A crisp lentil wafer, blistered over the flame.", why: "Crumble it over the rice for crunch.", x: 236, y: 330, r: 34 },
 ];
 
@@ -145,7 +145,7 @@ export function Thali() {
           <button type="button" onClick={() => addToPack(DISH.id, DISH.name, { spice: "Medium" }, plate.current, "/dishes/p-dal-bhat.jpg")} className="btn btn-brass px-6 py-3.5 text-[15px]">
             Pack a thali · {formatPrice(DISH.price)}
           </button>
-          <p className="text-[13.5px] text-muted">Refills on dal and rice, always.</p>
+          <p className="text-[13.5px] text-muted">Vegetable, or with chicken, goat, lamb or fish.</p>
         </div>
       </div>
     </div>
@@ -193,11 +193,13 @@ function Food({ id, x, y, r }: { id: string; x: number; y: number; r: number }) 
           {bits(4, "#c9713e", 3)}
         </g>
       );
-    case "dahi":
+    case "masu":
       return (
         <g>
-          <circle cx={x} cy={y} r={r} fill="#efe9dc" />
-          <path d={`M${x - r * 0.5} ${y} q${r * 0.5} ${-r * 0.5} ${r} 0`} stroke="#fffaf0" strokeWidth="3" fill="none" strokeLinecap="round" />
+          <circle cx={x} cy={y} r={r} fill="#8a4a24" />
+          <circle cx={x - r * 0.1} cy={y - r * 0.1} r={r * 0.78} fill="#9c5a2c" opacity=".8" />
+          {bits(7, "#5c2f16", 5.2, 0.6)}
+          {bits(8, "#d8a05a", 1.3)}
         </g>
       );
     default:

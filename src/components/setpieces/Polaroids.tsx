@@ -15,7 +15,7 @@ const SNAPS: Snap[] = [
   { img: "p-thukpa", caption: "Thukpa weather, Namche", back: "Snow on the prayer flags outside, noodles and steam inside.", date: "3,440 m · Nov" },
   { img: "p-dal-bhat", caption: "Teahouse dal bhat", back: "Seconds were compulsory. Thirds were encouraged.", date: "Dingboche · 4,410 m" },
   { img: "chai", caption: "Chiya at every stop", back: "Sweet, milky, a little ginger. Our recipe is the lodge owner's, mostly.", date: "Tengboche" },
-  { img: "p-sekuwa", caption: "Sekuwa smoke", back: "Charcoal, timur pepper, a paper plate. Perfect.", date: "Dharan · 2016" },
+  { img: "p-sekuwa", caption: "Sekuwa smoke", back: "Charcoal, timmur pepper, a paper plate. Perfect.", date: "Dharan · 2016" },
   { img: "p-momo-platter", caption: "Family meal, before service", back: "Every new cook's first job: pleat a hundred of these.", date: "Reservoir St." },
   { img: "p-old-fashioned", caption: "Opening night", back: "We ran out of ice at nine. Nobody minded.", date: "Harrisonburg" },
 ];

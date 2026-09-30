@@ -7,11 +7,13 @@ export type BagLine = {
   key: string;
   itemId: string;
   qty: number;
+  /** the guest's choice for dishes with options (protein, pour…); absent = the default */
+  option?: string;
   spice?: SpiceChoice;
   instructions?: string;
 };
 
-type AddOpts = { qty?: number; spice?: SpiceChoice; instructions?: string };
+type AddOpts = { qty?: number; option?: string; spice?: SpiceChoice; instructions?: string };
 
 type BagState = {
   lines: BagLine[];
@@ -38,9 +40,9 @@ function hash(input: string): string {
   return (h >>> 0).toString(36);
 }
 
-export function lineKey(itemId: string, spice?: SpiceChoice, instructions?: string): string {
+export function lineKey(itemId: string, spice?: SpiceChoice, instructions?: string, option?: string): string {
   const notes = instructions?.trim() ?? "";
-  return `${itemId}|${spice ?? ""}|${notes ? hash(notes) : ""}`;
+  return `${itemId}|${spice ?? ""}|${notes ? hash(notes) : ""}${option ? `|${option}` : ""}`;
 }
 
 const clampQty = (n: number) => Math.max(1, Math.min(MAX_QTY, Math.round(n)));
@@ -56,12 +58,12 @@ export const useBag = create<BagState>()(
       add(itemId, opts = {}) {
         const qty = clampQty(opts.qty ?? 1);
         const instructions = opts.instructions?.trim() || undefined;
-        const key = lineKey(itemId, opts.spice, instructions);
+        const key = lineKey(itemId, opts.spice, instructions, opts.option);
         set((s) => {
           const existing = s.lines.find((l) => l.key === key);
           const lines = existing
             ? s.lines.map((l) => (l.key === key ? { ...l, qty: clampQty(l.qty + qty) } : l))
-            : [...s.lines, { key, itemId, qty, spice: opts.spice, instructions }];
+            : [...s.lines, { key, itemId, qty, option: opts.option, spice: opts.spice, instructions }];
           return { lines, lastAdded: { key, qty } };
         });
       },

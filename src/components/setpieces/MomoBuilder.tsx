@@ -10,28 +10,36 @@ import { bowl } from "@/lib/audio";
 
 /* Build a momo. Pick a filling and a way to cook it, press "Pleat it" and watch the wrapper rise
    around the filling while eighteen pleats fold in one by one to the knot, then it cooks the way
-   you chose: steamed in bamboo, fried golden, kothey (seared on one side), sitting in jhol, or
-   tossed in chilli. Adds "Momo, Your Way" to the pack with your choices written on the ticket. */
-
-const ITEM = { id: "momo-your-way", name: "Momo, Your Way", price: 15, pieces: 10 };
+   you chose: steamed with tomato achar, sitting in jhol, kothey (seared on one side) or chilli
+   fry. Packs the real dish from the menu (Goat Jhol Momo, Kothey Momo with Chicken…). */
 
 const FILLINGS = [
-  { id: "chicken", label: "Chicken", note: "minced thigh, ginger, cilantro", color: "#c49a73" },
-  { id: "veg", label: "Garden veg", note: "cabbage, carrot, onion, garlic", color: "#8f9a5e" },
-  { id: "paneer", label: "Paneer & spinach", note: "fresh cheese, saag, cumin", color: "#a8b27a" },
-  { id: "lamb", label: "Spiced lamb", note: "timmur pepper, red onion", color: "#83563b" },
+  { id: "veg", label: "Vegetable", note: "seasoned vegetables", color: "#8f9a5e" },
+  { id: "chicken", label: "Chicken", note: "spiced minced chicken", color: "#c49a73" },
+  { id: "goat", label: "Goat", note: "spiced goat and Himalayan herbs", color: "#83563b" },
 ] as const;
 
 const STYLES = [
-  { id: "steamed", label: "Steamed", note: "in a bamboo basket, the classic" },
-  { id: "fried", label: "Fried", note: "golden and crackly all over" },
-  { id: "kothey", label: "Kothey", note: "steamed, then seared flat on the pan" },
-  { id: "jhol", label: "Jhol", note: "sitting in warm sesame-tomato broth" },
-  { id: "chilli", label: "Chilli", note: "wok-tossed with peppers and onion" },
+  { id: "steamed", label: "Steamed", note: "the classic, with house tomato achar" },
+  { id: "jhol", label: "Jhol", note: "in a tangy sesame-tomato broth (chicken or goat)" },
+  { id: "kothey", label: "Kothey", note: "pan-seared: crisp on one side, tender on the other" },
+  { id: "chilli", label: "Chilli fry", note: "fried, then wok-tossed with peppers, onion and chilli-garlic" },
 ] as const;
 
 type FillingId = (typeof FILLINGS)[number]["id"];
 type StyleId = (typeof STYLES)[number]["id"];
+
+/* The menu's momo dishes, passed in from the server (so this chunk doesn't carry menu.json). */
+export type MomoMenu = Record<string, { name: string; price: number; img: string | null; goatAdd?: number }>;
+
+/* filling × style → the dish on the menu (and the option to pick on it) */
+function dishFor(f: FillingId, s: StyleId): { id: string; option?: string } | null {
+  const opt = f === "veg" ? "Vegetable" : f === "chicken" ? "Chicken" : "Goat";
+  if (s === "steamed") return { id: f === "veg" ? "veg-steamed-momo" : `${f}-steamed-momo` };
+  if (s === "jhol") return f === "veg" ? null : { id: `${f}-jhol-momo` };
+  if (s === "kothey") return { id: "kothey-momo", option: opt };
+  return { id: "chilli-fry-momo", option: opt };
+}
 const PLEATS = 18;
 
 /* pleat curves: from points around the upper body to the knot, with a little swirl */
@@ -82,7 +90,7 @@ function MomoShape({ count }: { count: number }) {
   );
 }
 
-export function MomoBuilder() {
+export function MomoBuilder({ menu }: { menu: MomoMenu }) {
   const [filling, setFilling] = useState<FillingId>("chicken");
   const [style, setStyle] = useState<StyleId>("steamed");
   const [spice, setSpice] = useState<SpiceChoice>("Medium");
@@ -95,6 +103,9 @@ export function MomoBuilder() {
 
   const fill = FILLINGS.find((f) => f.id === filling)!;
   const sty = STYLES.find((s) => s.id === style)!;
+  const pick = dishFor(filling, style);
+  const dish = pick ? menu[pick.id] : undefined;
+  const price = dish ? dish.price + (pick?.option === "Goat" ? (dish.goatAdd ?? 0) : 0) : 0;
 
   const pleat = () => {
     timers.current.forEach(clearTimeout);
@@ -126,7 +137,8 @@ export function MomoBuilder() {
   };
 
   const add = () => {
-    addToPack(ITEM.id, ITEM.name, { spice, instructions: `${fill.label}, ${sty.label.toLowerCase()} (momo builder)` }, photo.current, "/dishes/o-momo-veggie.jpg");
+    if (!pick || !dish) return;
+    addToPack(pick.id, dish.name, { option: pick.option, spice }, photo.current, dish.img);
   };
 
   return (
@@ -226,7 +238,7 @@ export function MomoBuilder() {
           <p className="num caps text-[10px] text-brass/90" aria-live="polite">
             Pleats <span className="text-brass-hi">{count}</span>/{PLEATS}
           </p>
-          <p className={cn("display text-[22px] text-brass-hi transition-all duration-500", phase === "done" ? "translate-y-0 opacity-100" : "translate-y-2 opacity-0")}>× {ITEM.pieces}</p>
+          <p className={cn("display text-[20px] text-brass-hi transition-all duration-500", phase === "done" ? "translate-y-0 opacity-100" : "translate-y-2 opacity-0")}>{dish?.name}</p>
         </div>
       </div>
 
@@ -242,6 +254,7 @@ export function MomoBuilder() {
                 aria-checked={filling === f.id}
                 onClick={() => {
                   setFilling(f.id);
+                  if (f.id === "veg" && style === "jhol") setStyle("steamed");
                   if (phase === "done") reset();
                 }}
                 className={cn("chip-brass", filling === f.id && "is-on")}
@@ -258,7 +271,16 @@ export function MomoBuilder() {
           <legend className="caps text-[10.5px] text-brass">Cooked</legend>
           <div className="mt-3 flex flex-wrap gap-2" role="radiogroup" aria-label="How it's cooked">
             {STYLES.map((s) => (
-              <button key={s.id} type="button" role="radio" aria-checked={style === s.id} onClick={() => setStyle(s.id)} className={cn("chip-brass", style === s.id && "is-on")}>
+              <button
+                key={s.id}
+                type="button"
+                role="radio"
+                aria-checked={style === s.id}
+                disabled={!dishFor(filling, s.id)}
+                title={!dishFor(filling, s.id) ? "Jhol momo comes with chicken or goat" : undefined}
+                onClick={() => setStyle(s.id)}
+                className={cn("chip-brass disabled:cursor-not-allowed disabled:opacity-40", style === s.id && "is-on")}
+              >
                 {s.label}
               </button>
             ))}
@@ -284,8 +306,8 @@ export function MomoBuilder() {
             </button>
           ) : (
             <>
-              <button type="button" onClick={add} className="btn btn-brass px-6 py-3.5 text-[15px]">
-                Pack {ITEM.pieces} · {formatPrice(ITEM.price)}
+              <button type="button" onClick={add} disabled={!dish} className="btn btn-brass px-6 py-3.5 text-[15px]">
+                Pack it · {formatPrice(price)}
               </button>
               <button type="button" onClick={pleat} className="btn btn-ghost px-5 py-3.5 text-[15px]">
                 Pleat another
